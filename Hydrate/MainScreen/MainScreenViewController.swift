@@ -9,7 +9,7 @@ final class MainScreenViewController: UIViewController {
     override func loadView() {
         view = mainScreenView
         navigationController?.navigationBar.prefersLargeTitles = true
-        title = "Hydrate!"
+        title = L10n.currentHydration
     }
 
     override func viewDidLoad() {

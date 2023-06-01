@@ -16,6 +16,6 @@ final class MainScreenView: UIView {
 // MARK: - Private methods
 extension MainScreenView {
     private func configureViews() {
-        backgroundColor = .white
+        backgroundColor = Asset.backgroundColor.color
     }
 }
