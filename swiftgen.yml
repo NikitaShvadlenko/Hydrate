@@ -1,0 +1,15 @@
+strings:
+  inputs:
+    - Hydrate/Resources/Strings/en.lproj
+  outputs:
+    - templateName: structured-swift5
+      output: Hydrate/Generated/Strings+Generated.swift
+
+xcassets:
+  inputs:
+    - Hydrate/Resources/Assets.xcassets
+  outputs:
+    - templateName: swift5
+      params:
+        forceProvidesNamespaces: true
+      output: Hydrate/Generated/XCAssets+Generated.swift
