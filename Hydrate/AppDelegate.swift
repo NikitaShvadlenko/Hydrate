@@ -9,12 +9,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+        let window = UIWindow(frame: UIScreen.main.bounds)
 
-        let rootViewController = ViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = rootViewController
-        window?.makeKeyAndVisible()
+        let tabBarController = UITabBarController()
+        window.rootViewController = tabBarController
 
+        var viewControllers = [UIViewController]()
+
+        let mainScreenViewController = MainScreenAssembly.assemble().viewController
+        let mainScreenNavigationController = UINavigationController(
+            rootViewController: mainScreenViewController
+        )
+
+        viewControllers.append(mainScreenNavigationController)
+
+        tabBarController.setViewControllers(viewControllers, animated: false)
+
+        self.window = window
+        window.makeKeyAndVisible()
         return true
     }
 }
