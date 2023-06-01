@@ -11,11 +11,15 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
+        interactor?.retrieveHydrationData()
     }
 }
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: HydrationProgressModel) {
+        view?.setHydration(model: didRetrieveHydration)
+    }
 }
 
 // MARK: - MainScreenRouterOutput

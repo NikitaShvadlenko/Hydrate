@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class HydrationProgressView: UIView {
+final class HydrationProgressView: UIView {
 
     private lazy var percentageLabel: UILabel = {
         let label = UILabel()
@@ -58,6 +58,7 @@ extension HydrationProgressView {
 // MARK: Private methods
 extension HydrationProgressView {
     private func setupView() {
+        backgroundColor = .clear
         addSubview(stackView)
         [
             percentageLabel,

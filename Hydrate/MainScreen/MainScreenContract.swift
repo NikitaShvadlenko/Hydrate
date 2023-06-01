@@ -1,6 +1,7 @@
 // sourcery: AutoMockable
 protocol MainScreenViewInput: AnyObject {
     func configureViews()
+    func setHydration(model: HydrationProgressModel)
 }
 
 protocol MainScreenViewOutput {
@@ -9,10 +10,13 @@ protocol MainScreenViewOutput {
 
 // sourcery: AutoMockable
 protocol MainScreenInteractorInput {
+    func retrieveHydrationData()
 }
 
 // sourcery: AutoMockable
 protocol MainScreenInteractorOutput: AnyObject {
+   func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: HydrationProgressModel
+   )
 }
 
 // sourcery: AutoMockable

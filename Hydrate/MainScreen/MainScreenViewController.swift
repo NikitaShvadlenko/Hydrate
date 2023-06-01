@@ -22,8 +22,17 @@ final class MainScreenViewController: UIViewController {
 extension MainScreenViewController: MainScreenViewInput {
     func configureViews() {
     }
+
+    func setHydration(model: HydrationProgressModel) {
+        mainScreenView.progressView.configureView(
+            percentage: model.percentage,
+            amount: model.amount,
+            variance: model.variance
+        )
+    }
 }
 
 // MARK: - Private methods
 extension MainScreenViewController {
+
 }
