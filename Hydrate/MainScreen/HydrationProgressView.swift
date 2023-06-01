@@ -27,6 +27,13 @@ class HydrationProgressView: UIView {
         return label
     }()
 
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        return stackView
+    }()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -36,10 +43,29 @@ class HydrationProgressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+// MARK: Public Methods
+extension HydrationProgressView {
+    public func configureView(
+        percentage: Double,
+        amount: Measurement<UnitVolume>,
+        variance: Measurement<UnitVolume>) {
+            percentageLabel.text = "\(percentage)%"
+            amountLabel.text = "\(amount)"
+            varianceLabel.text = "\(variance)"
+        }
+}
 
 // MARK: Private methods
 extension HydrationProgressView {
     private func setupView() {
-
+        addSubview(stackView)
+        [
+            percentageLabel,
+            amountLabel,
+            varianceLabel
+        ].forEach(stackView.addArrangedSubview)
+        stackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
