@@ -1,7 +1,6 @@
 import Foundation
 
 struct HydrationProgressModel {
-    let percentage: Double
+    let goal: Measurement<UnitVolume>
     let amount: Measurement<UnitVolume>
-    let variance: Measurement<UnitVolume>
 }
