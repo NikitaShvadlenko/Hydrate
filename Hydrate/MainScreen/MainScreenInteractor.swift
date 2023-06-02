@@ -1,7 +1,9 @@
 import Foundation
+import CoreData
 
 final class MainScreenInteractor {
     weak var presenter: MainScreenInteractorOutput?
+    var context: NSManagedObjectContext?
 }
 
 // MARK: - MainScreenInteractorInput

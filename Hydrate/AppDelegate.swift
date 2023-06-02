@@ -9,24 +9,29 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let window = UIWindow(frame: UIScreen.main.bounds)
+        createHydrationJournalContainer { container in
+            let window = UIWindow(frame: UIScreen.main.bounds)
 
-        let tabBarController = UITabBarController()
-        window.rootViewController = tabBarController
+            let tabBarController = UITabBarController()
+            window.rootViewController = tabBarController
 
-        var viewControllers = [UIViewController]()
+            var viewControllers = [UIViewController]()
 
-        let mainScreenViewController = MainScreenAssembly.assemble().viewController
-        let mainScreenNavigationController = UINavigationController(
-            rootViewController: mainScreenViewController
-        )
+            let mainScreenViewController = MainScreenAssembly.assemble(
+                managedObjectContext: container.viewContext
+            ).viewController
 
-        viewControllers.append(mainScreenNavigationController)
+            let mainScreenNavigationController = UINavigationController(
+                rootViewController: mainScreenViewController
+            )
 
-        tabBarController.setViewControllers(viewControllers, animated: false)
+            viewControllers.append(mainScreenNavigationController)
 
-        self.window = window
-        window.makeKeyAndVisible()
+            tabBarController.setViewControllers(viewControllers, animated: false)
+
+            self.window = window
+            window.makeKeyAndVisible()
+        }
         return true
     }
 }

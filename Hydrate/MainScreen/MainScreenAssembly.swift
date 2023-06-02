@@ -1,7 +1,8 @@
 import UIKit
+import CoreData
 
 enum MainScreenAssembly {
-    static func assemble() -> AssembledModule<MainScreenModuleInput> {
+    static func assemble(managedObjectContext: NSManagedObjectContext) -> AssembledModule<MainScreenModuleInput> {
         let viewController = MainScreenViewController()
         let presenter = MainScreenPresenter()
         let interactor = MainScreenInteractor()
@@ -14,6 +15,7 @@ enum MainScreenAssembly {
         presenter.router = router
 
         interactor.presenter = presenter
+        interactor.context = managedObjectContext
 
         router.viewController = viewController
         router.presenter = presenter
