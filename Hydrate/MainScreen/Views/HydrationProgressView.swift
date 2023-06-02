@@ -3,7 +3,10 @@ import SnapKit
 
 final class HydrationProgressView: UIView {
 
-    let circleView = CircleProgressView(baseColor: .black, progressColor: .red, lineWidth: 20)
+    let circleView = CircleProgressView(
+        baseColor: Asset.progressViewBaseColor.color,
+        progressColor: Asset.progressViewProgressColor.color, lineWidth: 20
+    )
 
     private lazy var percentageLabel: UILabel = {
         let label = UILabel()
@@ -33,10 +36,11 @@ final class HydrationProgressView: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = -40
-        stackView.distribution = .fillEqually
+        stackView.spacing = 0
+        stackView.distribution = .fillProportionally
         return stackView
     }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -62,7 +66,7 @@ extension HydrationProgressView {
         progress: Double,
         amount: Measurement<UnitVolume>,
         variance: Measurement<UnitVolume>) {
-            percentageLabel.text = "\(progress)%"
+            percentageLabel.text = "\(progress * 100)%"
             amountLabel.text = "\(amount)"
             varianceLabel.text = "\(variance)"
             circleView.progress = CGFloat(progress)
