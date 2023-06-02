@@ -23,7 +23,7 @@ extension MainScreenView {
         progressView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(150)
         }
     }
 }
