@@ -22,15 +22,16 @@ extension MainScreenView {
         backgroundColor = Asset.backgroundColor.color
         addSubview(progressView)
         addSubview(shortcutsView)
+
         progressView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(12)
-            make.top.equalTo(safeAreaLayoutGuide)
-            make.bottom.equalTo(shortcutsView.snp.top)
+            make.top.equalTo(safeAreaLayoutGuide).offset(12)
+            make.height.equalTo(progressView.snp.width)
         }
 
         shortcutsView.snp.makeConstraints { make in
-            make.height.equalToSuperview().multipliedBy(0.15)
             make.leading.trailing.equalToSuperview().inset(12)
+            make.height.equalTo(shortcutsView.snp.width).multipliedBy(0.44)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
