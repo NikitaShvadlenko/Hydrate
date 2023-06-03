@@ -13,6 +13,7 @@ extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
         interactor?.retrieveHydrationData()
+        shortcutsManager?.shortcuts = []
     }
 }
 

@@ -10,6 +10,7 @@ class ShortcutsView: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
+        collectionView.register(AddShortcutCell.self, forCellWithReuseIdentifier: "\(AddShortcutCell.self)")
         return collectionView
     }()
 

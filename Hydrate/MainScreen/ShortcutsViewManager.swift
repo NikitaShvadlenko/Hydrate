@@ -46,7 +46,14 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
                 color: UIColor(named: shortcut.colorName) ?? .black
             )
         } else {
-
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "\(AddShortcutCell.self)",
+                for: indexPath
+            ) as? AddShortcutCell else {
+                fatalError("failed to deqeue cell")
+            }
+            return cell
         }
+        fatalError("It is impossible to get here")
     }
 }

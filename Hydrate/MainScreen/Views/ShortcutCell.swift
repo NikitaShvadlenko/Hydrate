@@ -42,7 +42,7 @@ extension ShortcutCell {
         color: UIColor
     ) {
         contentView.layer.borderColor = color.cgColor
-        contentView.backgroundColor = color.withAlphaComponent(0.1)
+        contentView.backgroundColor = color.withAlphaComponent(ShortcutCellConstants.backgroundAlpha)
         nameLabel.text = name
         volumeLabel.text = volume
         volumeLabel.textColor = color
@@ -60,8 +60,8 @@ extension ShortcutCell {
             beverageIcon
         ].forEach(addSubview(_:))
 
-        contentView.layer.cornerRadius = 14
-        contentView.layer.borderWidth = 1
+        contentView.layer.cornerRadius = ShortcutCellConstants.cornerRadius
+        contentView.layer.borderWidth = ShortcutCellConstants.borderWidth
 
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(12)
