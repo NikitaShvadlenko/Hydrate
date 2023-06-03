@@ -8,7 +8,6 @@ class ShortcutsView: UIView {
         collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.delegate = self
         collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
         collectionView.register(AddShortcutCell.self, forCellWithReuseIdentifier: "\(AddShortcutCell.self)")
         return collectionView
@@ -33,41 +32,6 @@ class ShortcutsView: UIView {
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
-extension ShortcutsView: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        sizeForItemAt indexPath: IndexPath
-    ) -> CGSize {
-        let availableWidth = bounds.width - (Constants.spaceBetweenCards * (Constants.numberOfColumns - 1))
-        - (Constants.horizontalCardInsets * 2)
-        let width = availableWidth / Constants.numberOfColumns
-
-        let availableHeight = bounds.height - (Constants.spaceBetweenCards * (Constants.numberOfRows - 1))
-        - (Constants.verticalCardInsets * 2)
-        let height = availableHeight / Constants.numberOfRows
-
-        return CGSize(width: width, height: height)
-    }
-
-    private enum Constants {
-        static let spaceBetweenCards: CGFloat = 10
-        static let horizontalCardInsets: CGFloat = 10
-        static let verticalCardInsets: CGFloat = 10
-        static let cardInsets = UIEdgeInsets(
-            top: verticalCardInsets,
-            left: horizontalCardInsets,
-            bottom: verticalCardInsets,
-            right: horizontalCardInsets
-        )
-        static let numberOfRows: CGFloat = 2
-        static let numberOfColumns: CGFloat = 2
-    }
-
-}
-
 // MARK: - Public Methods
 extension ShortcutsView {
     var dataSource: UICollectionViewDataSource? {
@@ -76,6 +40,15 @@ extension ShortcutsView {
         }
         set {
             collectionView.dataSource = newValue
+        }
+    }
+
+    var delegate: UICollectionViewDelegate? {
+        get {
+            collectionView.delegate
+        }
+        set {
+            collectionView.delegate = newValue
         }
     }
 
@@ -93,4 +66,19 @@ extension ShortcutsView {
             make.edges.equalToSuperview()
         }
     }
+
+    private enum Constants {
+        static let spaceBetweenCards: CGFloat = 10
+        static let horizontalCardInsets: CGFloat = 10
+        static let verticalCardInsets: CGFloat = 10
+        static let cardInsets = UIEdgeInsets(
+            top: verticalCardInsets,
+            left: horizontalCardInsets,
+            bottom: verticalCardInsets,
+            right: horizontalCardInsets
+        )
+        static let numberOfRows: CGFloat = 2
+        static let numberOfColumns: CGFloat = 2
+    }
+
 }

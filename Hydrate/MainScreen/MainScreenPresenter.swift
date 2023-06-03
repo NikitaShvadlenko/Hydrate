@@ -35,6 +35,21 @@ extension MainScreenPresenter: MainScreenModuleInput {
     }
 }
 
+// MARK: - ShortcutsViewManagerProtocol
+extension MainScreenPresenter: ShortcutsViewManagerDelegate {
+    func shortcutsViewManager(
+        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        let shortcuts = shortcutsViewManager.shortcuts
+        if !shortcuts.isEmpty && indexPath.item != shortcuts.count + 1 {
+            print("Asking interactor to record a drink \(shortcuts[indexPath.item].imageName)")
+        } else {
+            print("Asking vc to pop a screen with addShortcut")
+        }
+    }
+}
+
 // MARK: - Private methods
 extension MainScreenPresenter {
 }

@@ -20,6 +20,10 @@ final class MainScreenViewController: UIViewController {
     func setShortcutsDataSource(_ dataSource: UICollectionViewDataSource) {
         mainScreenView.shortcutsView.dataSource = dataSource
     }
+
+    func setShortcutsDelegate(_ delegate: UICollectionViewDelegate) {
+        mainScreenView.shortcutsView.delegate = delegate
+    }
 }
 
 // MARK: - MainScreenViewInput
