@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-final class HydrationJournal: NSManagedObject {
+final class JournalEntry: NSManagedObject {
 
     @NSManaged
     fileprivate(set) var date: Date
@@ -16,8 +16,8 @@ final class HydrationJournal: NSManagedObject {
         into context: NSManagedObjectContext,
         beverage: String,
         volumeConsumed: Double
-    ) -> HydrationJournal {
-        let hydationJournal: HydrationJournal = context.insertObject()
+    ) -> JournalEntry {
+        let hydationJournal: JournalEntry = context.insertObject()
         hydationJournal.beverage = beverage
         hydationJournal.volumeConsumed = volumeConsumed
         hydationJournal.date = Date()
@@ -25,7 +25,7 @@ final class HydrationJournal: NSManagedObject {
     }
 }
 
-extension HydrationJournal: Managed {
+extension JournalEntry: Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: #keyPath(date), ascending: false)]
     }

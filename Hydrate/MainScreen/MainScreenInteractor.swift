@@ -22,13 +22,13 @@ extension MainScreenInteractor: MainScreenInteractorInput {
 
 // MARK: - Private methods
 extension MainScreenInteractor {
-    private func fetchAllEntries() -> [HydrationJournal] {
+    private func fetchAllEntries() -> [JournalEntry] {
         guard let dataStorage = dataService else {
             fatalError("No data storage is set")
         }
         do {
-            guard let items = try dataStorage.fetchItems() as? [HydrationJournal] else {
-                fatalError("Failed to cast items from storage as [HydrationJournal]")
+            guard let items = try dataStorage.fetchItems() as? [JournalEntry] else {
+                fatalError("Failed to cast items from storage as [JournalEntry]")
             }
             return items
         } catch {

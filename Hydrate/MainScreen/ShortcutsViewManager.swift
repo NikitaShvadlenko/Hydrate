@@ -40,8 +40,8 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
             // TODO: handle nil values for image and color
             let shortcut = shortcuts[indexPath.item]
             cell.configureCell(
-                name: shortcut.name,
-                volume: "\(shortcut.volume)",
+                name: shortcut.journalEntry.beverage,
+                volume: "\(shortcut.journalEntry.volumeConsumed)",
                 image: UIImage(named: shortcut.imageName) ?? UIImage(),
                 color: UIColor(named: shortcut.colorName) ?? .black
             )

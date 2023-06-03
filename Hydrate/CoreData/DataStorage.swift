@@ -15,9 +15,9 @@ class HydrationDataService {
 }
 
 extension HydrationDataService: DataStorage {
-    public func insertItem(_ item: HydrationJournal) {
+    public func insertItem(_ item: JournalEntry) {
         context.performChanges {
-            _ = HydrationJournal.insert(
+            _ = JournalEntry.insert(
                 into: self.context,
                 beverage: item.beverage,
                 volumeConsumed: item.volumeConsumed
@@ -25,8 +25,8 @@ extension HydrationDataService: DataStorage {
         }
     }
 
-    public func fetchItems() throws -> [HydrationJournal] {
-        let request = HydrationJournal.sortedFetchRequest
+    public func fetchItems() throws -> [JournalEntry] {
+        let request = JournalEntry.sortedFetchRequest
         request.fetchBatchSize = 20
         let journal = try context.fetch(request)
         return journal
