@@ -5,6 +5,7 @@ final class MainScreenPresenter {
     weak var moduleOutput: MainScreenModuleOutput?
     var interactor: MainScreenInteractorInput?
     var router: MainScreenRouterInput?
+    var shortcutsManager: ShortcutsViewManagerProtocol?
 }
 
 // MARK: - MainScreenViewOutput

@@ -8,12 +8,15 @@ enum MainScreenAssembly {
         let interactor = MainScreenInteractor()
         let router = MainScreenRouter()
         let dataService = HydrationDataService(context: managedObjectContext)
+        let shortcutsViewManager = ShortcutsViewManager()
 
         viewController.presenter = presenter
+        viewController.setShortcutsDataSource(shortcutsViewManager)
 
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
+        presenter.shortcutsManager = shortcutsViewManager
 
         interactor.presenter = presenter
         interactor.dataService = dataService

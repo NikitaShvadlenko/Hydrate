@@ -16,6 +16,10 @@ final class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
     }
+
+    func setShortcutsDataSource(_ dataSource: UICollectionViewDataSource) {
+        mainScreenView.shortcutsView.dataSource = dataSource
+    }
 }
 
 // MARK: - MainScreenViewInput

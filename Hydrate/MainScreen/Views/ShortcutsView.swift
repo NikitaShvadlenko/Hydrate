@@ -9,8 +9,6 @@ class ShortcutsView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
-        // TODO: create a custom cell and data source
-        collectionView.dataSource = self
         collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
         return collectionView
     }()
@@ -93,20 +91,5 @@ extension ShortcutsView {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-}
-
-extension ShortcutsView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        4
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ShortcutCell.self)", for: indexPath) as? ShortcutCell else {
-            fatalError("Failed to deque cell")
-        }
-        cell.configureCell(name: "Water", volume: "12oz", image: Asset.screenshot20230520At003206.image , color: .systemBlue)
-
-        return cell
     }
 }
