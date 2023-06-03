@@ -11,7 +11,7 @@ class ShortcutsView: UIView {
         collectionView.delegate = self
         // TODO: create a custom cell and data source
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "\(UICollectionViewCell.self)")
+        collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
         return collectionView
     }()
 
@@ -102,8 +102,11 @@ extension ShortcutsView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(UICollectionViewCell.self)", for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ShortcutCell.self)", for: indexPath) as? ShortcutCell else {
+            fatalError("Failed to deque cell")
+        }
+        cell.configureCell(name: "Water", volume: "12oz", image: Asset.screenshot20230520At003206.image , color: .systemBlue)
+
         return cell
     }
 }
