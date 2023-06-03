@@ -23,13 +23,13 @@ extension MainScreenView {
         addSubview(progressView)
         addSubview(shortcutsView)
         progressView.snp.makeConstraints { make in
-            make.centerX.centerY.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(150)
+            make.leading.trailing.equalToSuperview().inset(12)
+            make.top.equalTo(safeAreaLayoutGuide)
+            make.bottom.equalTo(shortcutsView.snp.top)
         }
 
         shortcutsView.snp.makeConstraints { make in
-            make.height.equalTo(100)
+            make.height.equalToSuperview().multipliedBy(0.15)
             make.leading.trailing.equalToSuperview().inset(12)
             make.bottom.equalTo(safeAreaLayoutGuide)
         }

@@ -33,14 +33,6 @@ final class HydrationProgressView: UIView {
         return label
     }()
 
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.spacing = 10
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -52,9 +44,9 @@ final class HydrationProgressView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        circleView.center = stackView.center
+        circleView.center = amountLabel.center
         circleView.snp.makeConstraints { make in
-            make.centerY.equalTo(stackView.snp.centerY)
+            make.centerY.equalTo(amountLabel.snp.centerY)
             make.edges.equalToSuperview()
         }
 
@@ -78,15 +70,27 @@ extension HydrationProgressView {
 extension HydrationProgressView {
     private func setupView() {
         backgroundColor = .clear
-        addSubview(stackView)
-        stackView.addSubview(circleView)
         [
             percentageLabel,
             amountLabel,
             varianceLabel
-        ].forEach(stackView.addArrangedSubview)
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(12)
+        ].forEach(addSubview(_:))
+
+        amountLabel.addSubview(circleView)
+
+        amountLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(12)
+        }
+
+        percentageLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(amountLabel.snp.top)
+            make.leading.trailing.equalToSuperview()
+        }
+
+        varianceLabel.snp.makeConstraints { make in
+            make.top.equalTo(amountLabel.snp.bottom)
+            make.leading.trailing.equalToSuperview()
         }
     }
 }
