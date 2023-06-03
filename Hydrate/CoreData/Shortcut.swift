@@ -7,25 +7,35 @@ final class Shortcut: NSManagedObject {
     fileprivate(set) var date: Date
 
     @NSManaged
-    fileprivate(set) var beverage: String
+    fileprivate(set) var name: String
 
     @NSManaged
-    fileprivate(set) var volumeConsumed: Double
+    fileprivate(set) var colorName: String
+
+    @NSManaged
+    fileprivate(set) var volume: Double
+
+    @NSManaged
+    fileprivate(set) var imageName: String
 
     static func insert(
         into context: NSManagedObjectContext,
-        beverage: String,
-        volumeConsumed: Double
-    ) -> HydrationJournal {
-        let hydationJournal: HydrationJournal = context.insertObject()
-        hydationJournal.beverage = beverage
-        hydationJournal.volumeConsumed = volumeConsumed
-        hydationJournal.date = Date()
-        return hydationJournal
+        name: String,
+        volume: Double,
+        colorName: String,
+        imageName: String
+    ) -> Shortcut {
+        let shortcut: Shortcut = context.insertObject()
+        shortcut.name = name
+        shortcut.volume = volume
+        shortcut.colorName = colorName
+        shortcut.imageName = imageName
+        shortcut.date = Date()
+        return shortcut
     }
 }
 
-extension HydrationJournal: Managed {
+extension Shortcut: Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: #keyPath(date), ascending: false)]
     }

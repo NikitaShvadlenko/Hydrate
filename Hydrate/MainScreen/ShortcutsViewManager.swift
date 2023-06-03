@@ -1,10 +1,10 @@
 import UIKit
 protocol ShortcutsViewManagerProtocol {
-    var shortcuts: [Int] { get set }
+    var shortcuts: [Shortcut]? { get set }
 }
 
 class ShortcutsViewManager: NSObject {
-    var shortcuts: [Int] = [2,3,4,5,5]
+    var shortcuts: [Shortcut]?
 }
 
 extension ShortcutsViewManager: ShortcutsViewManagerProtocol {
@@ -13,18 +13,40 @@ extension ShortcutsViewManager: ShortcutsViewManagerProtocol {
 
 extension ShortcutsViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        shortcuts.count
+        guard let shortcuts = shortcuts else {
+            fatalError("shortcuts array was not set")
+        }
+        if !shortcuts.isEmpty {
+            return shortcuts.count + 1
+        } else {
+            return 1
+        }
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ShortcutCell.self)", for: indexPath) as? ShortcutCell else {
-            fatalError("Failed to deque cell")
+        guard let shortcuts = shortcuts else {
+            fatalError("shortcuts array was not set")
         }
-        cell.configureCell(name: "Water", volume: "12oz", image: Asset.screenshot20230520At003206.image , color: .systemBlue)
+        if !shortcuts.isEmpty && indexPath.item != shortcuts.count + 1 {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "\(ShortcutCell.self)",
+                for: indexPath
+            ) as? ShortcutCell else {
+                fatalError("failed to deqeue cell")
+            }
+            // TODO: handle nil values for image and color
+            let shortcut = shortcuts[indexPath.item]
+            cell.configureCell(
+                name: shortcut.name,
+                volume: "\(shortcut.volume)",
+                image: UIImage(named: shortcut.imageName) ?? UIImage(),
+                color: UIColor(named: shortcut.colorName) ?? .black
+            )
+        } else {
 
-        return cell
+        }
     }
 }

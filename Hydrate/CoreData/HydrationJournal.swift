@@ -4,16 +4,13 @@ import CoreData
 final class HydrationJournal: NSManagedObject {
 
     @NSManaged
-    fileprivate(set) var volume: Double
+    fileprivate(set) var date: Date
 
     @NSManaged
-    fileprivate(set) var colorName: String
+    fileprivate(set) var beverage: String
 
     @NSManaged
-    fileprivate(set) var imageName: String
-
-    @NSManaged
-    fileprivate(set) var name: String
+    fileprivate(set) var volumeConsumed: Double
 
     static func insert(
         into context: NSManagedObjectContext,
