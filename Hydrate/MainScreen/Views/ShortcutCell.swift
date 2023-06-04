@@ -66,6 +66,7 @@ extension ShortcutCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(12)
             make.leading.equalToSuperview().inset(12)
+            make.bottom.equalTo(volumeLabel.snp.top)
         }
 
         volumeLabel.snp.makeConstraints { make in
@@ -76,7 +77,6 @@ extension ShortcutCell {
 
         beverageIcon.snp.makeConstraints { make in
             make.trailing.top.equalToSuperview().inset(12)
-            make.centerY.equalTo(nameLabel.snp.centerY)
             make.width.equalTo(30)
             make.height.equalTo(30)
         }
