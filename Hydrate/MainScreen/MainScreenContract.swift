@@ -3,6 +3,8 @@ protocol MainScreenViewInput: AnyObject {
     func configureViews()
     func setHydration(model: HydrationProgressModel)
     func reloadShortcutsCollection()
+    func setNumberOfShortcutPages(_ numberOfPages: Int)
+    func selectShortcutPage(_ page: Int)
 }
 
 protocol MainScreenViewOutput {
@@ -17,7 +19,7 @@ protocol MainScreenInteractorInput {
 
 // sourcery: AutoMockable
 protocol MainScreenInteractorOutput: AnyObject {
-   func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: HydrationProgressModel)
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: HydrationProgressModel)
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut])
 }
 
@@ -29,7 +31,7 @@ protocol MainScreenRouterOutput: AnyObject {
 }
 
 protocol MainScreenModuleInput: AnyObject {
-	func configureModule(output: MainScreenModuleOutput?)
+    func configureModule(output: MainScreenModuleOutput?)
 }
 
 // sourcery: AutoMockable

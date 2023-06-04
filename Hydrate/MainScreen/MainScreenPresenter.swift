@@ -42,12 +42,15 @@ extension MainScreenPresenter: MainScreenModuleInput {
 
 // MARK: - ShortcutsViewManagerProtocol
 extension MainScreenPresenter: ShortcutsViewManagerDelegate {
-    func shortcutsViewManager(_ shortcutsViewManager: ShortcutsViewManagerProtocol, numberOfPages: Int) {
-        print(numberOfPages)
-    }
 
+    func shortcutsViewManager(
+        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
+        didCalculateNumberOfPages numberOfPages: Int
+    ) {
+        view?.setNumberOfShortcutPages(numberOfPages)
+    }
     func shortcutsViewManager(_ shortcutsViewManager: ShortcutsViewManagerProtocol, didMoveToPageNumber: Int) {
-        print(didMoveToPageNumber)
+        view?.selectShortcutPage(didMoveToPageNumber)
     }
 
     func shortcutsViewManager(

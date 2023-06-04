@@ -12,7 +12,7 @@ protocol ShortcutsViewManagerDelegate: AnyObject {
 
     func shortcutsViewManager(
         _ shortcutsViewManager: ShortcutsViewManagerProtocol,
-        numberOfPages: Int
+        didCalculateNumberOfPages numberOfPages: Int
     )
 
     func shortcutsViewManager(
@@ -24,9 +24,13 @@ protocol ShortcutsViewManagerDelegate: AnyObject {
 class ShortcutsViewManager: NSObject {
     var shortcuts: [Shortcut] = [] {
         didSet {
+            let totalNumberOfCells = shortcuts.count + 1
             let itemsPerPage = Int(Constants.numberOfRows + Constants.numberOfColumns)
-            let itemsRoundedUp: Float = Float(shortcuts.count + 1 / itemsPerPage).rounded(.up)
-            delegate?.shortcutsViewManager(self, numberOfPages: Int(itemsRoundedUp))
+            let numberOfPages =
+            totalNumberOfCells % itemsPerPage == 0 ?
+            totalNumberOfCells/itemsPerPage : totalNumberOfCells/itemsPerPage + 1
+
+            delegate?.shortcutsViewManager(self, didCalculateNumberOfPages: numberOfPages)
         }
     }
 
@@ -105,10 +109,10 @@ extension ShortcutsViewManager: UICollectionViewDelegateFlowLayout {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //TODO: Implement
-        fatalError("Not implemented")
-        let currentPage = 1
-        delegate?.shortcutsViewManager(self, didMoveToPageNumber: currentPage)
+        let width = scrollView.bounds.width - Constants.horizontalCardInsets * 2
+        let offset = scrollView.contentOffset.x
+        let pageNumber = Int((width/2 + offset) / width)
+        delegate?.shortcutsViewManager(self, didMoveToPageNumber: pageNumber)
     }
 
     private enum Constants {

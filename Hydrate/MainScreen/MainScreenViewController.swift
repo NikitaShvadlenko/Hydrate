@@ -28,6 +28,14 @@ final class MainScreenViewController: UIViewController {
 
 // MARK: - MainScreenViewInput
 extension MainScreenViewController: MainScreenViewInput {
+    func setNumberOfShortcutPages(_ numberOfPages: Int) {
+        mainScreenView.pageView.setupNumberOfPages(numberOfPages)
+    }
+
+    func selectShortcutPage(_ page: Int) {
+        mainScreenView.pageView.pageSelected(pageIndex: page)
+    }
+
     func configureViews() {
     }
 

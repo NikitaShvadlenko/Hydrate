@@ -25,7 +25,7 @@ class PageView: UIView {
 }
 
 extension PageView {
-    public func setupPages(numberOfPages: Int) {
+    public func setupNumberOfPages(_ numberOfPages: Int) {
         subviews.forEach { $0.removeFromSuperview() }
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
@@ -44,13 +44,16 @@ extension PageView {
                 make.height.equalToSuperview()
             }
         }
+        pageSelected(pageIndex: 0)
     }
 
     public func pageSelected(pageIndex: Int) {
         guard stackView.arrangedSubviews.count > pageIndex else {
             fatalError("Page number is higher")
         }
-        stackView.arrangedSubviews[pageIndex].backgroundColor = Asset.progressViewProgressColor.color
+        let subviews = stackView.arrangedSubviews
+        subviews.forEach { $0.backgroundColor = Asset.progressViewBaseColor.color }
+        subviews[pageIndex].backgroundColor = Asset.progressViewProgressColor.color
     }
 }
 
