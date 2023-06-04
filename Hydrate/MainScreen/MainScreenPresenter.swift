@@ -47,7 +47,7 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         let shortcuts = shortcutsViewManager.shortcuts
-        if !shortcuts.isEmpty && indexPath.item != shortcuts.count + 1 {
+        if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
             print("Asking interactor to record a drink \(shortcuts[indexPath.item].imageName)")
         } else {
             print("Asking vc to pop a screen with addShortcut")
