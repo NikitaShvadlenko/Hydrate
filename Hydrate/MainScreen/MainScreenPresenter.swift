@@ -13,12 +13,17 @@ extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
         interactor?.retrieveHydrationData()
-        shortcutsManager?.shortcuts = []
+        interactor?.retriveShortcuts()
     }
 }
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut]) {
+        shortcutsManager?.shortcuts = shortcuts
+        view?.reloadShortcutsCollection()
+    }
+
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: HydrationProgressModel) {
         view?.setHydration(model: didRetrieveHydration)
     }

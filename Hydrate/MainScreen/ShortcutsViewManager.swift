@@ -46,7 +46,7 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
                 name: shortcut.journalEntry.beverage,
                 volume: "\(shortcut.journalEntry.volumeConsumed)",
                 image: UIImage(named: shortcut.imageName) ?? UIImage(),
-                color: UIColor(named: shortcut.colorName) ?? .black
+                color: UIColor(named: shortcut.colorName) ?? .systemRed
             )
         } else {
             guard let cell = collectionView.dequeueReusableCell(

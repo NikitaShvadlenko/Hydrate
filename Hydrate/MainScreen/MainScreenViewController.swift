@@ -40,6 +40,10 @@ extension MainScreenViewController: MainScreenViewInput {
             variance: Measurement(value: variance, unit: model.amount.unit)
         )
     }
+
+    func reloadShortcutsCollection() {
+        mainScreenView.shortcutsView.reloadCollection()
+    }
 }
 
 // MARK: - Private methods

@@ -8,6 +8,6 @@
     <entity name="Shortcut" representedClassName=".Shortcut" syncable="YES">
         <attribute name="colorName" optional="YES" attributeType="String"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
-        <attribute name="journalEntry" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName"/>
+        <attribute name="journalEntry" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName=".JournalEntry"/>
     </entity>
 </model>

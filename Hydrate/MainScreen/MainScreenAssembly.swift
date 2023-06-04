@@ -7,8 +7,12 @@ enum MainScreenAssembly {
         let presenter = MainScreenPresenter()
         let interactor = MainScreenInteractor()
         let router = MainScreenRouter()
-        let dataService = HydrationDataService(context: managedObjectContext)
+
+        let dataService = JournalEntryService(context: managedObjectContext)
+        let shortcutsService = ShortcutService(context: managedObjectContext)
+
         let shortcutsViewManager = ShortcutsViewManager()
+
         shortcutsViewManager.delegate = presenter
 
         viewController.presenter = presenter
@@ -22,6 +26,7 @@ enum MainScreenAssembly {
 
         interactor.presenter = presenter
         interactor.dataService = dataService
+        interactor.shortcutService = shortcutsService
 
         router.viewController = viewController
         router.presenter = presenter
