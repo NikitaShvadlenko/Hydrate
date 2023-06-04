@@ -34,7 +34,8 @@ class AddShortcutCell: UICollectionViewCell {
 extension AddShortcutCell {
     private func setupView() {
         backgroundColor = Asset.progressViewBaseColor.color.withAlphaComponent(ShortcutCellConstants.backgroundAlpha)
-        tintColor = Asset.progressViewBaseColor.color
+        layer.borderColor = Asset.progressViewBaseColor.color.cgColor
+        layer.borderWidth = 1
         layer.cornerRadius = ShortcutCellConstants.cornerRadius
 
         [
