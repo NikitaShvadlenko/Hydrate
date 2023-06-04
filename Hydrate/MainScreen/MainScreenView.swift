@@ -9,7 +9,6 @@ final class MainScreenView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
-        pageView.setupPages(numberOfPages: 3)
     }
 
     @available(*, unavailable)

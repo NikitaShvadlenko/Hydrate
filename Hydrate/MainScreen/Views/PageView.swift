@@ -2,16 +2,11 @@ import UIKit
 import SnapKit
 
 class PageView: UIView {
-
-    private let elementWidth: CGFloat = 10
-    private let spacingBetweenElements: CGFloat = 5
-    private let pageViewHeight: CGFloat = 5
-
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
-        stackView.spacing = spacingBetweenElements
+        stackView.spacing = Constants.spacingBetweenElements
         stackView.alignment = .center
         return stackView
     }()
@@ -31,9 +26,10 @@ class PageView: UIView {
 
 extension PageView {
     public func setupPages(numberOfPages: Int) {
+        subviews.forEach { $0.removeFromSuperview() }
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            let requiredWidth = CGFloat(numberOfPages) * (spacingBetweenElements + elementWidth)
+            let requiredWidth = CGFloat(numberOfPages) * (Constants.spacingBetweenElements + Constants.elementWidth)
             make.edges.equalToSuperview()
             make.width.lessThanOrEqualTo(requiredWidth).priority(999)
         }
@@ -44,9 +40,24 @@ extension PageView {
             stackView.addArrangedSubview(view)
             view.layer.cornerRadius = 5
             view.snp.makeConstraints { make in
-                make.width.equalTo(elementWidth)
+                make.width.equalTo(Constants.elementWidth)
                 make.height.equalToSuperview()
             }
         }
+    }
+
+    public func pageSelected(pageIndex: Int) {
+        guard stackView.arrangedSubviews.count > pageIndex else {
+            fatalError("Page number is higher")
+        }
+        stackView.arrangedSubviews[pageIndex].backgroundColor = Asset.progressViewProgressColor.color
+    }
+}
+
+extension PageView {
+    public enum Constants {
+        static let elementWidth: CGFloat = 10
+        static let spacingBetweenElements: CGFloat = 5
+        static let pageViewHeight: CGFloat = 5
     }
 }
