@@ -7,6 +7,7 @@ class ShortcutCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = Asset.primaryTextColor.color
         return label
     }()

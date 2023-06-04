@@ -8,6 +8,8 @@ class AddShortcutCell: UICollectionViewCell {
         let label = UILabel()
         label.textColor = Asset.primaryTextColor.color
         label.textAlignment = .left
+        label.adjustsFontSizeToFitWidth = true
+        label.font = UIFont.systemFont(ofSize: 18)
         label.numberOfLines = 1
         label.text = L10n.addShortcut
         return label
@@ -15,7 +17,7 @@ class AddShortcutCell: UICollectionViewCell {
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.tintColor = Asset.progressViewBaseColor.color
+        imageView.tintColor = Asset.progressViewProgressColor.color.withAlphaComponent(0.8)
         imageView.image = UIImage(sfSymbol: SFSymbol.plusCircle)?.withConfiguration(symbolConfiguration)
         return imageView
     }()
@@ -33,8 +35,9 @@ class AddShortcutCell: UICollectionViewCell {
 // MARK: Private methods
 extension AddShortcutCell {
     private func setupView() {
-        backgroundColor = Asset.progressViewBaseColor.color.withAlphaComponent(ShortcutCellConstants.backgroundAlpha)
-        layer.borderColor = Asset.progressViewBaseColor.color.cgColor
+        backgroundColor = Asset.progressViewProgressColor.color
+            .withAlphaComponent(ShortcutCellConstants.backgroundAlpha)
+        layer.borderColor = Asset.progressViewProgressColor.color.cgColor
         layer.borderWidth = 1
         layer.cornerRadius = ShortcutCellConstants.cornerRadius
 
@@ -50,6 +53,7 @@ extension AddShortcutCell {
 
         label.snp.makeConstraints { make in
             make.leading.equalTo(imageView.snp.trailing).offset(12)
+            make.trailing.equalToSuperview().inset(12)
             make.centerY.equalToSuperview()
         }
     }
