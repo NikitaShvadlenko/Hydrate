@@ -25,6 +25,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 rootViewController: mainScreenViewController
             )
 
+            UITabBarItem.appearance()
+                .setTitleTextAttributes(
+                    [NSAttributedString.Key.foregroundColor: UIColor.clear],
+                    for: .normal
+                )
+
             viewControllers.append(mainScreenNavigationController)
 
             tabBarController.setViewControllers(viewControllers, animated: false)
