@@ -33,7 +33,7 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        if !shortcuts.isEmpty && indexPath.item != shortcuts.count + 1 {
+        if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "\(ShortcutCell.self)",
                 for: indexPath
@@ -43,11 +43,12 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
 
             let shortcut = shortcuts[indexPath.item]
             cell.configureCell(
-                name: shortcut.journalEntry.beverage,
-                volume: "\(shortcut.journalEntry.volumeConsumed)",
+                name: shortcut.beverageName,
+                volume: "\(shortcut.volumeConsumed)",
                 image: UIImage(named: shortcut.imageName) ?? UIImage(),
                 color: UIColor(named: shortcut.colorName) ?? .systemRed
             )
+            return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "\(AddShortcutCell.self)",
@@ -57,7 +58,6 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
             }
             return cell
         }
-        fatalError("It is impossible to get here")
     }
 }
 

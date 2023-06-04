@@ -4,30 +4,39 @@ import CoreData
 final class Shortcut: NSManagedObject {
 
     @NSManaged
-    fileprivate(set) var journalEntry: JournalEntry
-
-    @NSManaged
     fileprivate(set) var colorName: String
 
     @NSManaged
     fileprivate(set) var imageName: String
 
+    @NSManaged
+    fileprivate(set) var beverageName: String
+
+    @NSManaged
+    fileprivate(set) var volumeConsumed: Double
+
+    @NSManaged
+    fileprivate(set) var date: Date
+
     static func insert(
         into context: NSManagedObjectContext,
-        journalEntry: JournalEntry,
         colorName: String,
-        imageName: String
+        imageName: String,
+        beverageName: String,
+        volumeConsumed: Double
     ) -> Shortcut {
         let shortcut: Shortcut = context.insertObject()
-        shortcut.journalEntry = journalEntry
         shortcut.colorName = colorName
         shortcut.imageName = imageName
+        shortcut.volumeConsumed = volumeConsumed
+        shortcut.beverageName = beverageName
+        shortcut.date = Date()
         return shortcut
     }
 }
 
 extension Shortcut: Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] {
-        return [NSSortDescriptor(key: #keyPath(journalEntry.date), ascending: false)]
+        return [NSSortDescriptor(key: #keyPath(date), ascending: false)]
     }
 }

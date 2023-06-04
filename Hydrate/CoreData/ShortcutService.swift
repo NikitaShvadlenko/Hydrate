@@ -13,9 +13,10 @@ extension ShortcutService: DataStorage {
         context.performChanges {
             _ = Shortcut.insert(
                 into: self.context,
-                journalEntry: item.journalEntry,
                 colorName: item.colorName,
-                imageName: item.imageName
+                imageName: item.imageName,
+                beverageName: item.beverageName,
+                volumeConsumed: item.volumeConsumed
             )
         }
     }

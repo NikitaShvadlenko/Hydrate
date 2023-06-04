@@ -6,8 +6,10 @@
         <attribute name="volumeConsumed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Shortcut" representedClassName=".Shortcut" syncable="YES">
+        <attribute name="beverageName" optional="YES" attributeType="String"/>
         <attribute name="colorName" optional="YES" attributeType="String"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
-        <attribute name="journalEntry" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformerName" customClassName=".JournalEntry"/>
+        <attribute name="volumeConsumed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
 </model>
