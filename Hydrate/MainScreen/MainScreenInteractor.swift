@@ -33,9 +33,7 @@ extension MainScreenInteractor {
             fatalError("No data storage is set")
         }
         do {
-            guard let items = try dataStorage.fetchItems() as? [JournalEntry] else {
-                fatalError("Failed to cast items from storage as [JournalEntry]")
-            }
+            let items = try dataStorage.retrieveJournalEntries()
             return items
         } catch {
             fatalError("\(error)")
@@ -47,9 +45,7 @@ extension MainScreenInteractor {
             fatalError("No data storage is set")
         }
         do {
-            guard let items = try shortcutService.fetchItems() as? [Shortcut] else {
-                fatalError("Failed to cast items from storage as [JournalEntry]")
-            }
+           let items = try shortcutService.retrieveShortcuts()
             return items
         } catch {
             fatalError("\(error)")

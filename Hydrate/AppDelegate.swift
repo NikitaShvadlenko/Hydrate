@@ -9,7 +9,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        createHydrationJournalContainer { container in
+        let container = CoreDataService.shared.container
+
             let window = UIWindow(frame: UIScreen.main.bounds)
 
             let tabBarController = UITabBarController()
@@ -37,7 +38,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
             self.window = window
             window.makeKeyAndVisible()
-        }
         return true
     }
 }

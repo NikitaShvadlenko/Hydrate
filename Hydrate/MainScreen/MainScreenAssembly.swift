@@ -7,9 +7,10 @@ enum MainScreenAssembly {
         let presenter = MainScreenPresenter()
         let interactor = MainScreenInteractor()
         let router = MainScreenRouter()
+        let coreDataService = CoreDataService.shared
 
-        let dataService = JournalEntryService(context: managedObjectContext)
-        let shortcutsService = ShortcutService(context: managedObjectContext)
+        let dataService = coreDataService
+        let shortcutsService = coreDataService
 
         let shortcutsViewManager = ShortcutsViewManager()
 
