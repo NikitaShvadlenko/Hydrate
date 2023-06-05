@@ -117,7 +117,7 @@ extension ShortcutsViewManager: UICollectionViewDelegateFlowLayout {
 
     private enum Constants {
         static let spaceBetweenCards: CGFloat = 10
-        static let horizontalCardInsets: CGFloat = 10
+        static let horizontalCardInsets: CGFloat = 5
         static let verticalCardInsets: CGFloat = 10
         static let cardInsets = UIEdgeInsets(
             top: verticalCardInsets,

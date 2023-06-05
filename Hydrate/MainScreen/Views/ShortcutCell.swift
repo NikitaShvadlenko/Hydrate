@@ -65,9 +65,10 @@ extension ShortcutCell {
         contentView.layer.borderWidth = ShortcutCellConstants.borderWidth
 
         nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(12)
+            make.top.equalToSuperview().inset(5)
             make.leading.equalToSuperview().inset(12)
             make.bottom.equalTo(volumeLabel.snp.top)
+            make.height.equalTo(30)
         }
 
         volumeLabel.snp.makeConstraints { make in
