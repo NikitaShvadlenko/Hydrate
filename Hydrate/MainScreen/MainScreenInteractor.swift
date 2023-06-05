@@ -11,7 +11,9 @@ final class MainScreenInteractor {
 extension MainScreenInteractor: MainScreenInteractorInput {
     func insertJournalEntry(beverageName: String, volumeConsumed: Double) {
         dataService?.insertJournalEntry(beverageName: beverageName, volumeConsumed: volumeConsumed)
-        presenter?.interactor(self, didInsertJournalEntry: beverageName)
+        DispatchQueue.main.async {
+            self.presenter?.interactor(self, didInsertJournalEntry: beverageName)
+        }
     }
 
     func retriveShortcuts() {
@@ -20,6 +22,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
     }
 
     func retrieveHydrationData() {
+        dataService?.insertShortcut(colorName: Asset.progressViewBaseColor.name, imageName: Asset.waterDrop.name, beverageName: "Water", volumeConsumed: 250)
         // TODO: fetch information for a certain day, not total.
         let journalEntries = fetchAllEntries()
         var volumeConsumed = 0.0
