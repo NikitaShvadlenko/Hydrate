@@ -10,18 +10,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let container = CoreDataService.shared.container
-
             let window = UIWindow(frame: UIScreen.main.bounds)
-
             let tabBarController = UITabBarController()
             window.rootViewController = tabBarController
-
             var viewControllers = [UIViewController]()
-
             let mainScreenViewController = MainScreenAssembly.assemble(
                 managedObjectContext: container.viewContext
             ).viewController
-
             let mainScreenNavigationController = UINavigationController(
                 rootViewController: mainScreenViewController
             )

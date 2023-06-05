@@ -1,12 +1,19 @@
 import CoreData
 
-protocol DataStorage {
-
+protocol DataServiceProtocol {
     func retrieveJournalEntries() throws -> [JournalEntry]
     func retrieveShortcuts() throws -> [Shortcut]
+    func insertJournalEntry(
+        beverageName: String,
+        volumeConsumed: Double
+    )
 
-    func insertJournalEntry(_ item: JournalEntry)
-    func insertShortcut(_ item: Shortcut)
+    func insertShortcut(
+        colorName: String,
+        imageName: String,
+        beverageName: String,
+        volumeConsumed: Double
+    )
 }
 
 class CoreDataService {
@@ -22,7 +29,6 @@ class CoreDataService {
                 fatalError("Failed to load store: \(String(describing: error))")
             }
         }
-
         self.context = container.viewContext
     }
 
@@ -31,8 +37,9 @@ class CoreDataService {
     }
 
 }
+
 // MARK: CRUD for each item type
-extension CoreDataService: DataStorage {
+extension CoreDataService: DataServiceProtocol {
     func retrieveShortcuts() throws -> [Shortcut] {
         let request = Shortcut.sortedFetchRequest
         request.fetchBatchSize = 20
@@ -40,26 +47,34 @@ extension CoreDataService: DataStorage {
         return shortcuts
     }
 
-    public func insertShortcut(_ item: Shortcut) {
+    public func insertShortcut(
+        colorName: String,
+        imageName: String,
+        beverageName: String,
+        volumeConsumed: Double
+    ) {
         context.performChanges {
             _ = Shortcut.insert(
                 into: self.context,
-                colorName: item.colorName,
-                imageName: item.imageName,
-                beverageName: item.beverageName,
-                volumeConsumed: item.volumeConsumed
+                colorName: colorName,
+                imageName: imageName,
+                beverageName: beverageName,
+                volumeConsumed: volumeConsumed
             )
         }
     }
 }
 
 extension CoreDataService {
-    public func insertJournalEntry(_ item: JournalEntry) {
+    public func insertJournalEntry(
+        beverageName: String,
+        volumeConsumed: Double
+    ) {
         context.performChanges {
             _ = JournalEntry.insert(
                 into: self.context,
-                beverage: item.beverage,
-                volumeConsumed: item.volumeConsumed
+                beverage: beverageName,
+                volumeConsumed: volumeConsumed
             )
         }
     }

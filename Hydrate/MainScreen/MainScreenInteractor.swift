@@ -3,8 +3,8 @@ import CoreData
 
 final class MainScreenInteractor {
     weak var presenter: MainScreenInteractorOutput?
-    var dataService: (any DataStorage)?
-    var shortcutService: (any DataStorage)?
+    var dataService: (any DataServiceProtocol)?
+    var shortcutService: (any DataServiceProtocol)?
 }
 
 // MARK: - MainScreenInteractorInput
