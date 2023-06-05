@@ -49,8 +49,6 @@ final class HydrationProgressView: UIView {
             make.centerY.equalTo(amountLabel.snp.centerY)
             make.edges.equalToSuperview().inset(20)
         }
-
-        circleView.animateCircle(duration: 0.5, delay: 0)
     }
 }
 // MARK: Public Methods
@@ -63,6 +61,7 @@ extension HydrationProgressView {
             amountLabel.text = "\(amount)"
             varianceLabel.text = "\(variance)"
             circleView.progress = CGFloat(progress)
+            circleView.animateCircle(duration: 0.5, delay: 0)
         }
 }
 
