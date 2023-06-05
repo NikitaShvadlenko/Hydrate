@@ -20,14 +20,14 @@ extension MainScreenInteractor: MainScreenInteractorInput {
     }
 
     func retrieveHydrationData() {
-        // TODO: remove placeholder
-        let hydration = HydrationProgressModel(
-            goal: Measurement(
-                value: 50, unit: .cups),
-            amount: Measurement(value: 3, unit: .cups)
-        )
+        // TODO: fetch information for a certain day, not total.
+        let journalEntries = fetchAllEntries()
+        var volumeConsumed = 0.0
+        journalEntries.forEach { entry in
+            volumeConsumed = entry.volumeConsumed + volumeConsumed
+        }
 
-        presenter?.interactor(self, didRetrieveHydration: hydration)
+        presenter?.interactor(self, didRetrieveHydration: ConsumptionModel(totalConsumed: volumeConsumed))
     }
 }
 

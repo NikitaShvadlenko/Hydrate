@@ -39,13 +39,20 @@ extension MainScreenViewController: MainScreenViewInput {
     func configureViews() {
     }
 
-    func setHydration(model: HydrationProgressModel) {
-        let progress = model.amount.value / model.goal.value
-        let variance = model.amount.value - model.goal.value
+    func setHydration(model: ConsumptionModel, goal: Double) {
+        let hydrationModel =
+        HydrationProgressModel(
+            goal: Measurement(
+                value: goal, unit: .milliliters),
+            amount: Measurement(value: model.totalConsumed, unit: .milliliters)
+        )
+
+        let progress = hydrationModel.amount.value / hydrationModel.goal.value
+        let variance = hydrationModel.amount.value - hydrationModel.goal.value
             mainScreenView.progressView.configureView(
             progress: progress,
-            amount: model.amount,
-            variance: Measurement(value: variance, unit: model.amount.unit)
+            amount: hydrationModel.amount,
+            variance: Measurement(value: variance, unit: hydrationModel.amount.unit)
         )
     }
 

@@ -1,6 +1,9 @@
 import Foundation
 
 final class MainScreenPresenter {
+
+    // TODO: remove placeholder with daily goal
+    let dailyGoal: Double = 2000
     weak var view: MainScreenViewInput?
     weak var moduleOutput: MainScreenModuleOutput?
     var interactor: MainScreenInteractorInput?
@@ -29,8 +32,8 @@ extension MainScreenPresenter: MainScreenInteractorOutput {
         view?.reloadShortcutsCollection()
     }
 
-    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: HydrationProgressModel) {
-        view?.setHydration(model: didRetrieveHydration)
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: ConsumptionModel) {
+        view?.setHydration(model: didRetrieveHydration, goal: dailyGoal)
     }
 }
 
