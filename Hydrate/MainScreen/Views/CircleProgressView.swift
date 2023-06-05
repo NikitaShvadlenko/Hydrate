@@ -4,9 +4,16 @@ class CircleProgressView: UIView {
     private var radius: CGFloat { (bounds.width - lineWidth) / 2 }
     private let baseLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()
+    private let previousProgressLayer = CAShapeLayer()
     private var lineWidth: CGFloat = 0
 
+    private var previousProgressAngle: CGFloat = 0
+    private var previousProgress: CGFloat = 0
+
     public var progress: CGFloat = 0 {
+        willSet {
+           previousProgress = progress
+        }
         didSet {
             layoutSubviews()
         }
@@ -18,7 +25,7 @@ class CircleProgressView: UIView {
 
     init(baseColor: UIColor, progressColor: UIColor, lineWidth: CGFloat) {
         self.lineWidth = lineWidth
-        for layer in [baseLayer, progressLayer] {
+        for layer in [baseLayer, progressLayer, previousProgressLayer] {
             layer.fillColor = UIColor.clear.cgColor
             layer.lineWidth = lineWidth
             layer.lineCap = .round
@@ -29,9 +36,13 @@ class CircleProgressView: UIView {
         progressLayer.strokeColor = progressColor.cgColor
         progressLayer.strokeEnd = 1
 
+        previousProgressLayer.strokeColor = progressColor.cgColor
+        previousProgressLayer.strokeEnd = 1
+
         super.init(frame: .zero)
 
         layer.addSublayer(baseLayer)
+        layer.addSublayer(previousProgressLayer)
         layer.addSublayer(progressLayer)
     }
 
@@ -45,26 +56,36 @@ class CircleProgressView: UIView {
         super.layoutSubviews()
         baseLayer.frame = bounds
         progressLayer.frame = bounds
+        previousProgressLayer.frame = bounds
 
         let center = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         let basePath = UIBezierPath(
             arcCenter: center,
             radius: radius,
-            startAngle: .initialAngle,
-            endAngle: .endAngle(progress: 1),
+            startAngle: -(.pi / 2),
+            endAngle: endAngle(progress: 1),
+            clockwise: true
+        )
+
+        let previousProgressPath = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: -(.pi / 2),
+            endAngle: endAngle(progress: previousProgress),
             clockwise: true
         )
 
         let progressPath = UIBezierPath(
             arcCenter: center,
             radius: radius,
-            startAngle: .initialAngle,
-            endAngle: .endAngle(progress: progress),
+            startAngle: previousProgressAngle,
+            endAngle: endAngle(progress: progress),
             clockwise: true
         )
 
         baseLayer.path = basePath.cgPath
         progressLayer.path = progressPath.cgPath
+        previousProgressLayer.path = previousProgressPath.cgPath
     }
 }
 
@@ -82,11 +103,14 @@ private extension CircleProgressView {
     }
 }
 
-private extension CGFloat {
-    static var initialAngle: CGFloat = -(.pi / 2)
+private extension CircleProgressView {
+    func initialAngle() -> CGFloat {
+        -(.pi / 2)
+    }
 
-    static func endAngle(progress: CGFloat) -> CGFloat {
-        .pi * 2 * progress + .initialAngle
+     func endAngle(progress: CGFloat) -> CGFloat {
+        previousProgressAngle = .pi * 2 * progress + initialAngle()
+         return previousProgressAngle
     }
 }
 
