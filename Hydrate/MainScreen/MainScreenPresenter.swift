@@ -19,6 +19,11 @@ extension MainScreenPresenter: MainScreenViewOutput {
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
+    func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String) {
+        print("Did Insert", itemName)
+        interactor.retrieveHydrationData()
+    }
+
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut]) {
         shortcutsManager?.shortcuts = shortcuts
         view?.reloadShortcutsCollection()
@@ -59,7 +64,11 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
     ) {
         let shortcuts = shortcutsViewManager.shortcuts
         if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
-            print("Asking interactor to record a drink \(shortcuts[indexPath.item].imageName)")
+            let shortcutItem = shortcuts[indexPath.item]
+            interactor?.insertJournalEntry(
+                beverageName: shortcutItem.beverageName,
+                volumeConsumed: shortcutItem.volumeConsumed
+            )
         } else {
             print("Asking vc to pop a screen with addShortcut")
         }

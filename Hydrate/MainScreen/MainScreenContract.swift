@@ -15,12 +15,17 @@ protocol MainScreenViewOutput {
 protocol MainScreenInteractorInput {
     func retrieveHydrationData()
     func retriveShortcuts()
+    func insertJournalEntry(
+        beverageName: String,
+        volumeConsumed: Double
+    )
 }
 
 // sourcery: AutoMockable
 protocol MainScreenInteractorOutput: AnyObject {
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: HydrationProgressModel)
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut])
+    func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String)
 }
 
 // sourcery: AutoMockable

@@ -9,6 +9,11 @@ final class MainScreenInteractor {
 
 // MARK: - MainScreenInteractorInput
 extension MainScreenInteractor: MainScreenInteractorInput {
+    func insertJournalEntry(beverageName: String, volumeConsumed: Double) {
+        dataService?.insertJournalEntry(beverageName: beverageName, volumeConsumed: volumeConsumed)
+        presenter?.interactor(self, didInsertJournalEntry: beverageName)
+    }
+
     func retriveShortcuts() {
         let shortcuts = fetchAllShortcuts()
         presenter?.interactor(self, didRetrieveShortcuts: shortcuts)
