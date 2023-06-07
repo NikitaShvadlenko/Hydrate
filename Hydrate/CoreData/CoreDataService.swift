@@ -14,6 +14,12 @@ protocol DataServiceProtocol {
         beverageName: String,
         volumeConsumed: Double
     )
+
+    func createDailyJournalEntry(
+        with dailyGoal: Double
+    )
+
+    func fetchAllDailyJournals() throws -> [DailyJournal]
 }
 
 class CoreDataService {
@@ -81,6 +87,26 @@ extension CoreDataService {
 
     public func retrieveJournalEntries() throws -> [JournalEntry] {
         let request = JournalEntry.sortedFetchRequest
+        request.fetchBatchSize = 20
+        let journal = try context.fetch(request)
+        return journal
+    }
+}
+
+extension CoreDataService {
+    public func createDailyJournalEntry(
+        with dailyGoal: Double
+    ) {
+        context.performChanges {
+            _ = DailyJournal.insert(
+                into: self.context,
+                dailyGoal: dailyGoal
+            )
+        }
+    }
+
+    public func fetchAllDailyJournals() throws -> [DailyJournal] {
+        let request = DailyJournal.sortedFetchRequest
         request.fetchBatchSize = 20
         let journal = try context.fetch(request)
         return journal
