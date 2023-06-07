@@ -10,7 +10,18 @@ final class MainScreenInteractor {
 // MARK: - MainScreenInteractorInput
 extension MainScreenInteractor: MainScreenInteractorInput {
     func insertJournalEntry(beverageName: String, volumeConsumed: Double) {
-        dataService?.insertJournalEntry(beverageName: beverageName, volumeConsumed: volumeConsumed)
+        guard let dailyJournal = fetchDailyJournal(for: Date()) else {
+            fatalError("Failed to find daily journal ")
+        }
+
+        guard let journalEntry = dataService?.insertJournalEntry(
+            beverageName: beverageName,
+            volumeConsumed: volumeConsumed
+        ) else {
+            fatalError("Failked to create journal entry")
+        }
+        dataService?.addJournalEntry(to: dailyJournal, journalEntry: journalEntry)
+        //        dataService?.insertJournalEntry(beverageName: beverageName, volumeConsumed: volumeConsumed)
         DispatchQueue.main.async {
             self.presenter?.interactor(self, didInsertJournalEntry: beverageName)
         }
@@ -23,31 +34,27 @@ extension MainScreenInteractor: MainScreenInteractorInput {
 
     func retrieveHydrationData() {
         dataService?.insertShortcut(colorName: Asset.progressViewBaseColor.name, imageName: Asset.waterDrop.name, beverageName: "Water", volumeConsumed: 250)
-        // TODO: fetch information for a certain day, not total.
-        let journalEntries = fetchAllEntries()
-        var volumeConsumed = 0.0
-        journalEntries.forEach { entry in
-            volumeConsumed = entry.volumeConsumed + volumeConsumed
+        if let dailyJournal = fetchDailyJournal(for: Date()) {
+            let journalEntries = dailyJournal.journalEntries
+            var volumeConsumed = 0.0
+            journalEntries.forEach { entry in
+                volumeConsumed = entry.volumeConsumed + volumeConsumed
+            }
+            let dailyData =  ConsumptionModel(totalConsumed: volumeConsumed, dailyGoal: dailyJournal.dailyGoal)
+            presenter?.interactor(
+                self,
+                didRetrieveHydration: dailyData
+            )
+        } else {
+            createDailyJournal(goal: 2500)
+            let dailyData =  ConsumptionModel(totalConsumed: 0, dailyGoal: 2500)
+            presenter?.interactor(self, didRetrieveHydration: dailyData)
         }
-
-        presenter?.interactor(self, didRetrieveHydration: ConsumptionModel(totalConsumed: volumeConsumed))
     }
 }
 
 // MARK: - Private methods
 extension MainScreenInteractor {
-     func fetchAllEntries() -> [JournalEntry] {
-        guard let dataStorage = dataService else {
-            fatalError("No data storage is set")
-        }
-        do {
-            let items = try dataStorage.retrieveAllJournalEntries()
-            return items
-        } catch {
-            fatalError("\(error)")
-        }
-    }
-
      private func fetchAllShortcuts() -> [Shortcut] {
         guard let shortcutService = shortcutService else {
             fatalError("No data storage is set")
@@ -60,7 +67,28 @@ extension MainScreenInteractor {
         }
     }
 
-    private func retrieveTodaysHydration() {
+    func fetchDailyJournal(for date: Date) -> DailyJournal? {
+        guard let dataService = dataService else {
+            fatalError("No data serice")
+        }
 
+        let calendar = Calendar.current
+        let startOfDay = calendar.startOfDay(for: date)
+        guard
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
+            fatalError("Failed to add a day to startOfDay")
+        }
+        let predicate = NSPredicate(format: "date >= %@ && date < %@", startOfDay as NSDate, endOfDay as NSDate)
+
+        do {
+            let dailyJournal = try dataService.fetchAllDailyJournals(datePredicate: predicate)
+            return dailyJournal.first
+        } catch {
+            return nil
+        }
+    }
+
+    func createDailyJournal(goal: Double) {
+        dataService?.createDailyJournalEntry(with: goal)
     }
 }

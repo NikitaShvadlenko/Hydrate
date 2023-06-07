@@ -6,7 +6,7 @@ protocol DataServiceProtocol {
     func insertJournalEntry(
         beverageName: String,
         volumeConsumed: Double
-    )
+    ) -> JournalEntry
 
     func insertShortcut(
         colorName: String,
@@ -19,7 +19,18 @@ protocol DataServiceProtocol {
         with dailyGoal: Double
     )
 
-    func fetchAllDailyJournals() throws -> [DailyJournal]
+    func fetchAllDailyJournals(datePredicate: NSPredicate) throws -> [DailyJournal]
+
+    func addJournalEntry(
+        to object: DailyJournal,
+        journalEntry: JournalEntry
+    )
+
+    func changeDailyGoal(
+        of object: DailyJournal,
+        in context: NSManagedObjectContext,
+        newGoal: Double
+    )
 }
 
 class CoreDataService {
@@ -75,14 +86,17 @@ extension CoreDataService {
     public func insertJournalEntry(
         beverageName: String,
         volumeConsumed: Double
-    ) {
+    ) -> JournalEntry {
+        var createdJournalEntry = JournalEntry.insert(
+            into: self.context,
+            beverage: beverageName,
+            volumeConsumed: volumeConsumed
+        )
+
         context.performChanges {
-            _ = JournalEntry.insert(
-                into: self.context,
-                beverage: beverageName,
-                volumeConsumed: volumeConsumed
-            )
+            _ = createdJournalEntry
         }
+        return createdJournalEntry
     }
 
     public func retrieveAllJournalEntries() throws -> [JournalEntry] {
@@ -105,10 +119,44 @@ extension CoreDataService {
         }
     }
 
-    public func fetchAllDailyJournals() throws -> [DailyJournal] {
+    public func fetchAllDailyJournals(datePredicate: NSPredicate) throws -> [DailyJournal] {
         let request = DailyJournal.sortedFetchRequest
-        request.fetchBatchSize = 20
+        request.predicate = datePredicate
+        request.fetchBatchSize = 1
         let journal = try context.fetch(request)
         return journal
+    }
+
+    public func addJournalEntry(
+        to object: DailyJournal,
+        journalEntry: JournalEntry
+    ) {
+        var entries = object.journalEntries
+        entries.insert(journalEntry)
+        let goal = object.dailyGoal
+        context.performChanges {
+            DailyJournal.updateDailyJournal(
+                object: object,
+                into: self.context,
+                journalEntries: entries,
+                dailyGoal: goal
+            )
+        }
+    }
+
+    public func changeDailyGoal(
+        of object: DailyJournal,
+        in context: NSManagedObjectContext,
+        newGoal: Double
+    ) {
+        let journalEntries = object.journalEntries
+        context.performChanges {
+            DailyJournal.updateDailyJournal(
+                object: object,
+                into: context,
+                journalEntries: journalEntries,
+                dailyGoal: newGoal
+            )
+        }
     }
 }

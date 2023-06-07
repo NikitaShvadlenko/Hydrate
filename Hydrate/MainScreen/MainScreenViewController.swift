@@ -39,11 +39,11 @@ extension MainScreenViewController: MainScreenViewInput {
     func configureViews() {
     }
 
-    func setHydration(model: ConsumptionModel, goal: Double) {
+    func setHydration(model: ConsumptionModel) {
         let hydrationModel =
         HydrationProgressModel(
             goal: Measurement(
-                value: goal, unit: .milliliters),
+                value: model.dailyGoal, unit: .milliliters),
             amount: Measurement(value: model.totalConsumed, unit: .milliliters)
         )
 
