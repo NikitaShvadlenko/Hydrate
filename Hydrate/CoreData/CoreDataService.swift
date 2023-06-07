@@ -1,8 +1,8 @@
 import CoreData
 
 protocol DataServiceProtocol {
-    func retrieveJournalEntries() throws -> [JournalEntry]
-    func retrieveShortcuts() throws -> [Shortcut]
+    func retrieveAllJournalEntries() throws -> [JournalEntry]
+    func retrieveAllShortcuts() throws -> [Shortcut]
     func insertJournalEntry(
         beverageName: String,
         volumeConsumed: Double
@@ -46,7 +46,7 @@ class CoreDataService {
 
 // MARK: CRUD for each item type
 extension CoreDataService: DataServiceProtocol {
-    func retrieveShortcuts() throws -> [Shortcut] {
+    func retrieveAllShortcuts() throws -> [Shortcut] {
         let request = Shortcut.sortedFetchRequest
         request.fetchBatchSize = 20
         let shortcuts = try context.fetch(request)
@@ -85,7 +85,7 @@ extension CoreDataService {
         }
     }
 
-    public func retrieveJournalEntries() throws -> [JournalEntry] {
+    public func retrieveAllJournalEntries() throws -> [JournalEntry] {
         let request = JournalEntry.sortedFetchRequest
         request.fetchBatchSize = 20
         let journal = try context.fetch(request)

@@ -41,7 +41,7 @@ extension MainScreenInteractor {
             fatalError("No data storage is set")
         }
         do {
-            let items = try dataStorage.retrieveJournalEntries()
+            let items = try dataStorage.retrieveAllJournalEntries()
             return items
         } catch {
             fatalError("\(error)")
@@ -53,10 +53,14 @@ extension MainScreenInteractor {
             fatalError("No data storage is set")
         }
         do {
-           let items = try shortcutService.retrieveShortcuts()
+           let items = try shortcutService.retrieveAllShortcuts()
             return items
         } catch {
             fatalError("\(error)")
         }
+    }
+
+    private func retrieveTodaysHydration() {
+
     }
 }
