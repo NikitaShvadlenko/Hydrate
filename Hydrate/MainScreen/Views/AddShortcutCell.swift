@@ -17,6 +17,7 @@ class AddShortcutCell: UICollectionViewCell {
 
     private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.tintColor = Asset.progressViewProgressColor.color.withAlphaComponent(0.8)
         imageView.image = UIImage(sfSymbol: SFSymbol.plusCircle)?.withConfiguration(symbolConfiguration)
         return imageView
@@ -49,6 +50,7 @@ extension AddShortcutCell {
         imageView.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(12)
             make.centerY.equalToSuperview()
+            make.width.equalTo(imageView.snp.height)
         }
 
         label.snp.makeConstraints { make in
