@@ -56,8 +56,8 @@ final class RegistrationScreenView: UIView {
 
     private lazy var measurementPickerView: UIPickerView = {
         let pickerView = UIPickerView()
-        pickerView.dataSource = self
-        pickerView.delegate = self
+        //pickerView.dataSource = self
+        //pickerView.delegate = self
         return pickerView
     }()
 

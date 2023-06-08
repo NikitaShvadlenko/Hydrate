@@ -46,7 +46,7 @@ extension MainScreenViewController: MainScreenViewInput {
                 value: model.dailyGoal, unit: .milliliters),
             amount: Measurement(value: model.totalConsumed, unit: .milliliters)
         )
-
+// TODO: Create ViewModel
         let progress = hydrationModel.amount.value / hydrationModel.goal.value
         let variance = hydrationModel.amount.value - hydrationModel.goal.value
             mainScreenView.progressView.configureView(
