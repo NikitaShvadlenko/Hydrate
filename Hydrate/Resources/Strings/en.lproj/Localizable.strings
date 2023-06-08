@@ -1,3 +1,12 @@
 "appName" = "Hydrate!";
 "currentHydration" = "Current Hydration";
 "addShortcut" = "Add shortcut";
+"RegistrationScreen.welcome" = "Welcome!";
+"RegistrationScreen.setupPlan" = "Let's setup your hydration goal:";
+"RegistrationScreen.name" = "What is your name?";
+"RegistrationScreen.measurementsQuestion" = "What units of measurement do you prefer?";
+"RegistrationScreen.weight" = "Weight:";
+"RegistrationScreen.volume" = "Volume:";
+"RegistrationScreen.exerciseQuestion" = "How often do you exercise?";
+
+"RegistrationScreen.namePlaceholder" = "John";
