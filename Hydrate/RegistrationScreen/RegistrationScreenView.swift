@@ -15,6 +15,6 @@ final class RegistrationScreenView: UIView {
 // MARK: - Private methods
 extension RegistrationScreenView {
     private func configureViews() {
-        backgroundColor = .white
+        backgroundColor = .red
     }
 }

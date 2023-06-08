@@ -9,6 +9,11 @@ final class MainScreenInteractor {
 
 // MARK: - MainScreenInteractorInput
 extension MainScreenInteractor: MainScreenInteractorInput {
+    func retrieveUserData() {
+        let userData = fetchUserData()
+        presenter?.interactor(self, didRetrieveUserData: userData)
+    }
+
     func insertJournalEntry(beverageName: String, volumeConsumed: Double) {
         guard let dailyJournal = fetchDailyJournal(for: Date()) else {
             fatalError("Failed to find daily journal ")
@@ -21,7 +26,6 @@ extension MainScreenInteractor: MainScreenInteractorInput {
             fatalError("Failked to create journal entry")
         }
         dataService?.addJournalEntry(to: dailyJournal, journalEntry: journalEntry)
-        //        dataService?.insertJournalEntry(beverageName: beverageName, volumeConsumed: volumeConsumed)
         DispatchQueue.main.async {
             self.presenter?.interactor(self, didInsertJournalEntry: beverageName)
         }
@@ -90,5 +94,18 @@ extension MainScreenInteractor {
 
     func createDailyJournal(goal: Double) {
         dataService?.createDailyJournalEntry(with: goal)
+    }
+
+    func fetchUserData() -> UserData? {
+        guard let dataService = dataService else {
+            fatalError("No data service is set")
+        }
+        do {
+            let userData = try dataService.retrieveUserData()
+            return userData
+        } catch {
+            print(error)
+            return nil
+        }
     }
 }

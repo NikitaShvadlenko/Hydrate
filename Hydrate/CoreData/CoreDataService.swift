@@ -1,5 +1,6 @@
 import CoreData
 
+// TODO: Refactor
 protocol DataServiceProtocol {
     func retrieveAllJournalEntries() throws -> [JournalEntry]
     func retrieveAllShortcuts() throws -> [Shortcut]
@@ -31,6 +32,8 @@ protocol DataServiceProtocol {
         in context: NSManagedObjectContext,
         newGoal: Double
     )
+
+    func retrieveUserData() throws -> UserData?
 }
 
 class CoreDataService {
@@ -55,7 +58,7 @@ class CoreDataService {
 
 }
 
-// MARK: CRUD for each item type
+// MARK: Shortcuts
 extension CoreDataService: DataServiceProtocol {
     func retrieveAllShortcuts() throws -> [Shortcut] {
         let request = Shortcut.sortedFetchRequest
@@ -82,6 +85,7 @@ extension CoreDataService: DataServiceProtocol {
     }
 }
 
+// MARK: Journal Entry
 extension CoreDataService {
     public func insertJournalEntry(
         beverageName: String,
@@ -107,6 +111,7 @@ extension CoreDataService {
     }
 }
 
+// MARK: Daily Journal
 extension CoreDataService {
     public func createDailyJournalEntry(
         with dailyGoal: Double
@@ -158,5 +163,14 @@ extension CoreDataService {
                 dailyGoal: newGoal
             )
         }
+    }
+}
+
+extension CoreDataService {
+    func retrieveUserData() throws -> UserData? {
+        let request = UserData.sortedFetchRequest
+        request.fetchBatchSize = 1
+        let user = try context.fetch(request)
+        return user.first
     }
 }

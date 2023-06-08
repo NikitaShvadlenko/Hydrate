@@ -13,6 +13,7 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
+        interactor?.retrieveUserData()
         interactor?.retrieveHydrationData()
         interactor?.retriveShortcuts()
     }
@@ -20,6 +21,12 @@ extension MainScreenPresenter: MainScreenViewOutput {
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData?) {
+        if userData == nil {
+            router?.routeToRegistrationScreen()
+        }
+    }
+
     func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String) {
         print("Did Insert", itemName)
         interactor.retrieveHydrationData()
