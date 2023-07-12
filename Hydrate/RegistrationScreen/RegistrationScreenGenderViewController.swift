@@ -15,7 +15,6 @@ final class RegistrationScreenViewController: UIViewController {
         presenter?.viewDidLoad(self)
         navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.setHidesBackButton(true, animated: false)
-        title = L10n.RegistrationScreen.welcome
     }
 }
 
