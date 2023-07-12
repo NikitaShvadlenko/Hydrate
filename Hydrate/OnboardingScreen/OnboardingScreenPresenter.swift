@@ -11,6 +11,7 @@ final class OnboardingScreenPresenter {
 extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
     func viewDidLoad(_ view: OnboardingScreenViewInput) {
         view.configureViews()
+        router?.routeToGenderViewController()
     }
 }
 

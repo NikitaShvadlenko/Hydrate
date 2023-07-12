@@ -17,6 +17,7 @@ protocol OnboardingScreenInteractorOutput: AnyObject {
 
 // sourcery: AutoMockable
 protocol OnboardingScreenRouterInput {
+    func routeToGenderViewController()
 }
 
 protocol OnboardingScreenRouterOutput: AnyObject {
