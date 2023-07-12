@@ -15,6 +15,14 @@ final class OnboardingScreenGenderViewController: UIViewController {
         presenter?.viewDidLoad(self)
         navigationItem.hidesBackButton = true
     }
+
+    func setCollectionViewDataSource(dataSource: UICollectionViewDataSource) {
+        onboardingScreenGenderView.genderSelectionView.dataSource = dataSource
+    }
+
+    func setCollectionViewDelegate(delegate: UICollectionViewDelegate) {
+        onboardingScreenGenderView.genderSelectionView.delegate = delegate
+    }
 }
 
 // MARK: - OnboardingScreenGenderViewInput

@@ -5,6 +5,7 @@ final class OnboardingScreenGenderPresenter {
     weak var moduleOutput: OnboardingScreenGenderModuleOutput?
     var interactor: OnboardingScreenGenderInteractorInput?
     var router: OnboardingScreenGenderRouterInput?
+    var genderSelectionManager: GenderSelectionViewManagerProtocol?
 }
 
 // MARK: - OnboardingScreenGenderViewOutput
