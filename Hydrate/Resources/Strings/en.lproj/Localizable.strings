@@ -10,3 +10,5 @@
 "RegistrationScreen.exerciseQuestion" = "How often do you exercise?";
 
 "RegistrationScreen.namePlaceholder" = "John";
+
+"OnboardingScreenGender.screenTitle" = "Select your gender:";
