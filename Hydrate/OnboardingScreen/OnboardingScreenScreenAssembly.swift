@@ -1,11 +1,11 @@
 import UIKit
 
-enum RegistrationScreenAssembly {
-    static func assemble() -> AssembledModule<RegistrationScreenModuleInput> {
-        let viewController = RegistrationScreenViewController()
-        let presenter = RegistrationScreenPresenter()
-        let interactor = RegistrationScreenInteractor()
-        let router = RegistrationScreenRouter()
+enum OnboardingScreenAssembly {
+    static func assemble() -> AssembledModule<OnboardingScreenModuleInput> {
+        let viewController = OnboardingScreenViewController()
+        let presenter = OnboardingScreenPresenter()
+        let interactor = OnboardingScreenInteractor()
+        let router = OnboardingScreenRouter()
 
         viewController.presenter = presenter
 

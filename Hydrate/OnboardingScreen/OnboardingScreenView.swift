@@ -1,6 +1,6 @@
 import UIKit
 
-final class RegistrationScreenView: UIView {
+final class OnboardingScreenView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -14,7 +14,7 @@ final class RegistrationScreenView: UIView {
 }
 
 // MARK: - Private methods
-extension RegistrationScreenView {
+extension OnboardingScreenView {
     private func configureViews() {
         backgroundColor = .red
     }

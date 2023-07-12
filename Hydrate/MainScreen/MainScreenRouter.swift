@@ -8,7 +8,7 @@ final class MainScreenRouter {
 // MARK: - MainScreenRouterInput
 extension MainScreenRouter: MainScreenRouterInput {
     func routeToRegistrationScreen() {
-        let registrationViewController = RegistrationScreenAssembly.assemble().viewController
+        let registrationViewController = OnboardingScreenAssembly.assemble().viewController
         viewController?
             .navigationController?
             .pushViewController(

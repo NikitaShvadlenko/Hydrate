@@ -1,13 +1,13 @@
 import UIKit
 
-final class RegistrationScreenViewController: UIViewController {
+final class OnboardingScreenViewController: UIViewController {
 
-    private let registrationScreenView = RegistrationScreenView()
+    private let onboardingScreenView = OnboardingScreenView()
 
-    var presenter: RegistrationScreenViewOutput?
+    var presenter: OnboardingScreenViewOutput?
 
     override func loadView() {
-        view = registrationScreenView
+        view = onboardingScreenView
     }
 
     override func viewDidLoad() {
@@ -19,11 +19,11 @@ final class RegistrationScreenViewController: UIViewController {
 }
 
 // MARK: - RegistrationScreenViewInput
-extension RegistrationScreenViewController: RegistrationScreenViewInput {
+extension OnboardingScreenViewController: OnboardingScreenViewInput {
     func configureViews() {
     }
 }
 
 // MARK: - Private methods
-extension RegistrationScreenViewController {
+extension OnboardingScreenViewController {
 }
