@@ -4,7 +4,7 @@ import SnapKit
 final class OnboardingScreenGenderView: UIView {
 
     let titleLabel = OnboardingTitleLabel()
-    let genderSelectionView = OnboardingScreenGenderView()
+    let genderSelectionView = OnboardingScreenGenderCollectionView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,9 +30,9 @@ extension OnboardingScreenGenderView {
         }
 
         genderSelectionView.snp.makeConstraints { make in
-            make.height.equalTo(375)
+            make.height.equalTo(207)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(35)
         }
     }
 }

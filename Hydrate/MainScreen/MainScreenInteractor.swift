@@ -25,6 +25,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
         ) else {
             fatalError("Failked to create journal entry")
         }
+
         dataService?.addJournalEntry(to: dailyJournal, journalEntry: journalEntry)
         DispatchQueue.main.async {
             self.presenter?.interactor(self, didInsertJournalEntry: beverageName)
@@ -37,7 +38,6 @@ extension MainScreenInteractor: MainScreenInteractorInput {
     }
 
     func retrieveHydrationData() {
-        dataService?.insertShortcut(colorName: Asset.progressViewBaseColor.name, imageName: Asset.waterDrop.name, beverageName: "Water", volumeConsumed: 250)
         if let dailyJournal = fetchDailyJournal(for: Date()) {
             let journalEntries = dailyJournal.journalEntries
             var volumeConsumed = 0.0

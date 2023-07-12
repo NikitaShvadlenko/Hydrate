@@ -19,7 +19,7 @@ extension OnboardingScreenGenderCollectionView {
     private func setupView() {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(10)
+            make.edges.equalToSuperview().inset(16)
         }
     }
 }
