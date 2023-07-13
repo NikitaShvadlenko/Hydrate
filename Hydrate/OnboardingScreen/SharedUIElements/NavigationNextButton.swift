@@ -20,6 +20,7 @@ class NavigationNextButton: UIView {
         button.addTarget(self, action: #selector(buttonPressed), for: .touchDown)
         button.layer.borderColor = Asset.primaryTextColor.color.cgColor
         button.layer.borderWidth = 5
+        button.layer.cornerRadius = 10
         return button
     }()
 
