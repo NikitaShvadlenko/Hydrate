@@ -42,8 +42,15 @@ extension GenderSelectionViewManager: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.genederSelectionViewManager(self, didSelectItemAt: indexPath)
-        if let cell = collectionView.cellForItem(at: indexPath) as? GenderSelectionCell {
-            cell.selectCell()
+
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? GenderSelectionCell {
+            let cells = collectionView.visibleCells as? [GenderSelectionCell]
+            cells?.forEach { cell in
+                if cell != selectedCell {
+                    cell.isCellSelected = false
+                }
+            }
+            selectedCell.isCellSelected.toggle()
         }
     }
 }

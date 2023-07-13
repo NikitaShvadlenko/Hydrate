@@ -2,7 +2,17 @@ import UIKit
 
 class GenderSelectionCell: UICollectionViewCell {
 
-    private var isCellSelected = false
+    public var isCellSelected: Bool = false {
+        didSet {
+            if isCellSelected {
+                backgroundColor = .blue
+                genderImageView.alpha = 0.7
+                selectionBox.backgroundColor = .brown
+            } else {
+                prepareForReuse()
+            }
+        }
+    }
 
     private lazy var selectionBox: UIView = {
         let view = UIView()
@@ -32,19 +42,6 @@ class GenderSelectionCell: UICollectionViewCell {
         // TODO: Custom selection box with states
         selectionBox.backgroundColor = .red
         backgroundColor = .clear
-    }
-}
-// MARK: - Public methods
-extension GenderSelectionCell {
-    public func selectCell() {
-        isCellSelected.toggle()
-        if isCellSelected {
-            backgroundColor = .blue
-            genderImageView.alpha = 0.7
-            selectionBox.backgroundColor = .brown
-        } else {
-            prepareForReuse()
-        }
     }
 }
 
