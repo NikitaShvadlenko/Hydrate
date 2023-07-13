@@ -6,6 +6,9 @@ final class OnboardingScreenGenderInteractor {
 
 // MARK: - OnboardingScreenGenderInteractorInput
 extension OnboardingScreenGenderInteractor: OnboardingScreenGenderInteractorInput {
+    func saveGender(_ gender: Gender) {
+        print("saving", gender.rawValue)
+    }
 }
 
 // MARK: - Private methods

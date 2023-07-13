@@ -7,10 +7,12 @@ protocol OnboardingScreenGenderViewInput: AnyObject {
 
 protocol OnboardingScreenGenderViewOutput {
     func viewDidLoad(_ view: OnboardingScreenGenderViewInput)
+    func viewDidPressNextButton(_ view: OnboardingScreenGenderViewInput)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingScreenGenderInteractorInput {
+    func saveGender(_ gender: Gender)
 }
 
 // sourcery: AutoMockable

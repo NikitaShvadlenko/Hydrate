@@ -47,6 +47,7 @@ extension NavigationNextButton {
     @objc
     private func buttonPressed() {
         delegate?.buttonPressed()
+        // TODO: Implement custom press animation
         print("Implement custom animation")
     }
 }

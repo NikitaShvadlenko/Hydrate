@@ -11,6 +11,13 @@ final class OnboardingScreenGenderPresenter {
 
 // MARK: - OnboardingScreenGenderViewOutput
 extension OnboardingScreenGenderPresenter: OnboardingScreenGenderViewOutput {
+    func viewDidPressNextButton(_ view: OnboardingScreenGenderViewInput) {
+        guard let gender = selectedGender else {
+            fatalError("Gender was not selected, but the button pressed")
+        }
+        interactor?.saveGender(gender)
+    }
+
     func viewDidLoad(_ view: OnboardingScreenGenderViewInput) {
         view.configureViews()
     }

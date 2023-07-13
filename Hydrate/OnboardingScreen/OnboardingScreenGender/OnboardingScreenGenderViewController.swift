@@ -22,6 +22,10 @@ final class OnboardingScreenGenderViewController: UIViewController {
     func setCollectionViewDelegate(delegate: UICollectionViewDelegate) {
         onboardingScreenGenderView.genderSelectionView.delegate = delegate
     }
+
+    func setNavigationButtonDelegate(delegate: NavigationNextButtonDelegate) {
+        onboardingScreenGenderView.nextButton.delegate = self
+    }
 }
 
 // MARK: - OnboardingScreenGenderViewInput
@@ -31,6 +35,13 @@ extension OnboardingScreenGenderViewController: OnboardingScreenGenderViewInput 
     }
 
     func configureViews() {
+    }
+}
+
+// MARK: - NavigationNextButtonDelegate
+extension OnboardingScreenGenderViewController: NavigationNextButtonDelegate {
+    func buttonPressed() {
+        presenter?.viewDidPressNextButton(self)
     }
 }
 
