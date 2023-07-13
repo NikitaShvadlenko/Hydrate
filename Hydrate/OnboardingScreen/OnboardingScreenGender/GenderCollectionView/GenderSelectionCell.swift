@@ -7,19 +7,14 @@ class GenderSelectionCell: UICollectionViewCell {
             if isCellSelected {
                 backgroundColor = .blue
                 genderImageView.alpha = 0.7
-                selectionBox.backgroundColor = .brown
+                selectionBox.isSelected = true
             } else {
                 prepareForReuse()
             }
         }
     }
 
-    private lazy var selectionBox: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        view.layer.cornerRadius = 10
-        return view
-    }()
+    private var selectionBox = SelectionBox(width: 20)
 
     private lazy var genderImageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,8 +34,7 @@ class GenderSelectionCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         genderImageView.alpha = 1
-        // TODO: Custom selection box with states
-        selectionBox.backgroundColor = .red
+        selectionBox.isSelected = false
         backgroundColor = .clear
     }
 }
@@ -57,8 +51,6 @@ extension GenderSelectionCell {
         selectionBox.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(20)
-            make.width.equalTo(20)
         }
 
         genderImageView.snp.makeConstraints { make in
