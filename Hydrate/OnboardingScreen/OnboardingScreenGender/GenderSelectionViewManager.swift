@@ -1,12 +1,24 @@
 import UIKit
 
 protocol GenderSelectionViewManagerProtocol {
-
+    var genders: [Genders] { get }
 }
 
-class GenderSelectionViewManager: NSObject {}
+protocol GenderSelectionViewManagerDelegate: AnyObject {
+    func genederSelectionViewManager(
+        _ genederSelectionViewManager: GenderSelectionViewManagerProtocol,
+        didSelectItemAt indexPath: IndexPath
+    )
+}
+
+class GenderSelectionViewManager: NSObject {
+    weak var delegate: GenderSelectionViewManagerDelegate?
+}
 
 extension GenderSelectionViewManager: GenderSelectionViewManagerProtocol {
+    var genders: [Genders] {
+        Genders.allCases
+    }
 
 }
 
@@ -26,6 +38,10 @@ extension GenderSelectionViewManager: UICollectionViewDataSource {
             fatalError("failed to deqeue cell")
         }
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        delegate?.genederSelectionViewManager(self, didSelectItemAt: indexPath)
     }
 }
 
@@ -61,7 +77,7 @@ extension GenderSelectionViewManager: UICollectionViewDelegateFlowLayout {
 
 }
 
-enum Genders: CaseIterable {
+enum Genders: String, CaseIterable {
     case male
     case female
     case other

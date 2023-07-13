@@ -7,6 +7,7 @@ enum OnboardingScreenGenderAssembly {
         let interactor = OnboardingScreenGenderInteractor()
         let router = OnboardingScreenGenderRouter()
         let genderSelectionViewManager = GenderSelectionViewManager()
+        genderSelectionViewManager.delegate = presenter
 
         viewController.presenter = presenter
         viewController.setCollectionViewDataSource(dataSource: genderSelectionViewManager)

@@ -29,6 +29,12 @@ extension OnboardingScreenGenderPresenter: OnboardingScreenGenderModuleInput {
         self.moduleOutput = output
     }
 }
+// MARK: GenderSelectionViewManagerDelegate
+extension OnboardingScreenGenderPresenter: GenderSelectionViewManagerDelegate {
+    func genederSelectionViewManager(_ genederSelectionViewManager: GenderSelectionViewManagerProtocol, didSelectItemAt indexPath: IndexPath) {
+        print("selected ", genederSelectionViewManager.genders[indexPath.item].rawValue)
+    }
+}
 
 // MARK: - Private methods
 extension OnboardingScreenGenderPresenter {
