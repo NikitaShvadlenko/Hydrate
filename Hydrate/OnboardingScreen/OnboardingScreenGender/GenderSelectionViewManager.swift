@@ -1,7 +1,7 @@
 import UIKit
 
 protocol GenderSelectionViewManagerProtocol {
-    var genders: [Genders] { get }
+    var genders: [Gender] { get }
 }
 
 protocol GenderSelectionViewManagerDelegate: AnyObject {
@@ -16,15 +16,15 @@ class GenderSelectionViewManager: NSObject {
 }
 
 extension GenderSelectionViewManager: GenderSelectionViewManagerProtocol {
-    var genders: [Genders] {
-        Genders.allCases
+    var genders: [Gender] {
+        Gender.allCases
     }
 
 }
 
 extension GenderSelectionViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        Genders.allCases.count
+        Gender.allCases.count
     }
 
     func collectionView(
@@ -42,6 +42,9 @@ extension GenderSelectionViewManager: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.genederSelectionViewManager(self, didSelectItemAt: indexPath)
+        if let cell = collectionView.cellForItem(at: indexPath) as? GenderSelectionCell {
+            cell.selectCell()
+        }
     }
 }
 
@@ -52,11 +55,11 @@ extension GenderSelectionViewManager: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let numberOfCells: CGFloat = CGFloat(Genders.allCases.count - 1)
+        let numberOfCells: CGFloat = CGFloat(Gender.allCases.count - 1)
         let spaceBetweenCards = Constants.spaceBetweenCards
         let availableWidth: CGFloat = collectionView.bounds.width
         - (spaceBetweenCards * numberOfCells) - (Constants.horizontalCardInsets * 2)
-        let width = availableWidth / CGFloat(Genders.allCases.count)
+        let width = availableWidth / CGFloat(Gender.allCases.count)
 
         let height: CGFloat = collectionView.bounds.height - (Constants.verticalCardInsets * 2)
 
@@ -75,10 +78,4 @@ extension GenderSelectionViewManager: UICollectionViewDelegateFlowLayout {
         )
     }
 
-}
-
-enum Genders: String, CaseIterable {
-    case male
-    case female
-    case other
 }

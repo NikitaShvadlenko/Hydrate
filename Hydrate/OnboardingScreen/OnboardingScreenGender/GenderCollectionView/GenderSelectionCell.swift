@@ -2,6 +2,8 @@ import UIKit
 
 class GenderSelectionCell: UICollectionViewCell {
 
+    private var isCellSelected = false
+
     private lazy var selectionBox: UIView = {
         let view = UIView()
         view.backgroundColor = .red
@@ -23,10 +25,33 @@ class GenderSelectionCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
     }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        genderImageView.alpha = 1
+        // TODO: Custom selection box with states
+        selectionBox.backgroundColor = .red
+        backgroundColor = .clear
+    }
+}
+// MARK: - Public methods
+extension GenderSelectionCell {
+    public func selectCell() {
+        isCellSelected.toggle()
+        if isCellSelected {
+            backgroundColor = .blue
+            genderImageView.alpha = 0.7
+            selectionBox.backgroundColor = .brown
+        } else {
+            prepareForReuse()
+        }
+    }
 }
 
+// MARK: - Private methods
 extension GenderSelectionCell {
     private func setupView() {
+        layer.cornerRadius = 10
         [
             selectionBox,
             genderImageView

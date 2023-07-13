@@ -15,6 +15,9 @@ final class UserData: NSManagedObject {
     fileprivate(set) var exerciseLevelRawValue: String
 
     @NSManaged
+    fileprivate(set) var genderRawValue: String
+
+    @NSManaged
     fileprivate(set) var weightMeasurementUnitRawValue: String
 
     @NSManaged
@@ -27,6 +30,7 @@ final class UserData: NSManagedObject {
         let userData: UserData = context.insertObject()
         userData.dailyGoal = form.dailyGoal
         userData.weight = form.weight
+        userData.genderRawValue = form.gender.rawValue
         userData.exerciseLevelRawValue = form.exerciseLevel.rawValue
         userData.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
         userData.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
@@ -85,6 +89,18 @@ extension UserData {
         }
         set {
             weightMeasurementUnitRawValue = newValue.rawValue
+        }
+    }
+
+    var gender: Gender {
+        get {
+            guard let gender = Gender(rawValue: genderRawValue) else {
+                fatalError("Failed to convert")
+            }
+            return gender
+        }
+        set {
+            genderRawValue = newValue.rawValue
         }
     }
 }

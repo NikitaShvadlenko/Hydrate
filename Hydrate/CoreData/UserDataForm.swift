@@ -7,6 +7,7 @@ struct UserDataForm {
     var exerciseLevel: ExerciseLevel
     var weightMeasurementUnit: WeightMeasurementUnit
     var volumeMeasurementUnit: VolumeMeasurementUnit
+    var gender: Gender
 }
 
 enum ExerciseLevel: String {
@@ -25,4 +26,10 @@ enum VolumeMeasurementUnit: String {
 enum WeightMeasurementUnit: String {
     case kilograms
     case pounds
+}
+
+enum Gender: String, CaseIterable {
+    case male
+    case female
+    case other
 }

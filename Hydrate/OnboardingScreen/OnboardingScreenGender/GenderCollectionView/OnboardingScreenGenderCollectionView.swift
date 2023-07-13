@@ -34,6 +34,7 @@ class OnboardingScreenGenderCollectionView: UIView {
     }
 }
 
+// MARK: - Public methods
 extension OnboardingScreenGenderCollectionView {
     var dataSource: UICollectionViewDataSource? {
         get {
@@ -58,6 +59,7 @@ extension OnboardingScreenGenderCollectionView {
     }
 }
 
+// MARK: - Private methods
 extension OnboardingScreenGenderCollectionView {
     private func setupView() {
         addSubview(containerView)
