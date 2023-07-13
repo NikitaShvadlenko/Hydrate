@@ -7,15 +7,7 @@ final class OnboardingScreenRouter {
 
 // MARK: - RegistrationScreenRouterInput
 extension OnboardingScreenRouter: OnboardingScreenRouterInput {
-    func routeToGenderViewController() {
-        let registrationViewController = OnboardingScreenGenderAssembly.assemble().viewController
-        viewController?
-            .navigationController?
-            .pushViewController(
-                registrationViewController,
-                animated: true
-            )
-    }
+
 }
 
 // MARK: - Private methods

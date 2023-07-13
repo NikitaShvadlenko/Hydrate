@@ -23,7 +23,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
             beverageName: beverageName,
             volumeConsumed: volumeConsumed
         ) else {
-            fatalError("Failked to create journal entry")
+            fatalError("Failed to create journal entry")
         }
 
         dataService?.addJournalEntry(to: dailyJournal, journalEntry: journalEntry)

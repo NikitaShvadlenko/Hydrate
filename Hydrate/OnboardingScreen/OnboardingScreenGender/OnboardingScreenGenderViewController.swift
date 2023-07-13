@@ -13,7 +13,6 @@ final class OnboardingScreenGenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
-        navigationItem.hidesBackButton = true
     }
 
     func setCollectionViewDataSource(dataSource: UICollectionViewDataSource) {

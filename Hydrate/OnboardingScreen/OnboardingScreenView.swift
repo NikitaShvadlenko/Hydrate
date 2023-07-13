@@ -2,6 +2,9 @@ import UIKit
 
 final class OnboardingScreenView: UIView {
 
+    let pageViewContainer = UIView()
+    let pageView = PageView()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureViews()
@@ -16,6 +19,12 @@ final class OnboardingScreenView: UIView {
 // MARK: - Private methods
 extension OnboardingScreenView {
     private func configureViews() {
-        backgroundColor = .red
+        addSubview(pageView)
+        backgroundColor = Asset.onboardingScreenBackgroundColor.color
+        pageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(10)
+        }
     }
 }
