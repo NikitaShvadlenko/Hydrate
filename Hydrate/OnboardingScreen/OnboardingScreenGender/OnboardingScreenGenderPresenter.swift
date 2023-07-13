@@ -6,6 +6,7 @@ final class OnboardingScreenGenderPresenter {
     var interactor: OnboardingScreenGenderInteractorInput?
     var router: OnboardingScreenGenderRouterInput?
     var genderSelectionManager: GenderSelectionViewManagerProtocol?
+    var selectedGender: Gender?
 }
 
 // MARK: - OnboardingScreenGenderViewOutput
@@ -31,9 +32,11 @@ extension OnboardingScreenGenderPresenter: OnboardingScreenGenderModuleInput {
 }
 // MARK: GenderSelectionViewManagerDelegate
 extension OnboardingScreenGenderPresenter: GenderSelectionViewManagerDelegate {
-    func genederSelectionViewManager(_ genederSelectionViewManager: GenderSelectionViewManagerProtocol, didSelectItemAt indexPath: IndexPath) {
-        
-        print("selected ", genederSelectionViewManager.genders[indexPath.item].rawValue)
+    func genederSelectionViewManager(
+        _ genederSelectionViewManager: GenderSelectionViewManagerProtocol,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        selectedGender = genederSelectionViewManager.genders[indexPath.item]
     }
 }
 
