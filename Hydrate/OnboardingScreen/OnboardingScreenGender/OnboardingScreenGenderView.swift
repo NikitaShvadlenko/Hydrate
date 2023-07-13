@@ -5,6 +5,8 @@ final class OnboardingScreenGenderView: UIView {
 
     let titleLabel = OnboardingTitleLabel()
     let genderSelectionView = OnboardingScreenGenderCollectionView()
+    let buttonContainerView = UIView()
+    let nextButton = NavigationNextButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,8 +22,12 @@ final class OnboardingScreenGenderView: UIView {
 // MARK: - Private methods
 extension OnboardingScreenGenderView {
     private func configureViews() {
+        nextButton.title = "NEXT"
         addSubview(titleLabel)
         addSubview(genderSelectionView)
+        addSubview(buttonContainerView)
+        buttonContainerView.addSubview(nextButton)
+
         backgroundColor = Asset.onboardingScreenBackgroundColor.color
         titleLabel.text = L10n.OnboardingScreenGender.screenTitle
         titleLabel.snp.makeConstraints { make in
@@ -33,6 +39,18 @@ extension OnboardingScreenGenderView {
             make.height.equalTo(247)
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(35)
+        }
+
+        buttonContainerView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(genderSelectionView.snp.bottom)
+            make.bottom.equalToSuperview()
+        }
+
+        nextButton.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(75)
+            make.width.equalTo(150)
         }
     }
 }
