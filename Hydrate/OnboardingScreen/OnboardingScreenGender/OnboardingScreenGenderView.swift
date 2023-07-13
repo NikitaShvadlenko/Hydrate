@@ -22,7 +22,8 @@ final class OnboardingScreenGenderView: UIView {
 // MARK: - Private methods
 extension OnboardingScreenGenderView {
     private func configureViews() {
-        nextButton.title = "NEXT"
+        nextButton.title = L10n.OnboardingScreen.next
+        nextButton.alpha = 0
         addSubview(titleLabel)
         addSubview(genderSelectionView)
         addSubview(buttonContainerView)

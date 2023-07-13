@@ -50,7 +50,7 @@ extension GenderSelectionViewManager: UICollectionViewDataSource {
                     cell.isCellSelected = false
                 }
             }
-            selectedCell.isCellSelected.toggle()
+            selectedCell.isCellSelected = true
         }
     }
 }

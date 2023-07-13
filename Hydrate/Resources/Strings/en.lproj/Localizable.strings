@@ -12,3 +12,4 @@
 "RegistrationScreen.namePlaceholder" = "John";
 
 "OnboardingScreenGender.screenTitle" = "Select your gender:";
+"OnboardingScreen.next" = "Next";
