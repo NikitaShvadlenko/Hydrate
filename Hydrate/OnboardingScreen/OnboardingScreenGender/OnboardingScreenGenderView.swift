@@ -19,6 +19,17 @@ final class OnboardingScreenGenderView: UIView {
     }
 }
 
+// MARK: - Public methods
+extension OnboardingScreenGenderView {
+    func displayNextButton() {
+        if nextButton.alpha != 1 {
+            UIView.animate(withDuration: 0.2) {
+                self.nextButton.alpha = 1
+            }
+        }
+    }
+}
+
 // MARK: - Private methods
 extension OnboardingScreenGenderView {
     private func configureViews() {

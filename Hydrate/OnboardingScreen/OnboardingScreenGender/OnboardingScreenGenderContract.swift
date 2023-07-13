@@ -1,6 +1,8 @@
+import UIKit
 // sourcery: AutoMockable
 protocol OnboardingScreenGenderViewInput: AnyObject {
     func configureViews()
+    func collectionViewDidSelectCell(at indexPath: IndexPath)
 }
 
 protocol OnboardingScreenGenderViewOutput {

@@ -37,6 +37,7 @@ extension OnboardingScreenGenderPresenter: GenderSelectionViewManagerDelegate {
         didSelectItemAt indexPath: IndexPath
     ) {
         selectedGender = genederSelectionViewManager.genders[indexPath.item]
+        view?.collectionViewDidSelectCell(at: indexPath)
     }
 }
 
