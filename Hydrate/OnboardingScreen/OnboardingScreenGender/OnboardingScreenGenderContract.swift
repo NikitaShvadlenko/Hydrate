@@ -17,6 +17,7 @@ protocol OnboardingScreenGenderInteractorInput {
 
 // sourcery: AutoMockable
 protocol OnboardingScreenGenderInteractorOutput: AnyObject {
+    func interactor(_ interactor: OnboardingScreenGenderInteractorInput, didSaveGender gender: Gender)
 }
 
 // sourcery: AutoMockable

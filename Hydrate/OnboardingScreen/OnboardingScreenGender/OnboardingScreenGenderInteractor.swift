@@ -8,6 +8,7 @@ final class OnboardingScreenGenderInteractor {
 extension OnboardingScreenGenderInteractor: OnboardingScreenGenderInteractorInput {
     func saveGender(_ gender: Gender) {
         print("saving", gender.rawValue)
+        presenter?.interactor(self, didSaveGender: gender)
     }
 }
 

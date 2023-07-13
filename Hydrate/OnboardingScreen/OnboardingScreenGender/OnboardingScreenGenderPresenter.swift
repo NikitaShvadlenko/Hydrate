@@ -25,6 +25,9 @@ extension OnboardingScreenGenderPresenter: OnboardingScreenGenderViewOutput {
 
 // MARK: - OnboardingScreenGenderInteractorOutput
 extension OnboardingScreenGenderPresenter: OnboardingScreenGenderInteractorOutput {
+    func interactor(_ interactor: OnboardingScreenGenderInteractorInput, didSaveGender gender: Gender) {
+        print("Once next is pressed, need to open next screen")
+    }
 }
 
 // MARK: - OnboardingScreenGenderRouterOutput
