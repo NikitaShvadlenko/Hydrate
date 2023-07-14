@@ -5,8 +5,6 @@ class GenderSelectionCell: UICollectionViewCell {
     public var isCellSelected: Bool = false {
         didSet {
             if isCellSelected {
-                backgroundColor = .blue
-                genderImageView.alpha = 0.7
                 selectionBox.isSelected = true
             } else {
                 prepareForReuse()
@@ -33,9 +31,7 @@ class GenderSelectionCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        genderImageView.alpha = 1
         selectionBox.isSelected = false
-        backgroundColor = .clear
     }
 }
 
