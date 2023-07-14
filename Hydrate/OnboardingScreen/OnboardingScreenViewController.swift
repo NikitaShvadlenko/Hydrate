@@ -18,7 +18,7 @@ final class OnboardingScreenViewController: UIViewController {
         navigationItem.hidesBackButton = true
         presenter?.viewDidLoad(self)
         setOnboardingViewControllers()
-        presentNextOnboardingViewController()
+        navigateToNextOnboardingViewController(navigationDirection: .forward)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -46,12 +46,19 @@ extension OnboardingScreenViewController: OnboardingScreenViewInput {
 
 // MARK: - Private methods
 extension OnboardingScreenViewController {
-    func presentNextOnboardingViewController() {
+    func navigateToNextOnboardingViewController(navigationDirection: NavigationDirection) {
         guard let onboardingViewControllers = onboardingViewControllers else { return }
         let numberOfOnboardingViewControllers = onboardingViewControllers.count
         onboardingScreenView.pageView.setupNumberOfPages(numberOfOnboardingViewControllers)
         removeChildrenViewControllers()
-        currentSelectedOnboardingViewController += 1
+
+        if currentSelectedOnboardingViewController < 0 {
+            onboardingScreenView.hideBackButton()
+        } else {
+            onboardingScreenView.displayBackButton()
+        }
+
+        currentSelectedOnboardingViewController += navigationDirection.rawValue
         onboardingScreenView.pageView.pageSelected(pageIndex: currentSelectedOnboardingViewController)
 
         let newOnboardingViewController = onboardingViewControllers[currentSelectedOnboardingViewController]
@@ -79,6 +86,11 @@ extension OnboardingScreenViewController {
 
 extension OnboardingScreenViewController: NavigationBackButtonDelegate {
     func viewDidPressBackNavigationButton() {
-        print("Button Pressed")
+        navigateToNextOnboardingViewController(navigationDirection: .backward)
     }
+}
+
+enum NavigationDirection: Int {
+    case backward = -1
+    case forward = 1
 }
