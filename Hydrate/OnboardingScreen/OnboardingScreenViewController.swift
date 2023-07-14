@@ -36,6 +36,10 @@ final class OnboardingScreenViewController: UIViewController {
     func setBackButtonDelegate(_ backButtonDelegate: NavigationBackButtonDelegate) {
         onboardingScreenView.navigationBackButton.delegate = backButtonDelegate
     }
+
+    func setNavigationButtonDelegate(delegate: NavigationNextButtonDelegate) {
+        onboardingScreenView.navigationNextButton.delegate = delegate
+    }
 }
 
 // MARK: - RegistrationScreenViewInput
@@ -67,7 +71,7 @@ extension OnboardingScreenViewController {
         newOnboardingViewController.view.snp.makeConstraints { make in
             make.top.equalTo(onboardingScreenView.safeAreaLayoutGuide.snp.top).inset(70)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(onboardingScreenView.pageView.snp.top)
+            make.bottom.equalTo(onboardingScreenView.navigationNextButton.snp.top)
         }
     }
 

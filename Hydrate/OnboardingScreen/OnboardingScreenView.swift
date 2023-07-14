@@ -4,6 +4,7 @@ final class OnboardingScreenView: UIView {
 
     let pageViewContainer = UIView()
     let pageView = PageView()
+    let navigationNextButton = NavigationNextButton()
     let navigationBackButton = NavigationBackButton(width: 37.55)
 
     override init(frame: CGRect) {
@@ -25,12 +26,24 @@ extension OnboardingScreenView {
     public func displayBackButton() {
         navigationBackButton.alpha = 1
     }
+
+    func displayNextButton() {
+        if navigationNextButton.alpha != 1 {
+            UIView.animate(withDuration: 0.2) {
+                self.navigationNextButton.alpha = 1
+            }
+        }
+    }
+
 }
 // MARK: - Private methods
 extension OnboardingScreenView {
     private func configureViews() {
         addSubview(pageView)
         addSubview(navigationBackButton)
+        addSubview(navigationNextButton)
+        navigationNextButton.title = L10n.OnboardingScreen.next
+        navigationNextButton.alpha = 0.5
         navigationBackButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)
             make.leading.equalToSuperview().inset(16)
@@ -41,6 +54,13 @@ extension OnboardingScreenView {
             make.centerX.equalToSuperview()
             make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
             make.height.equalTo(10)
+        }
+
+        navigationNextButton.snp.makeConstraints { make in
+            make.bottom.equalTo(pageView.snp.top).offset(-16)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(50)
+            make.width.equalTo(340)
         }
     }
 }

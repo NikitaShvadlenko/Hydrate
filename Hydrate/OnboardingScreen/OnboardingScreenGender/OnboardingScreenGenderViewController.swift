@@ -1,5 +1,9 @@
 import UIKit
 
+protocol OnboardingDelegate: UIViewController {
+    func viewDidSelectOption()
+}
+
 final class OnboardingScreenGenderViewController: UIViewController {
 
     private let onboardingScreenGenderView = OnboardingScreenGenderView()
@@ -23,9 +27,6 @@ final class OnboardingScreenGenderViewController: UIViewController {
         onboardingScreenGenderView.genderSelectionView.delegate = delegate
     }
 
-    func setNavigationButtonDelegate(delegate: NavigationNextButtonDelegate) {
-        onboardingScreenGenderView.nextButton.delegate = self
-    }
 }
 
 // MARK: - OnboardingScreenGenderViewInput
