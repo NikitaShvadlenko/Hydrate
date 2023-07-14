@@ -6,9 +6,11 @@ protocol NavigationBackButtonDelegate: AnyObject {
 class NavigationBackButton: UIButton {
     weak var delegate: NavigationBackButtonDelegate?
 
-    init(delegate: NavigationBackButtonDelegate) {
+    let width: CGFloat
+
+    init(width: CGFloat) {
+        self.width = width
         super.init(frame: .zero)
-        self.delegate = delegate
         setupView()
     }
 
@@ -22,12 +24,20 @@ extension NavigationBackButton {
     private func setupView() {
         backgroundColor = Asset.navigationBackButtonBackgroundColor.color
         tintColor = Asset.navigationBackButtonSymbolColor.color
-        imageView?.image = UIImage(sfSymbol: SFSymbol.achievements)
+
+        setImage(UIImage(sfSymbol: SFSymbol.backSymbol), for: .normal)
         addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
+        snp.makeConstraints { make in
+            make.width.equalTo(width)
+            make.height.equalTo(width)
+        }
+        layer.cornerRadius = width / 2
     }
 
     @objc
     func buttonPressed() {
+        //TODO: custom press animation
         delegate?.viewDidPressBackNavigationButton()
     }
 }

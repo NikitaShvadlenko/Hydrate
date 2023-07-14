@@ -8,6 +8,7 @@ enum OnboardingScreenAssembly {
         let router = OnboardingScreenRouter()
 
         viewController.presenter = presenter
+        viewController.setBackButtonDelegate(viewController)
 
         presenter.view = viewController
         presenter.interactor = interactor

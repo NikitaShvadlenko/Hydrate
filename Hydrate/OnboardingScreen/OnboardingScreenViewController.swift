@@ -19,17 +19,22 @@ final class OnboardingScreenViewController: UIViewController {
         presenter?.viewDidLoad(self)
         setOnboardingViewControllers()
         presentNextOnboardingViewController()
-        setupNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         tabBarController?.tabBar.isHidden = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
         tabBarController?.tabBar.isHidden = false
+    }
+
+    func setBackButtonDelegate(_ backButtonDelegate: NavigationBackButtonDelegate) {
+        onboardingScreenView.navigationBackButton.delegate = backButtonDelegate
     }
 }
 
@@ -69,13 +74,6 @@ extension OnboardingScreenViewController {
                 child.removeFromParent()
             }
         }
-    }
-
-    private func setupNavigationBar() {
-        let leftBarItem = UIBarButtonItem()
-        let view = NavigationBackButton(delegate: self)
-        leftBarItem.customView = view
-        navigationItem.leftBarButtonItem = leftBarItem
     }
 }
 
