@@ -20,14 +20,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
             let mainScreenNavigationController = UINavigationController(
                 rootViewController: mainScreenViewController
             )
-
-            UITabBarItem.appearance()
-                .setTitleTextAttributes(
-                    [NSAttributedString.Key.foregroundColor: UIColor.clear],
-                    for: .normal
-                )
-
+            // TODO: Customize tab bar
             viewControllers.append(mainScreenNavigationController)
+
+            tabBarController.tabBar.tintColor = .black
 
             tabBarController.setViewControllers(viewControllers, animated: false)
 
