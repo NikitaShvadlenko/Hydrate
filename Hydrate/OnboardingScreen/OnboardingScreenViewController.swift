@@ -15,10 +15,11 @@ final class OnboardingScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.hidesBackButton = true
         presenter?.viewDidLoad(self)
-        self.navigationItem.setHidesBackButton(true, animated: false)
         setOnboardingViewControllers()
         presentNextOnboardingViewController()
+        setupNavigationBar()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,5 +69,18 @@ extension OnboardingScreenViewController {
                 child.removeFromParent()
             }
         }
+    }
+
+    private func setupNavigationBar() {
+        let leftBarItem = UIBarButtonItem()
+        let view = NavigationBackButton(delegate: self)
+        leftBarItem.customView = view
+        navigationItem.leftBarButtonItem = leftBarItem
+    }
+}
+
+extension OnboardingScreenViewController: NavigationBackButtonDelegate {
+    func viewDidPressBackNavigationButton() {
+        print("Button Pressed")
     }
 }
