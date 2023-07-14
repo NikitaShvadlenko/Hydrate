@@ -52,7 +52,8 @@ extension OnboardingScreenViewController {
         addChild(newOnboardingViewController)
         onboardingScreenView.addSubview(newOnboardingViewController.view)
         newOnboardingViewController.view.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalTo(onboardingScreenView.safeAreaLayoutGuide.snp.top).inset(70)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(onboardingScreenView.pageView.snp.top)
         }
     }
