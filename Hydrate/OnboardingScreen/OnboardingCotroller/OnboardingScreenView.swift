@@ -27,12 +27,18 @@ extension OnboardingScreenView {
         navigationBackButton.alpha = 1
     }
 
-    func displayNextButton() {
+    func enableNextButton() {
+        navigationNextButton.isActive = true
         if navigationNextButton.alpha != 1 {
             UIView.animate(withDuration: 0.2) {
                 self.navigationNextButton.alpha = 1
             }
         }
+    }
+
+    func disableNextButton() {
+        navigationNextButton.isActive = false
+        navigationNextButton.alpha = 0.5
     }
 
 }

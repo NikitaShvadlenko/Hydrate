@@ -25,14 +25,6 @@ final class OnboardingScreenGenderViewController: UIViewController {
     func setCollectionViewDelegate(delegate: UICollectionViewDelegate) {
         onboardingScreenGenderView.genderSelectionView.delegate = delegate
     }
-
-    func setOnboardingDelegate() {
-        guard let parent = self.parent as? OnboardingController else {
-            fatalError("No parent")
-        }
-        self.delegate = parent
-    }
-
 }
 
 // MARK: - OnboardingScreenGenderViewInput

@@ -3,6 +3,7 @@ import UIKit
 final class OnboardingWelcomeScreenViewController: UIViewController {
 
     private let onboardingWelcomeScreenView = OnboardingWelcomeScreenView()
+    weak var delegate: OnboardingController?
 
     var presenter: OnboardingWelcomeScreenViewOutput?
 
@@ -13,6 +14,12 @@ final class OnboardingWelcomeScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
+        setOnboardingDelegate()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        delegate?.viewDidSelectOption()
     }
 }
 
@@ -21,7 +28,15 @@ extension OnboardingWelcomeScreenViewController: OnboardingWelcomeScreenViewInpu
     func configureViews() {
     }
 }
+// MARK: - OnboardingChildController
+extension OnboardingWelcomeScreenViewController: OnboardingChildController {
+    var navigationButtonTitle: String {
+        L10n.OnboardingScreen.start
+    }
 
+    func viewDidPressNextButton() {
+    }
+}
 // MARK: - Private methods
 extension OnboardingWelcomeScreenViewController {
 }

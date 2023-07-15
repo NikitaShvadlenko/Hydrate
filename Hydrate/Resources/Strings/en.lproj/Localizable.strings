@@ -1,15 +1,13 @@
 "appName" = "Hydrate!";
 "currentHydration" = "Current Hydration";
 "addShortcut" = "Add shortcut";
-"RegistrationScreen.welcome" = "Welcome!";
-"RegistrationScreen.setupPlan" = "Let's setup your hydration goal:";
-"RegistrationScreen.name" = "What is your name?";
-"RegistrationScreen.measurementsQuestion" = "What units of measurement do you prefer?";
-"RegistrationScreen.weight" = "Weight:";
-"RegistrationScreen.volume" = "Volume:";
-"RegistrationScreen.exerciseQuestion" = "How often do you exercise?";
 
-"RegistrationScreen.namePlaceholder" = "John";
-
+"OnboardingScreen.welcome" = "Welcome!";
+"OnboardingScreen.letsStart" = "Let's start";
+"OnboardingScreen.setupPlan" = "Let's setup your hydration goal:";
+"OnboardingScreen.weight" = "Weight:";
+"OnboardingScreen.volume" = "Volume:";
+"OnboardingScreen.exerciseQuestion" = "How often do you exercise?";
 "OnboardingScreenGender.screenTitle" = "Select your gender:";
 "OnboardingScreen.next" = "Next";
+"OnboardingScreen.start" = "Start";

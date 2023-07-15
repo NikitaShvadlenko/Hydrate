@@ -6,6 +6,7 @@ protocol NavigationNextButtonDelegate: AnyObject {
 
 class NavigationNextButton: UIView {
     weak var delegate: NavigationNextButtonDelegate?
+    public var isActive: Bool = false
 
     public var title: String? {
         didSet {
@@ -46,6 +47,7 @@ extension NavigationNextButton {
 
     @objc
     private func buttonPressed() {
+        guard isActive else { return }
         delegate?.buttonPressed()
         // TODO: Implement custom press animation
         print("Implement custom animation")

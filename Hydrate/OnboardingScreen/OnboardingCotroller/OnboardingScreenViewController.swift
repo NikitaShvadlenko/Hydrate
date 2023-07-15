@@ -54,11 +54,12 @@ extension OnboardingScreenViewController: OnboardingScreenViewInput {
 // MARK: - Private methods
 extension OnboardingScreenViewController {
     func navigateToNextOnboardingViewController(navigationDirection: NavigationDirection) {
+        currentSelectedOnboardingViewController += navigationDirection.rawValue
         removeChildrenViewControllers()
         currentlyDisplayedView?.removeFromSuperview()
+        onboardingScreenView.disableNextButton()
         configureBackButton()
         guard let onboardingViewControllers = onboardingViewControllers else { return }
-        currentSelectedOnboardingViewController += navigationDirection.rawValue
         if currentSelectedOnboardingViewController < onboardingViewControllers.count {
             let newOnboardingViewController = onboardingViewControllers[currentSelectedOnboardingViewController]
             setNavigationButtonTitle(newOnboardingViewController.navigationButtonTitle)
@@ -77,10 +78,13 @@ extension OnboardingScreenViewController {
 
     func setOnboardingViewControllers() {
         guard let genderController = OnboardingScreenGenderAssembly.assemble().viewController
-                as? OnboardingChildController else {
+                as? OnboardingChildController,
+              let welcomeController = OnboardingWelcomeScreenAssembly.assemble().viewController
+                as? OnboardingChildController
+        else {
             fatalError("Gender controller does not conform to OnboardingChildCOntroller protocol")
         }
-        onboardingViewControllers = [genderController]
+        onboardingViewControllers = [welcomeController, genderController]
     }
 
     func removeChildrenViewControllers() {
@@ -101,7 +105,7 @@ extension OnboardingScreenViewController {
     }
 
     func configureBackButton() {
-        if currentSelectedOnboardingViewController < 0 {
+        if currentSelectedOnboardingViewController <= 0 {
             onboardingScreenView.hideBackButton()
         } else {
             onboardingScreenView.displayBackButton()
@@ -131,7 +135,7 @@ extension OnboardingScreenViewController: OnboardingController {
     }
 
     func viewDidSelectOption() {
-        onboardingScreenView.displayNextButton()
+        onboardingScreenView.enableNextButton()
     }
 }
 

@@ -1,6 +1,6 @@
 import UIKit
 
-class OnboardingTitleLabel: UILabel {
+class TitleLabel: UILabel {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -11,7 +11,7 @@ class OnboardingTitleLabel: UILabel {
     }
 }
 
-extension OnboardingTitleLabel {
+extension TitleLabel {
     private func setupView() {
         textAlignment = .center
         font = UIFont.systemFont(ofSize: 20)

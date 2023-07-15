@@ -3,7 +3,7 @@ import SnapKit
 
 final class OnboardingScreenGenderView: UIView {
 
-    let titleLabel = OnboardingTitleLabel()
+    let titleLabel = TitleLabel()
     let genderSelectionView = OnboardingScreenGenderCollectionView()
 
     override init(frame: CGRect) {
