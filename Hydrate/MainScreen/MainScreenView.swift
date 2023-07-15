@@ -4,7 +4,7 @@ import SnapKit
 final class MainScreenView: UIView {
     let progressView = HydrationProgressView()
     let shortcutsView = ShortcutsView()
-    let pageView = PageView()
+    let pageView = PageView(elementWidth: 8, spacingBetweenElements: 12)
 
     override init(frame: CGRect) {
         super.init(frame: frame)

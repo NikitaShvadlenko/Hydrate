@@ -2,17 +2,23 @@ import UIKit
 import SnapKit
 
 class PageView: UIView {
+
+     var elementWidth: CGFloat
+     var spacingBetweenElements: CGFloat
+
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fill
-        stackView.spacing = Constants.spacingBetweenElements
+        stackView.spacing = spacingBetweenElements
         stackView.alignment = .center
         return stackView
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(elementWidth: CGFloat, spacingBetweenElements: CGFloat) {
+        self.elementWidth = elementWidth
+        self.spacingBetweenElements = spacingBetweenElements
+        super.init(frame: .zero)
     }
 
     required init?(coder: NSCoder) {
@@ -29,7 +35,7 @@ extension PageView {
         subviews.forEach { $0.removeFromSuperview() }
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
-            let requiredWidth = CGFloat(numberOfPages) * (Constants.spacingBetweenElements + Constants.elementWidth)
+            let requiredWidth = CGFloat(numberOfPages) * (spacingBetweenElements + elementWidth)
             make.edges.equalToSuperview()
             make.width.lessThanOrEqualTo(requiredWidth).priority(999)
         }
@@ -38,10 +44,10 @@ extension PageView {
             let view = UIView()
             view.backgroundColor = Asset.progressViewBaseColor.color
             stackView.addArrangedSubview(view)
-            view.layer.cornerRadius = 5
+            view.layer.cornerRadius = elementWidth / 2
             view.snp.makeConstraints { make in
-                make.width.equalTo(Constants.elementWidth)
-                make.height.equalToSuperview()
+                make.width.equalTo(elementWidth)
+                make.height.equalTo(elementWidth)
             }
         }
         pageSelected(pageIndex: 0)
@@ -54,13 +60,5 @@ extension PageView {
         let subviews = stackView.arrangedSubviews
         subviews.forEach { $0.backgroundColor = Asset.progressViewBaseColor.color }
         subviews[pageIndex].backgroundColor = Asset.progressViewProgressColor.color
-    }
-}
-
-extension PageView {
-    public enum Constants {
-        static let elementWidth: CGFloat = 10
-        static let spacingBetweenElements: CGFloat = 5
-        static let pageViewHeight: CGFloat = 5
     }
 }

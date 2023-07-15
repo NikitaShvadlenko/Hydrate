@@ -32,13 +32,13 @@ extension OnboardingScreenGenderView {
         titleLabel.text = L10n.OnboardingScreenGender.screenTitle
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).inset(20)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top)
         }
 
         genderSelectionView.snp.makeConstraints { make in
             make.height.equalTo(247)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(35)
+            make.top.equalTo(titleLabel.snp.bottom).offset(48)
         }
     }
 }

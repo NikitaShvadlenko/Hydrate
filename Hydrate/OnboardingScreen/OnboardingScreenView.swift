@@ -3,7 +3,7 @@ import UIKit
 final class OnboardingScreenView: UIView {
 
     let pageViewContainer = UIView()
-    let pageView = PageView()
+    let pageView = PageView(elementWidth: 8, spacingBetweenElements: 12)
     let navigationNextButton = NavigationNextButton()
     let navigationBackButton = NavigationBackButton(width: 37.55)
 
