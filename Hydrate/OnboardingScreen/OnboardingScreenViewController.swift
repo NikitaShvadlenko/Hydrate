@@ -54,29 +54,22 @@ extension OnboardingScreenViewController: OnboardingScreenViewInput {
 // MARK: - Private methods
 extension OnboardingScreenViewController {
     func navigateToNextOnboardingViewController(navigationDirection: NavigationDirection) {
+        removeChildrenViewControllers()
         currentlyDisplayedView?.removeFromSuperview()
-        if currentSelectedOnboardingViewController < 0 {
-            onboardingScreenView.hideBackButton()
-        } else {
-            onboardingScreenView.displayBackButton()
-        }
-
+        configureBackButton()
         guard let onboardingViewControllers = onboardingViewControllers else { return }
         currentSelectedOnboardingViewController += navigationDirection.rawValue
         if currentSelectedOnboardingViewController < onboardingViewControllers.count {
             let newOnboardingViewController = onboardingViewControllers[currentSelectedOnboardingViewController]
+            setNavigationButtonTitle(newOnboardingViewController.navigationButtonTitle)
             onboardingScreenView.pageView.pageSelected(pageIndex: currentSelectedOnboardingViewController)
             addChild(newOnboardingViewController)
             currentlyDisplayedView = newOnboardingViewController.view
+
             guard let currentlyDisplayedView = currentlyDisplayedView else {
                 return
             }
-            onboardingScreenView.addSubview(currentlyDisplayedView)
-            currentlyDisplayedView.snp.makeConstraints { make in
-                make.top.equalTo(onboardingScreenView.safeAreaLayoutGuide.snp.top).inset(70)
-                make.leading.trailing.equalToSuperview()
-                make.bottom.equalTo(onboardingScreenView.navigationNextButton.snp.top)
-            }
+            configureContainedView(currentlyDisplayedView)
         } else {
             presenter?.viewDidCompleteOnboarding(self)
         }
@@ -95,6 +88,23 @@ extension OnboardingScreenViewController {
             for child in children {
                 child.removeFromParent()
             }
+        }
+    }
+
+    func configureContainedView(_ view: UIView) {
+        onboardingScreenView.addSubview(view)
+        view.snp.makeConstraints { make in
+            make.top.equalTo(onboardingScreenView.safeAreaLayoutGuide.snp.top).inset(70)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(onboardingScreenView.navigationNextButton.snp.top)
+        }
+    }
+
+    func configureBackButton() {
+        if currentSelectedOnboardingViewController < 0 {
+            onboardingScreenView.hideBackButton()
+        } else {
+            onboardingScreenView.displayBackButton()
         }
     }
 }
@@ -116,6 +126,10 @@ extension OnboardingScreenViewController: NavigationNextButtonDelegate {
 
 // MARK: - OnboardingController
 extension OnboardingScreenViewController: OnboardingController {
+    func setNavigationButtonTitle(_ title: String) {
+        onboardingScreenView.navigationNextButton.title = title
+    }
+
     func viewDidSelectOption() {
         onboardingScreenView.displayNextButton()
     }

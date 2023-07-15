@@ -42,7 +42,6 @@ extension OnboardingScreenView {
         addSubview(pageView)
         addSubview(navigationBackButton)
         addSubview(navigationNextButton)
-        navigationNextButton.title = L10n.OnboardingScreen.next
         navigationNextButton.alpha = 0.5
         navigationBackButton.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide)

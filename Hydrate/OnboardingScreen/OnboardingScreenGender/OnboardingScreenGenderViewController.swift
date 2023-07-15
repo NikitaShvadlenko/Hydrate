@@ -57,6 +57,10 @@ extension OnboardingScreenGenderViewController {
 }
 
 extension OnboardingScreenGenderViewController: OnboardingChildController {
+    var navigationButtonTitle: String {
+        L10n.OnboardingScreen.next
+    }
+
     func viewDidPressNextButton() {
         presenter?.viewDidPressNextButton(self)
     }
