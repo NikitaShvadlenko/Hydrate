@@ -5,7 +5,7 @@
 "OnboardingScreen.welcome" = "Welcome!";
 "OnboardingScreen.letsStart" = "Let's start";
 "OnboardingScreen.setupPlan" = "Let's setup your hydration goal:";
-"OnboardingScreen.weight" = "Weight:";
+"OnboardingScreen.weight" = "Your weight";
 "OnboardingScreen.volume" = "Volume:";
 "OnboardingScreen.exerciseQuestion" = "How often do you exercise?";
 "OnboardingScreenGender.screenTitle" = "Select your gender:";
