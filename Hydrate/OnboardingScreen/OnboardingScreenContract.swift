@@ -5,6 +5,7 @@ protocol OnboardingScreenViewInput: AnyObject {
 
 protocol OnboardingScreenViewOutput {
     func viewDidLoad(_ view: OnboardingScreenViewInput)
+    func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput)
 }
 
 // sourcery: AutoMockable
@@ -17,6 +18,7 @@ protocol OnboardingScreenInteractorOutput: AnyObject {
 
 // sourcery: AutoMockable
 protocol OnboardingScreenRouterInput {
+    func routeToMainScreen()
 }
 
 protocol OnboardingScreenRouterOutput: AnyObject {

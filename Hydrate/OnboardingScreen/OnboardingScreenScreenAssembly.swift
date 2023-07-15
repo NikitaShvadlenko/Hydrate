@@ -9,6 +9,7 @@ enum OnboardingScreenAssembly {
 
         viewController.presenter = presenter
         viewController.setBackButtonDelegate(viewController)
+        viewController.setNextButtonDelegate(delegate: viewController)
 
         presenter.view = viewController
         presenter.interactor = interactor

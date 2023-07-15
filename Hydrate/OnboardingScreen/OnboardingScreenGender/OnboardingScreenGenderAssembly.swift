@@ -10,7 +10,6 @@ enum OnboardingScreenGenderAssembly {
         genderSelectionViewManager.delegate = presenter
 
         viewController.presenter = presenter
-        viewController.setNavigationButtonDelegate(delegate: viewController)
         viewController.setCollectionViewDataSource(dataSource: genderSelectionViewManager)
         viewController.setCollectionViewDelegate(delegate: genderSelectionViewManager)
 

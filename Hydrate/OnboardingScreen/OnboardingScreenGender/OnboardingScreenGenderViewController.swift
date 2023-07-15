@@ -1,10 +1,8 @@
 import UIKit
 
-protocol OnboardingDelegate: UIViewController {
-    func viewDidSelectOption()
-}
-
 final class OnboardingScreenGenderViewController: UIViewController {
+
+    weak var delegate: OnboardingController?
 
     private let onboardingScreenGenderView = OnboardingScreenGenderView()
 
@@ -17,6 +15,7 @@ final class OnboardingScreenGenderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
+        setOnboardingDelegate()
     }
 
     func setCollectionViewDataSource(dataSource: UICollectionViewDataSource) {
@@ -27,12 +26,19 @@ final class OnboardingScreenGenderViewController: UIViewController {
         onboardingScreenGenderView.genderSelectionView.delegate = delegate
     }
 
+    func setOnboardingDelegate() {
+        guard let parent = self.parent as? OnboardingController else {
+            fatalError("No parent")
+        }
+        self.delegate = parent
+    }
+
 }
 
 // MARK: - OnboardingScreenGenderViewInput
 extension OnboardingScreenGenderViewController: OnboardingScreenGenderViewInput {
     func collectionViewDidSelectCell(at indexPath: IndexPath) {
-        onboardingScreenGenderView.displayNextButton()
+        delegate?.viewDidSelectOption()
     }
 
     func configureViews() {
@@ -48,4 +54,10 @@ extension OnboardingScreenGenderViewController: NavigationNextButtonDelegate {
 
 // MARK: - Private methods
 extension OnboardingScreenGenderViewController {
+}
+
+extension OnboardingScreenGenderViewController: OnboardingChildController {
+    func viewDidPressNextButton() {
+        presenter?.viewDidPressNextButton(self)
+    }
 }

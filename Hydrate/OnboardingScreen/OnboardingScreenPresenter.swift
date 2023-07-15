@@ -9,6 +9,10 @@ final class OnboardingScreenPresenter {
 
 // MARK: - RegistrationScreenViewOutput
 extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
+    func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput) {
+        router?.routeToMainScreen()
+    }
+
     func viewDidLoad(_ view: OnboardingScreenViewInput) {
         view.configureViews()
     }
