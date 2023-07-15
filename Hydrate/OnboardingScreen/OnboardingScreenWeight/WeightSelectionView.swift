@@ -12,14 +12,21 @@ class WeightSelectionView: UIView {
         view.textAlignment = .center
         view.borderStyle = .none
         view.tintColor = .black
+        
         return view
     }()
 
+    private lazy var segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: [L10n.OnboardingScreen.pounds, L10n.OnboardingScreen.killograms])
+
+        return segmentedControl
+    }()
+
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [textfield, UIView()])
+        let stackView = UIStackView(arrangedSubviews: [textfield, segmentedControl])
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .equalCentering
+        stackView.distribution = .equalSpacing
         return stackView
     }()
 

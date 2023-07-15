@@ -11,3 +11,5 @@
 "OnboardingScreenGender.screenTitle" = "Select your gender:";
 "OnboardingScreen.next" = "Next";
 "OnboardingScreen.start" = "Start";
+"OnboardingScreen.pounds" = "lb";
+"OnboardingScreen.killograms" = "kg";
