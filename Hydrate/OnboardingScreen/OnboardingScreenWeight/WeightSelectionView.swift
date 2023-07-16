@@ -91,7 +91,7 @@ extension WeightSelectionView {
             make.height.equalTo(1)
         }
     }
-    
+
     private func addToolbar() {
         let bar = UIToolbar()
         let doneButton = UIBarButtonItem(

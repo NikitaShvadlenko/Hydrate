@@ -1,6 +1,13 @@
 import UIKit
 
+struct SegmentedControlUnit {
+    let unit: Unit
+    let localisedUnitSymbol: String
+}
+
 class UnitsOfMeasurementSegmentedControl: UISegmentedControl {
+    var segmentedControlItems: [SegmentedControlUnit]?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureSegmentedControlTitles()
