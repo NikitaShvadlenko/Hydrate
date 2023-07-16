@@ -1,12 +1,18 @@
 import UIKit
 
+protocol WeightSelectionViewDelegate: UITextFieldDelegate {
+    func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl)
+}
+
 class WeightSelectionView: UIView {
+
+    weak var delegate: WeightSelectionViewDelegate?
 
     let backgroundContainerView = BackgroundContainerView()
 
     private lazy var textfield: UITextField = {
         let view = UITextField()
-        view.keyboardType = .numberPad
+        view.keyboardType = .decimalPad
         view.placeholder = "65"
         view.font = UIFont.systemFont(ofSize: 32)
         view.textAlignment = .center
@@ -23,7 +29,11 @@ class WeightSelectionView: UIView {
 
     private lazy var segmentedControl: UISegmentedControl = {
         let segmentedControl = UISegmentedControl()
-        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.addTarget(
+            self,
+            action: #selector(segmentedControlDidSelectOption),
+            for: .primaryActionTriggered
+        )
         return segmentedControl
     }()
 
@@ -85,17 +95,25 @@ extension WeightSelectionView {
         let formatter = MeasurementFormatter()
         formatter.locale = Locale.current
         let currentUnitMass = UnitMass(forLocale: Locale.current)
+        let kilogramSymbol = UnitMass.kilograms.symbol
+        let poundSymbol = UnitMass.pounds.symbol
         switch currentUnitMass {
         case .kilograms:
-            print("Killograms")
+            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 0, animated: false)
+            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 1, animated: false)
         case .pounds:
-            print("Pounds")
+            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 0, animated: false)
+            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 1, animated: false)
         default:
-            print("NOT Supported")
+            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 0, animated: false)
+            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 1, animated: false)
         }
-
-    //    for index in 0...titles.count - 1 {
-      //      self.segmentedControl.insertSegment(withTitle: titles[index], at: index, animated: false)
-        //}
+        segmentedControl.selectedSegmentIndex = 0
     }
+
+    @objc
+    func segmentedControlDidSelectOption() {
+        delegate?.segmentedControlDidSelectOption(segmentedControl)
+    }
+
 }

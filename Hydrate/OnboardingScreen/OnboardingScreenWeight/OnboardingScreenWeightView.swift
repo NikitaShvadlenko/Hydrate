@@ -15,6 +15,7 @@ final class OnboardingScreenWeightView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+// MARK: - Public methods
 
 // MARK: - Private methods
 extension OnboardingScreenWeightView {
