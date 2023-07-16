@@ -9,6 +9,10 @@ final class OnboardingScreenWeightPresenter {
 
 // MARK: - OnboardingScreenWeightViewOutput
 extension OnboardingScreenWeightPresenter: OnboardingScreenWeightViewOutput {
+    func viewDidSelectMassMeasurementType(_ massType: WeightMeasurementUnit) {
+        print("presenter should ask interactor to save \(massType.rawValue) to database")
+    }
+
     func viewDidLoad(_ view: OnboardingScreenWeightViewInput) {
         view.configureViews()
     }

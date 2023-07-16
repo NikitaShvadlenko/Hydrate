@@ -43,11 +43,28 @@ extension OnboardingScreenWeightViewController: OnboardingChildController {
 // MARK: - WeightSelectionViewDelegate
 extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
     func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl) {
-        
+        let itemIndex = segmentedControl.selectedSegmentIndex
+        guard let symbol = segmentedControl.titleForSegment(at: itemIndex) else {
+            fatalError("No symbol")
+        }
+        let selectedMeasurementUnit = convertSymbolIntoWightMeasurementUnit(symbol)
+        presenter?.viewDidSelectMassMeasurementType(selectedMeasurementUnit)
     }
 
-    func toolbarDoneButtonPressed(_ view: UIView) {
-        
+    func toolbarDoneButtonPressed(_ textField: UITextField) {
+        textField.resignFirstResponder()
+    }
+
+    func convertSymbolIntoWightMeasurementUnit(_ symbol: String) -> WeightMeasurementUnit {
+        let selectedMass = UnitMass(symbol: symbol)
+        switch selectedMass.symbol {
+        case UnitMass.kilograms.symbol:
+            return .kilograms
+        case UnitMass.pounds.symbol:
+            return .pounds
+        default:
+            fatalError("wrong symbol")
+        }
     }
 }
 

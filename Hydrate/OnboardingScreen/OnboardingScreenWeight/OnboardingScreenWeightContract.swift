@@ -5,6 +5,7 @@ protocol OnboardingScreenWeightViewInput: AnyObject {
 
 protocol OnboardingScreenWeightViewOutput {
     func viewDidLoad(_ view: OnboardingScreenWeightViewInput)
+    func viewDidSelectMassMeasurementType(_ massType: WeightMeasurementUnit)
 }
 
 // sourcery: AutoMockable

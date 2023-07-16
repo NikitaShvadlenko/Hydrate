@@ -8,7 +8,8 @@ enum OnboardingScreenWeightAssembly {
         let router = OnboardingScreenWeightRouter()
 
         viewController.presenter = presenter
-
+        viewController.setWeightViewDelegate(delegate: viewController)
+        
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router

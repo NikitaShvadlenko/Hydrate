@@ -2,7 +2,7 @@ import UIKit
 
 protocol WeightSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl)
-    func toolbarDoneButtonPressed(_ view: UIView)
+    func toolbarDoneButtonPressed(_ textField: UITextField)
 }
 
 class WeightSelectionView: UIView {
@@ -11,7 +11,7 @@ class WeightSelectionView: UIView {
 
     let backgroundContainerView = BackgroundContainerView()
 
-    private lazy var textfield: UITextField = {
+    private lazy var textField: UITextField = {
         let view = UITextField()
         view.keyboardType = .decimalPad
         view.placeholder = "65"
@@ -39,7 +39,7 @@ class WeightSelectionView: UIView {
     }()
 
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [textfield, containerView])
+        let stackView = UIStackView(arrangedSubviews: [textField, containerView])
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
@@ -70,7 +70,7 @@ extension WeightSelectionView {
 
         segmentedControl.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalTo(textfield.snp.width)
+            make.width.equalTo(textField.snp.width)
             make.bottom.equalToSuperview()
         }
 
@@ -78,7 +78,7 @@ extension WeightSelectionView {
             make.leading.trailing.equalToSuperview().inset(48)
             make.top.bottom.equalToSuperview().inset(40)
         }
-        addBottomLine(to: textfield)
+        addBottomLine(to: textField)
     }
 
     private func addBottomLine(to textField: UITextField) {
@@ -94,11 +94,12 @@ extension WeightSelectionView {
     }
 
     private func configureSegmentedControlTitles() {
-        let formatter = MeasurementFormatter()
-        formatter.locale = Locale.current
         let currentUnitMass = UnitMass(forLocale: Locale.current)
+        print(Locale.current)
         let kilogramSymbol = UnitMass.kilograms.symbol
         let poundSymbol = UnitMass.pounds.symbol
+        print(currentUnitMass.symbol)
+
         switch currentUnitMass {
         case .kilograms:
             self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 0, animated: false)
@@ -125,7 +126,7 @@ extension WeightSelectionView {
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         bar.items = [flexSpace, doneButton]
         bar.sizeToFit()
-        textfield.inputAccessoryView = bar
+        textField.inputAccessoryView = bar
     }
 
     @objc
@@ -135,6 +136,6 @@ extension WeightSelectionView {
 
     @objc
     func doneTapped() {
-        delegate?.toolbarDoneButtonPressed(self)
+        delegate?.toolbarDoneButtonPressed(textField)
     }
 }
