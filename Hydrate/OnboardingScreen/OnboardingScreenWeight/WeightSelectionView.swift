@@ -28,8 +28,8 @@ class WeightSelectionView: UIView {
         return view
     }()
 
-    private lazy var segmentedControl: UISegmentedControl = {
-        let segmentedControl = UISegmentedControl()
+    private lazy var segmentedControl: UnitsOfMeasurementSegmentedControl = {
+        let segmentedControl = UnitsOfMeasurementSegmentedControl(frame: .zero)
         segmentedControl.addTarget(
             self,
             action: #selector(segmentedControlDidSelectOption),
@@ -48,7 +48,6 @@ class WeightSelectionView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureSegmentedControlTitles()
         setupView()
         addToolbar()
     }
@@ -92,28 +91,7 @@ extension WeightSelectionView {
             make.height.equalTo(1)
         }
     }
-
-    private func configureSegmentedControlTitles() {
-        let currentUnitMass = UnitMass(forLocale: Locale.current)
-        print(Locale.current)
-        let kilogramSymbol = UnitMass.kilograms.symbol
-        let poundSymbol = UnitMass.pounds.symbol
-        print(currentUnitMass.symbol)
-
-        switch currentUnitMass {
-        case .kilograms:
-            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 0, animated: false)
-            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 1, animated: false)
-        case .pounds:
-            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 0, animated: false)
-            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 1, animated: false)
-        default:
-            self.segmentedControl.insertSegment(withTitle: kilogramSymbol, at: 0, animated: false)
-            self.segmentedControl.insertSegment(withTitle: poundSymbol, at: 1, animated: false)
-        }
-        segmentedControl.selectedSegmentIndex = 0
-    }
-
+    
     private func addToolbar() {
         let bar = UIToolbar()
         let doneButton = UIBarButtonItem(
