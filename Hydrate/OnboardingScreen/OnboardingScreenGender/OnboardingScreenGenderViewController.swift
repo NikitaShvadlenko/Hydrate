@@ -18,6 +18,10 @@ final class OnboardingScreenGenderViewController: UIViewController {
         setOnboardingDelegate()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        onboardingScreenGenderView.genderSelectionView.reloadCollection()
+    }
+
     func setCollectionViewDataSource(dataSource: UICollectionViewDataSource) {
         onboardingScreenGenderView.genderSelectionView.dataSource = dataSource
     }
