@@ -1,7 +1,7 @@
 import UIKit
 
 class UnitsOfMeasurementSegmentedControl: UISegmentedControl {
-    var segmentedControlItems: [Unit]?
+    var segmentedControlItems: [Dimension]?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,8 +21,7 @@ extension UnitsOfMeasurementSegmentedControl {
     private func setupView() {
     }
 
-    private func configureSegmentedControlTitles(for mass: [UnitMass]) {
-
+    private func configureSegmentedControlTitles(for mass: [Dimension]) {
 
         let formatter = MeasurementFormatter()
         formatter.locale = Locale.current
@@ -62,7 +61,6 @@ extension UnitsOfMeasurementSegmentedControl {
 
         return []
     }
-
 }
 
 extension Array where Element: Equatable {
@@ -81,3 +79,4 @@ extension Array where Element: Equatable {
         return nil
     }
 }
+
