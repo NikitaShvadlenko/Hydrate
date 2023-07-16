@@ -2,6 +2,7 @@ import UIKit
 
 protocol WeightSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl)
+    func toolbarDoneButtonPressed(_ view: UIView)
 }
 
 class WeightSelectionView: UIView {
@@ -114,9 +115,15 @@ extension WeightSelectionView {
 
     private func addToolbar() {
         let bar = UIToolbar()
-        let doneButton = UIBarButtonItem(title: L10n.OnboardingScreen.done, style: .done, target: self, action: #selector(doneTapped))
+        let doneButton = UIBarButtonItem(
+            title: L10n.OnboardingScreen.done,
+            style: .done,
+            target: self,
+            action: #selector(doneTapped)
+        )
+
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        bar.items = [flexSpace, doneButton, flexSpace]
+        bar.items = [flexSpace, doneButton]
         bar.sizeToFit()
         textfield.inputAccessoryView = bar
     }
@@ -128,6 +135,6 @@ extension WeightSelectionView {
 
     @objc
     func doneTapped() {
-        print("Done tapped")
+        delegate?.toolbarDoneButtonPressed(self)
     }
 }

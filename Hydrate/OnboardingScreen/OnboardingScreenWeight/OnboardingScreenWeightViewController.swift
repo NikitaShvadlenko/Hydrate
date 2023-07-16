@@ -17,6 +17,10 @@ final class OnboardingScreenWeightViewController: UIViewController {
         presenter?.viewDidLoad(self)
         setOnboardingDelegate()
     }
+
+    func setWeightViewDelegate(delegate: WeightSelectionViewDelegate) {
+        onboardingScreenWeightView.weightSelectionView.delegate = delegate
+    }
 }
 
 // MARK: - OnboardingScreenWeightViewInput
@@ -25,7 +29,7 @@ extension OnboardingScreenWeightViewController: OnboardingScreenWeightViewInput 
     }
 }
 
-// MARK: -
+// MARK: - OnboardingScreenChildController
 extension OnboardingScreenWeightViewController: OnboardingChildController {
     var navigationButtonTitle: String {
         L10n.OnboardingScreen.next
@@ -33,6 +37,17 @@ extension OnboardingScreenWeightViewController: OnboardingChildController {
 
     func viewDidPressNextButton() {
         print("ViewPressedNextButton")
+    }
+}
+
+// MARK: - WeightSelectionViewDelegate
+extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
+    func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl) {
+        
+    }
+
+    func toolbarDoneButtonPressed(_ view: UIView) {
+        
     }
 }
 
