@@ -49,6 +49,7 @@ class WeightSelectionView: UIView {
         super.init(frame: frame)
         configureSegmentedControlTitles()
         setupView()
+        addToolbar()
     }
 
     required init?(coder: NSCoder) {
@@ -111,9 +112,29 @@ extension WeightSelectionView {
         segmentedControl.selectedSegmentIndex = 0
     }
 
+    private func addToolbar() {
+        let toolbar = UIToolbar()
+        let nextButtonContainerView = UIView()
+        let navigationNextButton = NavigationNextButton()
+        nextButtonContainerView.addSubview(navigationNextButton)
+
+        let nextButtonInContainerView = UIBarButtonItem(customView: nextButtonContainerView)
+
+        toolbar.items = [nextButtonInContainerView]
+        navigationNextButton.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
+        }
+        toolbar.barTintColor = .
+        toolbar.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
+
+        textfield.inputAccessoryView = toolbar
+    }
+
     @objc
     func segmentedControlDidSelectOption() {
         delegate?.segmentedControlDidSelectOption(segmentedControl)
     }
-
 }
