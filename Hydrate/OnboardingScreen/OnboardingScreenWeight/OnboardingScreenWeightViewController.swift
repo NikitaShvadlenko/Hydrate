@@ -47,10 +47,6 @@ extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension) {
         presenter?.viewDidSelectMassDimension(dimension)
     }
-
-    func toolbarDoneButtonPressed(_ textField: UITextField) {
-        textField.resignFirstResponder()
-    }
 }
 
 // MARK: - Private methods

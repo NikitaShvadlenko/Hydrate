@@ -2,7 +2,6 @@ import UIKit
 
 protocol WeightSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension)
-    func toolbarDoneButtonPressed(_ textField: UITextField)
 }
 
 class WeightSelectionView: UIView {
@@ -19,6 +18,7 @@ class WeightSelectionView: UIView {
         view.textAlignment = .center
         view.borderStyle = .none
         view.tintColor = .black
+        view.delegate = delegate
         return view
     }()
 
@@ -103,10 +103,5 @@ extension WeightSelectionView {
         let index = segmentedControl.selectedSegmentIndex
         let dimension = segmentedControl.segmentedControlItems[index]
         delegate?.segmentedControlDidSelectDimension(segmentedControl, dimension: dimension)
-    }
-
-    @objc
-    func doneTapped() {
-        delegate?.toolbarDoneButtonPressed(textField)
     }
 }
