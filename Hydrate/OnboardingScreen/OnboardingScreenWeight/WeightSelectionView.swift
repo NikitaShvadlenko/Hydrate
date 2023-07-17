@@ -28,8 +28,8 @@ class WeightSelectionView: UIView {
         return view
     }()
 
-    private lazy var segmentedControl: UnitsOfMeasurementSegmentedControl = {
-        let segmentedControl = UnitsOfMeasurementSegmentedControl(frame: .zero)
+    private lazy var segmentedControl: DimensionSegmentedControl = {
+        let segmentedControl = DimensionSegmentedControl(segmentedControlItems: [UnitMass.kilograms, UnitMass.pounds])
         segmentedControl.addTarget(
             self,
             action: #selector(segmentedControlDidSelectOption),

@@ -1,14 +1,12 @@
 import UIKit
 
-class UnitsOfMeasurementSegmentedControl: UISegmentedControl {
-    public var segmentedControlItems: [Dimension] = [] {
-        didSet {
-            configureSegmentedControlItems(for: segmentedControlItems)
-        }
-    }
+class DimensionSegmentedControl: UISegmentedControl {
+    public var segmentedControlItems: [Dimension]
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(segmentedControlItems: [Dimension]) {
+        self.segmentedControlItems = segmentedControlItems
+        super.init(frame: .zero)
+        configureSegmentedControlItems(for: segmentedControlItems)
     }
 
     required init?(coder: NSCoder) {
@@ -17,7 +15,7 @@ class UnitsOfMeasurementSegmentedControl: UISegmentedControl {
 }
 
 // MARK: Private methods
-extension UnitsOfMeasurementSegmentedControl {
+extension DimensionSegmentedControl {
     private func configureSegmentedControlItems(for dimensions: [Dimension]) {
         let currentUnitMass = UnitMass(forLocale: Locale.current)
         if let swappedDimensions = dimensions.placeElementToFirstPosition(element: currentUnitMass) {
