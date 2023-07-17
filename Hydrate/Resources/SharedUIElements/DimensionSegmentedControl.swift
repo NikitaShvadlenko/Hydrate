@@ -28,6 +28,7 @@ extension DimensionSegmentedControl {
             let title = createLocalisedTitle(from: segmentedControlItems[dimensionItemIndex])
             insertSegment(withTitle: title, at: dimensionItemIndex, animated: false)
         }
+
     }
 
     func createLocalisedTitle(from dimension: Dimension) -> String {

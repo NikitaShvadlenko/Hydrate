@@ -1,7 +1,7 @@
 import UIKit
 
 protocol WeightSelectionViewDelegate: UITextFieldDelegate {
-    func segmentedControlDidSelectOption(_ segmentedControl: UISegmentedControl)
+    func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension)
     func toolbarDoneButtonPressed(_ textField: UITextField)
 }
 
@@ -50,6 +50,8 @@ class WeightSelectionView: UIView {
         super.init(frame: frame)
         setupView()
         addToolbar()
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControlDidSelectOption()
     }
 
     required init?(coder: NSCoder) {
@@ -109,7 +111,9 @@ extension WeightSelectionView {
 
     @objc
     func segmentedControlDidSelectOption() {
-        delegate?.segmentedControlDidSelectOption(segmentedControl)
+        let index = segmentedControl.selectedSegmentIndex
+        let dimension = segmentedControl.segmentedControlItems[index]
+        delegate?.segmentedControlDidSelectDimension(segmentedControl, dimension: dimension)
     }
 
     @objc

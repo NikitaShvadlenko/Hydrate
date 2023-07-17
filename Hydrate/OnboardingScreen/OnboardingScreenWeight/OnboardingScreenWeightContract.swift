@@ -1,3 +1,4 @@
+import Foundation
 // sourcery: AutoMockable
 protocol OnboardingScreenWeightViewInput: AnyObject {
     func configureViews()
@@ -5,11 +6,12 @@ protocol OnboardingScreenWeightViewInput: AnyObject {
 
 protocol OnboardingScreenWeightViewOutput {
     func viewDidLoad(_ view: OnboardingScreenWeightViewInput)
-    func viewDidSelectMassMeasurementType(_ massType: WeightMeasurementUnit)
+    func viewDidSelectMassDimension(_ dimension: Dimension)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingScreenWeightInteractorInput {
+    func saveDimension(_ dimension: Dimension)
 }
 
 // sourcery: AutoMockable
