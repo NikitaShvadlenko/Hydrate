@@ -6,7 +6,11 @@ protocol WeightSelectionViewDelegate: UITextFieldDelegate {
 
 class WeightSelectionView: UIView {
 
-    weak var delegate: WeightSelectionViewDelegate?
+    weak var delegate: WeightSelectionViewDelegate? {
+        didSet {
+            textField.delegate = delegate
+        }
+    }
 
     let backgroundContainerView = BackgroundContainerView()
 
@@ -18,7 +22,6 @@ class WeightSelectionView: UIView {
         view.textAlignment = .center
         view.borderStyle = .none
         view.tintColor = .black
-        view.delegate = delegate
         return view
     }()
 

@@ -47,6 +47,24 @@ extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension) {
         presenter?.viewDidSelectMassDimension(dimension)
     }
+
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        guard let decimalSeparator = NumberFormatter().decimalSeparator else {
+            fatalError("could not create decimal separator")
+        }
+
+        let currentText = textField.text ?? ""
+
+        if currentText.count > 5 && !string.isEmpty {
+            return false
+        }
+
+        let invalidCharacters =
+        CharacterSet(charactersIn: ("0123456789" + decimalSeparator)).inverted
+        return (string.rangeOfCharacter(from: invalidCharacters) == nil)
+    }
 }
 
 // MARK: - Private methods
