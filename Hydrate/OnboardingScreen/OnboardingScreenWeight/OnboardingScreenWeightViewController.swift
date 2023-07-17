@@ -74,7 +74,7 @@ extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
             return
         }
 
-        if weight > 10 && weight < 1000 {
+        if weight > 10 && weight < 1500 {
             presenter?.viewDidInsertWeightValue(self, value: weight)
             delegate?.viewDidSelectOption()
         } else {
