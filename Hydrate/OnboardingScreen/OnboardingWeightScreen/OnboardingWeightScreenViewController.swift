@@ -1,38 +1,38 @@
 import UIKit
 
-final class OnboardingScreenWeightViewController: UIViewController {
+final class OnboardingWeightScreenViewController: UIViewController {
 
     weak var delegate: OnboardingController?
 
-    private let onboardingScreenWeightView = OnboardingScreenWeightView()
+    private let onboardingWeightScreenView = OnboardingWeightScreenView()
 
-    var presenter: OnboardingScreenWeightViewOutput?
+    var presenter: OnboardingWeightScreenViewOutput?
 
     override func loadView() {
-        view = onboardingScreenWeightView
+        view = onboardingWeightScreenView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
         setOnboardingDelegate()
-        onboardingScreenWeightView.weightSelectionView.selectFirstSegmentedControlElement()
+        onboardingWeightScreenView.weightSelectionView.selectFirstSegmentedControlElement()
         registerDismissKeyboardWhenTouchOutside()
     }
 
     func setWeightViewDelegate(delegate: WeightSelectionViewDelegate) {
-        onboardingScreenWeightView.weightSelectionView.delegate = delegate
+        onboardingWeightScreenView.weightSelectionView.delegate = delegate
     }
 }
 
-// MARK: - OnboardingScreenWeightViewInput
-extension OnboardingScreenWeightViewController: OnboardingScreenWeightViewInput {
+// MARK: - OnboardingWeightScreenViewInput
+extension OnboardingWeightScreenViewController: OnboardingWeightScreenViewInput {
     func configureViews() {
     }
 }
 
 // MARK: - OnboardingScreenChildController
-extension OnboardingScreenWeightViewController: OnboardingChildController {
+extension OnboardingWeightScreenViewController: OnboardingChildController {
     var navigationButtonTitle: String {
         L10n.OnboardingScreen.next
     }
@@ -43,7 +43,7 @@ extension OnboardingScreenWeightViewController: OnboardingChildController {
 }
 
 // MARK: - WeightSelectionViewDelegate
-extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
+extension OnboardingWeightScreenViewController: WeightSelectionViewDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension) {
         presenter?.viewDidSelectMassDimension(self, dimension)
     }
@@ -84,5 +84,5 @@ extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
 }
 
 // MARK: - Private methods
-extension OnboardingScreenWeightViewController {
+extension OnboardingWeightScreenViewController {
 }

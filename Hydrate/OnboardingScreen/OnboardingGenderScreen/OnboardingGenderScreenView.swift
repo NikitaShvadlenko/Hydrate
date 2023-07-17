@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-final class OnboardingScreenGenderView: UIView {
+final class OnboardingGenderScreenView: UIView {
 
     let titleLabel = TitleLabel()
-    let genderSelectionView = OnboardingScreenGenderCollectionView()
+    let genderSelectionView = OnboardingGenderScreenCollectionView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -18,18 +18,18 @@ final class OnboardingScreenGenderView: UIView {
 }
 
 // MARK: - Public methods
-extension OnboardingScreenGenderView {
+extension OnboardingGenderScreenView {
 
 }
 
 // MARK: - Private methods
-extension OnboardingScreenGenderView {
+extension OnboardingGenderScreenView {
     private func configureViews() {
         addSubview(titleLabel)
         addSubview(genderSelectionView)
 
         backgroundColor = Asset.onboardingScreenBackgroundColor.color
-        titleLabel.text = L10n.OnboardingScreenGender.screenTitle
+        titleLabel.text = L10n.OnboardingGenderScreen.screenTitle
         titleLabel.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(safeAreaLayoutGuide.snp.top)

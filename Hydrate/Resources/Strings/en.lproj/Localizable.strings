@@ -8,7 +8,7 @@
 "OnboardingScreen.weight" = "Your weight";
 "OnboardingScreen.volume" = "Volume:";
 "OnboardingScreen.exerciseQuestion" = "How often do you exercise?";
-"OnboardingScreenGender.screenTitle" = "Select your gender:";
+"OnboardingGenderScreen.screenTitle" = "Select your gender:";
 "OnboardingScreen.next" = "Next";
 "OnboardingScreen.start" = "Start";
 "OnboardingScreen.pounds" = "lb";

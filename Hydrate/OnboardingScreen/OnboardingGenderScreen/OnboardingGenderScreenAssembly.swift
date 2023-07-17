@@ -1,11 +1,11 @@
 import UIKit
 
-enum OnboardingScreenGenderAssembly {
-    static func assemble() -> AssembledModule<OnboardingScreenGenderModuleInput> {
-        let viewController = OnboardingScreenGenderViewController()
-        let presenter = OnboardingScreenGenderPresenter()
-        let interactor = OnboardingScreenGenderInteractor()
-        let router = OnboardingScreenGenderRouter()
+enum OnboardingGenderScreenAssembly {
+    static func assemble() -> AssembledModule<OnboardingGenderScreenModuleInput> {
+        let viewController = OnboardingGenderScreenViewController()
+        let presenter = OnboardingGenderScreenPresenter()
+        let interactor = OnboardingGenderScreenInteractor()
+        let router = OnboardingGenderScreenRouter()
         let genderSelectionViewManager = GenderSelectionViewManager()
         genderSelectionViewManager.delegate = presenter
 

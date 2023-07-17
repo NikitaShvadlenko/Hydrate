@@ -1,6 +1,6 @@
 import UIKit
 
-final class OnboardingScreenWeightView: UIView {
+final class OnboardingWeightScreenView: UIView {
 
     let titleLabel = TitleLabel()
     let weightSelectionView = WeightSelectionView()
@@ -18,7 +18,7 @@ final class OnboardingScreenWeightView: UIView {
 // MARK: - Public methods
 
 // MARK: - Private methods
-extension OnboardingScreenWeightView {
+extension OnboardingWeightScreenView {
     private func configureViews() {
         backgroundColor = .clear
         addSubview(titleLabel)

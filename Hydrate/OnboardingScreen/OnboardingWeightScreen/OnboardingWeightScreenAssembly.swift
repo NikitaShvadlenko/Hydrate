@@ -1,11 +1,11 @@
 import UIKit
 
-enum OnboardingScreenWeightAssembly {
-    static func assemble() -> AssembledModule<OnboardingScreenWeightModuleInput> {
-        let viewController = OnboardingScreenWeightViewController()
-        let presenter = OnboardingScreenWeightPresenter()
-        let interactor = OnboardingScreenWeightInteractor()
-        let router = OnboardingScreenWeightRouter()
+enum OnboardingWeightScreenAssembly {
+    static func assemble() -> AssembledModule<OnboardingWeightScreenModuleInput> {
+        let viewController = OnboardingWeightScreenViewController()
+        let presenter = OnboardingWeightScreenPresenter()
+        let interactor = OnboardingWeightScreenInteractor()
+        let router = OnboardingWeightScreenRouter()
 
         viewController.presenter = presenter
         viewController.setWeightViewDelegate(delegate: viewController)

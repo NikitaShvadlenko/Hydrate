@@ -1,12 +1,12 @@
 import UIKit
 
-final class OnboardingScreenGenderViewController: UIViewController {
+final class OnboardingGenderScreenViewController: UIViewController {
 
     weak var delegate: OnboardingController?
 
-    private let onboardingScreenGenderView = OnboardingScreenGenderView()
+    private let onboardingScreenGenderView = OnboardingGenderScreenView()
 
-    var presenter: OnboardingScreenGenderViewOutput?
+    var presenter: OnboardingGenderScreenViewOutput?
 
     override func loadView() {
         view = onboardingScreenGenderView
@@ -31,8 +31,8 @@ final class OnboardingScreenGenderViewController: UIViewController {
     }
 }
 
-// MARK: - OnboardingScreenGenderViewInput
-extension OnboardingScreenGenderViewController: OnboardingScreenGenderViewInput {
+// MARK: - OnboardingGenderScreenViewInput
+extension OnboardingGenderScreenViewController: OnboardingGenderScreenViewInput {
     func collectionViewDidSelectCell(at indexPath: IndexPath) {
         delegate?.viewDidSelectOption()
     }
@@ -42,17 +42,17 @@ extension OnboardingScreenGenderViewController: OnboardingScreenGenderViewInput 
 }
 
 // MARK: - NavigationNextButtonDelegate
-extension OnboardingScreenGenderViewController: NavigationNextButtonDelegate {
+extension OnboardingGenderScreenViewController: NavigationNextButtonDelegate {
     func buttonPressed() {
         presenter?.viewDidPressNextButton(self)
     }
 }
 
 // MARK: - Private methods
-extension OnboardingScreenGenderViewController {
+extension OnboardingGenderScreenViewController {
 }
 
-extension OnboardingScreenGenderViewController: OnboardingChildController {
+extension OnboardingGenderScreenViewController: OnboardingChildController {
     var navigationButtonTitle: String {
         L10n.OnboardingScreen.next
     }

@@ -1,11 +1,11 @@
 import Foundation
 
-final class OnboardingScreenWeightInteractor {
-    weak var presenter: OnboardingScreenWeightInteractorOutput?
+final class OnboardingWeightScreenInteractor {
+    weak var presenter: OnboardingWeightScreenInteractorOutput?
 }
 
-// MARK: - OnboardingScreenWeightInteractorInput
-extension OnboardingScreenWeightInteractor: OnboardingScreenWeightInteractorInput {
+// MARK: - OnboardingWeightScreenInteractorInput
+extension OnboardingWeightScreenInteractor: OnboardingWeightScreenInteractorInput {
     func saveDimension(_ dimension: Dimension) {
         switch dimension {
         case UnitMass.kilograms:
@@ -19,5 +19,5 @@ extension OnboardingScreenWeightInteractor: OnboardingScreenWeightInteractorInpu
 }
 
 // MARK: - Private methods
-extension OnboardingScreenWeightInteractor {
+extension OnboardingWeightScreenInteractor {
 }

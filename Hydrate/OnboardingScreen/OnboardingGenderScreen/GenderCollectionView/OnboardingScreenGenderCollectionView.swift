@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingScreenGenderCollectionView: UIView {
+class OnboardingGenderScreenCollectionView: UIView {
 
     let containerView = BackgroundContainerView()
 
@@ -35,7 +35,7 @@ class OnboardingScreenGenderCollectionView: UIView {
 }
 
 // MARK: - Public methods
-extension OnboardingScreenGenderCollectionView {
+extension OnboardingGenderScreenCollectionView {
     var dataSource: UICollectionViewDataSource? {
         get {
             collectionView.dataSource
@@ -60,7 +60,7 @@ extension OnboardingScreenGenderCollectionView {
 }
 
 // MARK: - Private methods
-extension OnboardingScreenGenderCollectionView {
+extension OnboardingGenderScreenCollectionView {
     private func setupView() {
         addSubview(containerView)
         containerView.snp.makeConstraints { make in
