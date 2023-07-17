@@ -132,12 +132,17 @@ extension OnboardingScreenViewController: NavigationNextButtonDelegate {
 
 // MARK: - OnboardingController
 extension OnboardingScreenViewController: OnboardingController {
+
     func setNavigationButtonTitle(_ title: String) {
         onboardingScreenView.navigationNextButton.title = title
     }
 
     func viewDidSelectOption() {
         onboardingScreenView.enableNextButton()
+    }
+
+    func viewDidDeselectOption() {
+        onboardingScreenView.disableNextButton()
     }
 }
 

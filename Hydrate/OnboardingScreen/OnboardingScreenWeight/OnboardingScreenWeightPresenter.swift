@@ -9,8 +9,12 @@ final class OnboardingScreenWeightPresenter {
 
 // MARK: - OnboardingScreenWeightViewOutput
 extension OnboardingScreenWeightPresenter: OnboardingScreenWeightViewOutput {
-    func viewDidSelectMassDimension(_ dimension: Dimension) {
+    func viewDidSelectMassDimension(_ view: OnboardingScreenWeightViewInput, _ dimension: Dimension) {
         interactor?.saveDimension(dimension)
+    }
+
+    func viewDidInsertWeightValue(_ view: OnboardingScreenWeightViewInput, value: Double) {
+        print("Saved \(value)")
     }
 
     func viewDidLoad(_ view: OnboardingScreenWeightViewInput) {

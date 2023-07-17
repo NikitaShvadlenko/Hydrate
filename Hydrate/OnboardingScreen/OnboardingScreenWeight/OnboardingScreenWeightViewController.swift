@@ -45,7 +45,7 @@ extension OnboardingScreenWeightViewController: OnboardingChildController {
 // MARK: - WeightSelectionViewDelegate
 extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension) {
-        presenter?.viewDidSelectMassDimension(dimension)
+        presenter?.viewDidSelectMassDimension(self, dimension)
     }
 
     func textField(_ textField: UITextField,
@@ -64,6 +64,22 @@ extension OnboardingScreenWeightViewController: WeightSelectionViewDelegate {
         let invalidCharacters =
         CharacterSet(charactersIn: ("0123456789" + decimalSeparator)).inverted
         return (string.rangeOfCharacter(from: invalidCharacters) == nil)
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard
+            let text = textField.text,
+            let weight = Double(text.replacingOccurrences(of: ",", with: "."))
+        else {
+            return
+        }
+
+        if weight > 10 && weight < 1000 {
+            presenter?.viewDidInsertWeightValue(self, value: weight)
+            delegate?.viewDidSelectOption()
+        } else {
+            delegate?.viewDidDeselectOption()
+        }
     }
 }
 

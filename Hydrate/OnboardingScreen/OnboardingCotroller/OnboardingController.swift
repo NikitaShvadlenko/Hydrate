@@ -2,6 +2,7 @@ import UIKit
 
 protocol OnboardingController: UIViewController {
     func viewDidSelectOption()
+    func viewDidDeselectOption()
     func setNavigationButtonTitle(_ title: String)
 }
 

@@ -6,7 +6,8 @@ protocol OnboardingScreenWeightViewInput: AnyObject {
 
 protocol OnboardingScreenWeightViewOutput {
     func viewDidLoad(_ view: OnboardingScreenWeightViewInput)
-    func viewDidSelectMassDimension(_ dimension: Dimension)
+    func viewDidSelectMassDimension(_ view: OnboardingScreenWeightViewInput, _ dimension: Dimension)
+    func viewDidInsertWeightValue(_ view: OnboardingScreenWeightViewInput, value: Double)
 }
 
 // sourcery: AutoMockable
