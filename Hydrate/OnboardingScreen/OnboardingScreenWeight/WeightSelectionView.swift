@@ -49,7 +49,6 @@ class WeightSelectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        addToolbar()
         segmentedControl.selectedSegmentIndex = 0
         segmentedControlDidSelectOption()
     }
@@ -92,21 +91,6 @@ extension WeightSelectionView {
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(1)
         }
-    }
-
-    private func addToolbar() {
-        let bar = UIToolbar()
-        let doneButton = UIBarButtonItem(
-            title: L10n.OnboardingScreen.done,
-            style: .done,
-            target: self,
-            action: #selector(doneTapped)
-        )
-
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        bar.items = [flexSpace, doneButton]
-        bar.sizeToFit()
-        textField.inputAccessoryView = bar
     }
 
     @objc
