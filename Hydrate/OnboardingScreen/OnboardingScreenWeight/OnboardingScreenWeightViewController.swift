@@ -16,6 +16,8 @@ final class OnboardingScreenWeightViewController: UIViewController {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
         setOnboardingDelegate()
+        onboardingScreenWeightView.weightSelectionView.selectFirstSegmentedControlElement()
+        registerDismissKeyboardWhenTouchOutside()
     }
 
     func setWeightViewDelegate(delegate: WeightSelectionViewDelegate) {

@@ -49,12 +49,17 @@ class WeightSelectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControlDidSelectOption()
     }
 
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
+    }
+}
+// MARK: - Public methods
+extension WeightSelectionView {
+    public func selectFirstSegmentedControlElement() {
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControlDidSelectOption()
     }
 }
 
