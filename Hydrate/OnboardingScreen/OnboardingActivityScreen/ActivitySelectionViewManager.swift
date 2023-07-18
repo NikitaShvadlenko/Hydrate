@@ -37,6 +37,8 @@ extension ActivitySelectionViewManager: UICollectionViewDataSource {
         ) as? ActivitySelectionCell else {
             fatalError("failed to deqeue cell")
         }
+        let activityLevel = ActivityLevel.allCases[indexPath.item]
+        cell.configureCell(for: activityLevel)
         return cell
     }
 

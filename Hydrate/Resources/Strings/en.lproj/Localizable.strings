@@ -19,6 +19,13 @@
 "OnboardingScreen.done" = "Done";
 
 "OnboardingScreen.activitySelectionTitle" = "Your activity";
+"ActivitySelection.Light.title" = "Light";
+"ActivitySelection.Moderate.title" = "Moderate";
+"ActivitySelection.Heavy.title" = "Heavy";
+
+"ActivitySelection.Light.decription" = "0 - 2 hours of exercise a week";
+"ActivitySelection.Moderate.decription" = "2-10 hours of exercise a week";
+"ActivitySelection.Heavy.decription" = "more than 10 hours of exercise a week";
 
 "OnboardingScreen.intakeGoal" = "Intake goal";
 "OnboardingScreen.calculatedGoal" = "We calculated your ideal intake goal, you can change it by tapping on the number";
