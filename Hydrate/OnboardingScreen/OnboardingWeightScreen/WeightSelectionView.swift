@@ -22,6 +22,7 @@ class WeightSelectionView: UIView {
         view.textAlignment = .center
         view.borderStyle = .none
         view.tintColor = .black
+        view.adjustsFontSizeToFitWidth = true
         return view
     }()
 

@@ -50,14 +50,14 @@ extension OnboardingScreenView {
         addSubview(navigationNextButton)
         navigationNextButton.alpha = 0.5
         navigationBackButton.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(safeAreaLayoutGuide).inset(16)
             make.leading.equalToSuperview().inset(16)
         }
 
         backgroundColor = Asset.onboardingScreenBackgroundColor.color
         pageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom).inset(16)
             make.height.equalTo(10)
         }
 

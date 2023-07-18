@@ -21,6 +21,7 @@ class GoalSelectionView: UIView {
         view.font = UIFont.systemFont(ofSize: 32)
         view.textAlignment = .center
         view.borderStyle = .none
+        view.adjustsFontSizeToFitWidth = true
         view.tintColor = .black
         return view
     }()
