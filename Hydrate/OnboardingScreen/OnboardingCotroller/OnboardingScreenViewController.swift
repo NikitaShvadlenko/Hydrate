@@ -92,7 +92,14 @@ extension OnboardingScreenViewController {
         else {
             fatalError("Gender controller does not conform to OnboardingChildCOntroller protocol")
         }
-        onboardingViewControllers = [activityController, themeController, goalController, weightController, welcomeController, genderController]
+        onboardingViewControllers = [
+            activityController,
+            themeController,
+            goalController,
+            weightController,
+            welcomeController,
+            genderController
+        ]
     }
 
     func removeChildrenViewControllers() {
