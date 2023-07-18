@@ -43,15 +43,14 @@ extension ActivitySelectionCell {
             selectionBox,
             activityImageView
         ].forEach(addSubview(_:))
-
         selectionBox.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
+            make.trailing.equalToSuperview().offset(8)
+            make.centerY.equalToSuperview()
         }
 
         activityImageView.snp.makeConstraints { make in
-            make.bottom.equalTo(selectionBox.snp.top).offset(-8)
-            make.leading.trailing.top.equalToSuperview()
+            make.leading.top.bottom.equalToSuperview()
+            make.trailing.equalTo(selectionBox.snp.leading).offset(-8)
         }
     }
 }

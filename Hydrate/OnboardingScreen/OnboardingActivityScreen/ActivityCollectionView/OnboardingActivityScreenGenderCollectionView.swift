@@ -20,7 +20,7 @@ class OnboardingActivityScreenCollectionView: UIView {
         flowLayout.minimumInteritemSpacing = Constants.spaceBetweenCards
         flowLayout.minimumLineSpacing = Constants.spaceBetweenCards
         flowLayout.sectionInset = Constants.cardInsets
-        flowLayout.scrollDirection = .horizontal
+        flowLayout.scrollDirection = .vertical
         return flowLayout
     }()
 
