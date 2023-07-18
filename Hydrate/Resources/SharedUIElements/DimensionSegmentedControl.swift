@@ -18,13 +18,16 @@ class DimensionSegmentedControl: UISegmentedControl {
 extension DimensionSegmentedControl {
     private func configureSegmentedControlItems(for dimensions: [Dimension], type: DimesionType) {
 
-        let localisedUnit: Dimension
+        var localisedUnit: Dimension
 
         switch type {
         case .mass:
             localisedUnit = UnitMass(forLocale: Locale.current)
         case .volume:
             localisedUnit = UnitVolume(forLocale: Locale.current)
+            if localisedUnit == UnitVolume.gallons {
+                localisedUnit = UnitVolume.fluidOunces
+            }
         }
 
         if let swappedDimensions = dimensions.placeElementToFirstPosition(element: localisedUnit) {
