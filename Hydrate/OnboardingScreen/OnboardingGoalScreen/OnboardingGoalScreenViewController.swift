@@ -18,6 +18,7 @@ final class OnboardingGoalScreenViewController: UIViewController {
         setOnboardingDelegate()
         onboardingGoalScreenView.goalSelectionView.selectFirstSegmentedControlElement()
         registerDismissKeyboardWhenTouchOutside()
+        delegate?.viewDidSelectOption()
     }
 
     func setGoalViewDelegate(delegate: GoalSelectionViewDelegate) {
@@ -77,7 +78,7 @@ extension OnboardingGoalScreenViewController: GoalSelectionViewDelegate {
             return
         }
 
-        if volume > 10 && volume < 9000 {
+        if volume > 1000 && volume < 9000 {
             presenter?.viewDidInsertVolumeValue(self, value: volume)
             delegate?.viewDidSelectOption()
         } else {
