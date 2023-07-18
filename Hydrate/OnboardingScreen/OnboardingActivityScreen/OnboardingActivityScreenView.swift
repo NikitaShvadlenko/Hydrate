@@ -36,9 +36,10 @@ extension OnboardingActivityScreenView {
         }
 
         activitySelectionView.snp.makeConstraints { make in
-            make.height.equalTo(247)
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(48)
+            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().inset(39)
+            make.top.equalTo(titleLabel).inset(48)
         }
     }
 }

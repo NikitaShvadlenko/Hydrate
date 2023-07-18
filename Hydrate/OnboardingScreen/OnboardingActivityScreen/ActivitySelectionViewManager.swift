@@ -64,11 +64,9 @@ extension ActivitySelectionViewManager: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         let numberOfCells: CGFloat = CGFloat(ActivityLevel.allCases.count - 1)
         let spaceBetweenCards = Constants.spaceBetweenCards
-        let availableWidth: CGFloat = collectionView.bounds.width
-        - (spaceBetweenCards * numberOfCells) - (Constants.horizontalCardInsets * 2)
-        let width = availableWidth / CGFloat(ActivityLevel.allCases.count)
-
-        let height: CGFloat = collectionView.bounds.height - (Constants.verticalCardInsets * 2)
+        let availibleHeight = collectionView.bounds.height - (spaceBetweenCards * numberOfCells) - (Constants.verticalCardInsets * 2)
+        let height = availibleHeight / CGFloat(ActivityLevel.allCases.count)
+        let width: CGFloat = collectionView.bounds.width - (Constants.horizontalCardInsets * 2)
 
         return CGSize(width: width, height: height)
     }
