@@ -12,7 +12,7 @@ final class UserData: NSManagedObject {
     fileprivate(set) var weight: Double
 
     @NSManaged
-    fileprivate(set) var exerciseLevelRawValue: String
+    fileprivate(set) var activityLevelRawValue: String
 
     @NSManaged
     fileprivate(set) var genderRawValue: String
@@ -31,7 +31,7 @@ final class UserData: NSManagedObject {
         userData.dailyGoal = form.dailyGoal
         userData.weight = form.weight
         userData.genderRawValue = form.gender.rawValue
-        userData.exerciseLevelRawValue = form.exerciseLevel.rawValue
+        userData.activityLevelRawValue = form.activityLevel.rawValue
         userData.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
         userData.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
         userData.date = Date()
@@ -46,7 +46,7 @@ final class UserData: NSManagedObject {
         guard let updateObject = context.object(with: object.objectID) as? Self else { return }
         updateObject.dailyGoal = form.dailyGoal
         updateObject.weight = form.weight
-        updateObject.exerciseLevelRawValue = form.exerciseLevel.rawValue
+        updateObject.activityLevelRawValue = form.activityLevel.rawValue
         updateObject.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
         updateObject.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
     }
@@ -56,15 +56,15 @@ extension UserData: Managed {
 }
 
 extension UserData {
-    var exerciseLevel: ExerciseLevel {
+    var activityLevel: ActivityLevel {
         get {
-            guard let exerciseLevel = ExerciseLevel(rawValue: exerciseLevelRawValue) else {
+            guard let activityLevel = ActivityLevel(rawValue: activityLevelRawValue) else {
                 fatalError("Failed to convert")
             }
-            return exerciseLevel
+            return activityLevel
         }
         set {
-            exerciseLevelRawValue = newValue.rawValue
+            activityLevelRawValue = newValue.rawValue
         }
     }
 

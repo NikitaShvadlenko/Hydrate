@@ -4,13 +4,13 @@ struct UserDataForm {
     var date: Date
     var dailyGoal: Double
     var weight: Double
-    var exerciseLevel: ExerciseLevel
+    var activityLevel: ActivityLevel
     var weightMeasurementUnit: WeightMeasurementUnit
     var volumeMeasurementUnit: VolumeMeasurementUnit
     var gender: Gender
 }
 
-enum ExerciseLevel: String {
+enum ActivityLevel: String, CaseIterable {
     case light
     case moderate
     case heavy
