@@ -1,12 +1,12 @@
 import UIKit
 
-protocol WeightSelectionViewDelegate: UITextFieldDelegate {
+protocol GoalSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension)
 }
 
-class WeightSelectionView: UIView {
+class GoalSelectionView: UIView {
 
-    weak var delegate: WeightSelectionViewDelegate? {
+    weak var delegate: GoalSelectionViewDelegate? {
         didSet {
             textField.delegate = delegate
         }
@@ -17,7 +17,7 @@ class WeightSelectionView: UIView {
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.keyboardType = .decimalPad
-        view.placeholder = "65"
+        view.placeholder = "3000"
         view.font = UIFont.systemFont(ofSize: 32)
         view.textAlignment = .center
         view.borderStyle = .none
@@ -33,8 +33,9 @@ class WeightSelectionView: UIView {
 
     private lazy var segmentedControl: DimensionSegmentedControl = {
         let segmentedControl = DimensionSegmentedControl(
-            segmentedControlItems: [UnitMass.kilograms, UnitMass.pounds],
-            dimensionType: .mass
+            segmentedControlItems: [
+                UnitVolume.milliliters, UnitVolume.fluidOunces
+            ], dimensionType: .volume
         )
         segmentedControl.addTarget(
             self,
@@ -62,15 +63,19 @@ class WeightSelectionView: UIView {
     }
 }
 // MARK: - Public methods
-extension WeightSelectionView {
+extension GoalSelectionView {
     public func selectFirstSegmentedControlElement() {
         segmentedControl.selectedSegmentIndex = 0
         segmentedControlDidSelectOption()
     }
+
+    public func updateTitle(title: String) {
+        textField.text = title
+    }
 }
 
 // MARK: - Private methods
-extension WeightSelectionView {
+extension GoalSelectionView {
     private func setupView() {
         addSubview(backgroundContainerView)
         backgroundContainerView.addSubview(stackView)

@@ -11,6 +11,11 @@
 "OnboardingGenderScreen.screenTitle" = "Select your gender:";
 "OnboardingScreen.next" = "Next";
 "OnboardingScreen.start" = "Start";
+
 "OnboardingScreen.pounds" = "lb";
 "OnboardingScreen.killograms" = "kg";
+"OnboardingScreen.ounces" = "oz";
 "OnboardingScreen.done" = "Done";
+
+"OnboardingScreen.intakeGoal" = "Intake goal";
+"OnboardingScreen.calculatedGoal" = "We calculated your ideal intake goal, you can change it by tapping on the number";

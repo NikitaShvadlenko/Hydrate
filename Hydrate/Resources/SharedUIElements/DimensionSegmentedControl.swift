@@ -3,10 +3,10 @@ import UIKit
 class DimensionSegmentedControl: UISegmentedControl {
     public var segmentedControlItems: [Dimension]
 
-    init(segmentedControlItems: [Dimension]) {
+    init(segmentedControlItems: [Dimension], dimensionType: DimesionType) {
         self.segmentedControlItems = segmentedControlItems
         super.init(frame: .zero)
-        configureSegmentedControlItems(for: segmentedControlItems)
+        configureSegmentedControlItems(for: segmentedControlItems, type: dimensionType)
     }
 
     required init?(coder: NSCoder) {
@@ -16,9 +16,18 @@ class DimensionSegmentedControl: UISegmentedControl {
 
 // MARK: Private methods
 extension DimensionSegmentedControl {
-    private func configureSegmentedControlItems(for dimensions: [Dimension]) {
-        let currentUnitMass = UnitMass(forLocale: Locale.current)
-        if let swappedDimensions = dimensions.placeElementToFirstPosition(element: currentUnitMass) {
+    private func configureSegmentedControlItems(for dimensions: [Dimension], type: DimesionType) {
+
+        let localisedUnit: Dimension
+
+        switch type {
+        case .mass:
+            localisedUnit = UnitMass(forLocale: Locale.current)
+        case .volume:
+            localisedUnit = UnitVolume(forLocale: Locale.current)
+        }
+
+        if let swappedDimensions = dimensions.placeElementToFirstPosition(element: localisedUnit) {
             segmentedControlItems = swappedDimensions
         } else {
             segmentedControlItems = dimensions
@@ -33,8 +42,19 @@ extension DimensionSegmentedControl {
 
     func createLocalisedTitle(from dimension: Dimension) -> String {
         let formatter = MeasurementFormatter()
-        formatter.locale = Locale.current
-        formatter.unitStyle = .short
+
+        switch dimension {
+        case UnitVolume.fluidOunces:
+            return L10n.OnboardingScreen.ounces
+        default:
+            formatter.locale = Locale.current
+            formatter.unitStyle = .short
+        }
         return formatter.string(from: dimension)
     }
+}
+
+public enum DimesionType {
+    case mass
+    case volume
 }
