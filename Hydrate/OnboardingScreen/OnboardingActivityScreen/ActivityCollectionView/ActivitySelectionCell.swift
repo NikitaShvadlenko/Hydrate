@@ -67,8 +67,11 @@ extension ActivitySelectionCell {
             activityImageView
         ].forEach(addSubview(_:))
 
-//        activityImageView.addSubview(titleView)
-//        activityImageView.addSubview(subtitleView)
+        titleView.textAlignment = .left
+        subtitleView.textAlignment = .left
+
+        activityImageView.addSubview(titleView)
+        activityImageView.addSubview(subtitleView)
 
         selectionBox.snp.makeConstraints { make in
             make.trailing.equalToSuperview().offset(8)
@@ -81,11 +84,16 @@ extension ActivitySelectionCell {
         }
 
         titleView.snp.makeConstraints { make in
-
+            make.bottom.equalTo(activityImageView.snp.centerY)
+            make.leading.equalToSuperview().inset(8)
+            make.trailing.equalToSuperview().inset(8)
 
         }
 
         subtitleView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(8)
+            make.top.equalTo(titleView.snp.bottom).offset(8)
         }
     }
 }

@@ -18,6 +18,10 @@ final class OnboardingGoalScreenViewController: UIViewController {
         setOnboardingDelegate()
         onboardingGoalScreenView.goalSelectionView.selectFirstSegmentedControlElement()
         registerDismissKeyboardWhenTouchOutside()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         delegate?.viewDidSelectOption()
     }
 
@@ -39,7 +43,7 @@ extension OnboardingGoalScreenViewController: OnboardingGoalScreenViewInput {
 // MARK: - OnboardingScreenChildController
 extension OnboardingGoalScreenViewController: OnboardingChildController {
     var navigationButtonTitle: String {
-        L10n.OnboardingScreen.next
+        L10n.OnboardingScreen.setGoal
     }
 
     func viewDidPressNextButton() {

@@ -38,8 +38,8 @@ extension OnboardingActivityScreenView {
         activitySelectionView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.bottom.equalToSuperview().inset(39)
-            make.top.equalTo(titleLabel).inset(48)
+            make.bottom.lessThanOrEqualToSuperview().inset(39)
+            make.top.lessThanOrEqualTo(titleLabel).inset(39)
         }
     }
 }

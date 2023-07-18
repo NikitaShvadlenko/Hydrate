@@ -29,3 +29,5 @@
 
 "OnboardingScreen.intakeGoal" = "Intake goal";
 "OnboardingScreen.calculatedGoal" = "We calculated your ideal intake goal, you can change it by tapping on the number";
+"OnboardingScreen.setGoal" = "Set goal";
+"OnboardingScreen.setTheme" = "Set theme";

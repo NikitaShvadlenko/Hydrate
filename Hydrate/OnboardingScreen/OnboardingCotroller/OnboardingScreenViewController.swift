@@ -70,7 +70,15 @@ extension OnboardingScreenViewController {
             guard let currentlyDisplayedView = currentlyDisplayedView else {
                 return
             }
-            configureContainedView(currentlyDisplayedView)
+
+            UIView.transition(with: onboardingScreenView,
+                              duration: 0.33,
+                              options: [.curveEaseOut, .transitionCrossDissolve],
+                              animations: {
+                self.configureContainedView(currentlyDisplayedView)
+            },
+                              completion: nil
+            )
         } else {
             presenter?.viewDidCompleteOnboarding(self)
         }
@@ -93,12 +101,12 @@ extension OnboardingScreenViewController {
             fatalError("Gender controller does not conform to OnboardingChildCOntroller protocol")
         }
         onboardingViewControllers = [
-            activityController,
-            themeController,
-            goalController,
-            weightController,
             welcomeController,
-            genderController
+            genderController,
+            weightController,
+            activityController,
+            goalController,
+            themeController
         ]
     }
 

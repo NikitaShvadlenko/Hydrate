@@ -62,7 +62,7 @@ extension OnboardingScreenView {
         }
 
         navigationNextButton.snp.makeConstraints { make in
-            make.bottom.equalTo(pageView.snp.top).offset(-16)
+            make.bottom.equalTo(pageView.snp.top).offset(-32)
             make.centerX.equalToSuperview()
             make.height.equalTo(50)
             make.width.equalTo(340)

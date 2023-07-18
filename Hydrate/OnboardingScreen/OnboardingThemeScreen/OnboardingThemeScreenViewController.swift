@@ -54,7 +54,7 @@ extension OnboardingThemeScreenViewController {
 
 extension OnboardingThemeScreenViewController: OnboardingChildController {
     var navigationButtonTitle: String {
-        L10n.OnboardingScreen.next
+        L10n.OnboardingScreen.setTheme
     }
 
     func viewDidPressNextButton() {

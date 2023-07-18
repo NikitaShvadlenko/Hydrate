@@ -17,5 +17,6 @@ extension SubtitleLabel {
         numberOfLines = 0
         font = UIFont.systemFont(ofSize: 16)
         textColor = Asset.secondaryTextColor.color
+        adjustsFontSizeToFitWidth = true
     }
 }
