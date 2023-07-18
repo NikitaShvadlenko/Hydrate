@@ -84,11 +84,13 @@ extension OnboardingScreenViewController {
               let weightController = OnboardingWeightScreenAssembly.assemble().viewController
                 as? OnboardingChildController,
               let goalController = OnboardingGoalScreenAssembly.assemble().viewController
+                as? OnboardingChildController,
+              let themeController = OnboardingThemeScreenAssembly.assemble().viewController
                 as? OnboardingChildController
         else {
             fatalError("Gender controller does not conform to OnboardingChildCOntroller protocol")
         }
-        onboardingViewControllers = [goalController, weightController, welcomeController, genderController]
+        onboardingViewControllers = [themeController, goalController, weightController, welcomeController, genderController]
     }
 
     func removeChildrenViewControllers() {

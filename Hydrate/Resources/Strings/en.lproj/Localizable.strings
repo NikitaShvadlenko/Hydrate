@@ -11,6 +11,7 @@
 "OnboardingGenderScreen.screenTitle" = "Select your gender:";
 "OnboardingScreen.next" = "Next";
 "OnboardingScreen.start" = "Start";
+"OnboardingScreen.themeScreenTitle" = "Which theme does fit you?";
 
 "OnboardingScreen.pounds" = "lb";
 "OnboardingScreen.killograms" = "kg";

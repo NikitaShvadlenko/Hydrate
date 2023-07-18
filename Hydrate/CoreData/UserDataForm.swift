@@ -33,3 +33,9 @@ enum Gender: String, CaseIterable {
     case female
     case other
 }
+
+enum Theme: String, CaseIterable {
+    case green
+    case blue
+    case red
+}
