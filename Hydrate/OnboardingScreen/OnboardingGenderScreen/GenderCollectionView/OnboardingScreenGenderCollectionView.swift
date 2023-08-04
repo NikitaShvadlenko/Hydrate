@@ -17,9 +17,6 @@ class OnboardingGenderScreenCollectionView: UIView {
 
     private lazy var flowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumInteritemSpacing = Constants.spaceBetweenCards
-        flowLayout.minimumLineSpacing = Constants.spaceBetweenCards
-        flowLayout.sectionInset = Constants.cardInsets
         flowLayout.scrollDirection = .horizontal
         return flowLayout
     }()
@@ -70,19 +67,5 @@ extension OnboardingGenderScreenCollectionView {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-
-    private enum Constants {
-        static let spaceBetweenCards: CGFloat = 10
-        static let horizontalCardInsets: CGFloat = 16
-        static let verticalCardInsets: CGFloat = 40
-        static let cardInsets = UIEdgeInsets(
-            top: verticalCardInsets,
-            left: horizontalCardInsets,
-            bottom: verticalCardInsets,
-            right: horizontalCardInsets
-        )
-        static let numberOfRows: CGFloat = 2
-        static let numberOfColumns: CGFloat = 2
     }
 }

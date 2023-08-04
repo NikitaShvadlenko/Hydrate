@@ -66,11 +66,32 @@ extension ActivitySelectionViewManager: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         let numberOfCells: CGFloat = CGFloat(ActivityLevel.allCases.count - 1)
         let spaceBetweenCards = Constants.spaceBetweenCards
-        let availibleHeight = collectionView.bounds.height - (spaceBetweenCards * numberOfCells) - (Constants.verticalCardInsets * 2)
+
+        let availibleHeight =
+        collectionView.bounds.height -
+        (spaceBetweenCards * numberOfCells) -
+        (Constants.verticalCardInsets * 2)
+
         let height = availibleHeight / CGFloat(ActivityLevel.allCases.count)
         let width: CGFloat = collectionView.bounds.width - (Constants.horizontalCardInsets * 2)
 
         return CGSize(width: width, height: height)
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        Constants.cardInsets
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        Constants.spaceBetweenCards
     }
 
     private enum Constants {

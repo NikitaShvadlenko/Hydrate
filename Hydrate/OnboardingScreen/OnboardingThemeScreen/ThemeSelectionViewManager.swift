@@ -73,6 +73,22 @@ extension ThemeSelectionViewManager: UICollectionViewDelegateFlowLayout {
         return CGSize(width: width, height: height)
     }
 
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        Constants.spaceBetweenCards
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        Constants.cardInsets
+    }
+
     private enum Constants {
         static let spaceBetweenCards: CGFloat = 10
         static let horizontalCardInsets: CGFloat = 16
