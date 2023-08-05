@@ -5,6 +5,11 @@ protocol OnboardingScreenViewInput: AnyObject {
 
 protocol OnboardingScreenViewOutput {
     func viewDidLoad(_ view: OnboardingScreenViewInput)
+    func viewDidChooseGender(_ view: OnboardingScreenViewInput, gender: Gender)
+    func viewDidChooseTheme(_ view: OnboardingScreenViewInput, theme: Theme)
+    func viewDidChooseGoal(_ view: OnboardingScreenViewInput, goal: Double, preferredUnits: VolumeMeasurementUnit)
+    func viewDidChooseWeight(_ view: OnboardingScreenViewInput, weight: Double, preferredUnits: WeightMeasurementUnit)
+    func viewDidRequestGoal(_ view: OnboardingScreenViewInput, units: VolumeMeasurementUnit) -> Double
     func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput)
 }
 

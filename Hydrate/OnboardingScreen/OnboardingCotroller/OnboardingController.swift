@@ -2,6 +2,13 @@ import UIKit
 
 protocol OnboardingController: UIViewController {
     func viewDidSelectOption()
+
+    func childDidChooseGender(_ child: OnboardingChildController, gender: Gender)
+    func childDidChooseTheme(_ child: OnboardingChildController, theme: Theme)
+    func childDidChooseGoal(_ child: OnboardingChildController, goal: Double, preferredUnits: VolumeMeasurementUnit)
+    func childDidChooseWeight(_ child: OnboardingChildController, weight: Double, preferredUnits: WeightMeasurementUnit)
+    func childDidRequestGoal(_ child: OnboardingChildController, for unitsOfMeasurement: VolumeMeasurementUnit) -> Double
+
     func viewDidDeselectOption()
     func setNavigationButtonTitle(_ title: String)
 }

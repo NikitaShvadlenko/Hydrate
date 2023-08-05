@@ -153,6 +153,35 @@ extension OnboardingScreenViewController: NavigationNextButtonDelegate {
 
 // MARK: - OnboardingController
 extension OnboardingScreenViewController: OnboardingController {
+    func childDidChooseGender(_ child: OnboardingChildController, gender: Gender) {
+        presenter?.viewDidChooseGender(self, gender: gender)
+    }
+
+    func childDidChooseTheme(_ child: OnboardingChildController, theme: Theme) {
+        presenter?.viewDidChooseTheme(self, theme: theme)
+    }
+
+    func childDidChooseGoal(_ child: OnboardingChildController, goal: Double, preferredUnits: VolumeMeasurementUnit) {
+        presenter?.viewDidChooseGoal(self, goal: goal, preferredUnits: preferredUnits)
+    }
+
+    func childDidChooseWeight(
+        _ child: OnboardingChildController,
+        weight: Double,
+        preferredUnits: WeightMeasurementUnit
+    ) {
+        presenter?.viewDidChooseWeight(self, weight: weight, preferredUnits: preferredUnits)
+    }
+
+    func childDidRequestGoal(
+        _ child: OnboardingChildController,
+        for unitsOfMeasurement: VolumeMeasurementUnit
+    ) -> Double {
+        guard let goal = presenter?.viewDidRequestGoal(self, units: unitsOfMeasurement) else {
+            fatalError("Presenter could not return goal")
+        }
+        return goal
+    }
 
     func setNavigationButtonTitle(_ title: String) {
         onboardingScreenView.navigationNextButton.title = title
