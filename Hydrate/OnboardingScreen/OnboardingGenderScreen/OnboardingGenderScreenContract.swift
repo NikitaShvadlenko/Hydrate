@@ -1,8 +1,9 @@
 import UIKit
 // sourcery: AutoMockable
-protocol OnboardingGenderScreenViewInput: AnyObject {
+protocol OnboardingGenderScreenViewInput: UIViewController {
     func configureViews()
     func collectionViewDidSelectCell(at indexPath: IndexPath)
+    func setGender(_ gender: Gender)
 }
 
 protocol OnboardingGenderScreenViewOutput {
@@ -12,12 +13,10 @@ protocol OnboardingGenderScreenViewOutput {
 
 // sourcery: AutoMockable
 protocol OnboardingGenderScreenInteractorInput {
-    func saveGender(_ gender: Gender)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingGenderScreenInteractorOutput: AnyObject {
-    func interactor(_ interactor: OnboardingGenderScreenInteractorInput, didSaveGender gender: Gender)
 }
 
 // sourcery: AutoMockable

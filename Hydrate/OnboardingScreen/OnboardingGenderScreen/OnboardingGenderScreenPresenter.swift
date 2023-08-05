@@ -15,7 +15,7 @@ extension OnboardingGenderScreenPresenter: OnboardingGenderScreenViewOutput {
         guard let gender = selectedGender else {
             fatalError("Gender was not selected, but the button pressed")
         }
-        interactor?.saveGender(gender)
+        view.setGender(gender)
     }
 
     func viewDidLoad(_ view: OnboardingGenderScreenViewInput) {

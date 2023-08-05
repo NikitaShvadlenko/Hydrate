@@ -11,6 +11,7 @@ final class OnboardingScreenPresenter {
 // MARK: - RegistrationScreenViewOutput
 extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
     func viewDidChooseGender(_ view: OnboardingScreenViewInput, gender: Gender) {
+        print(gender)
         builder?.setGender(gender)
     }
 

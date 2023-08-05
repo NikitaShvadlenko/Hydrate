@@ -33,6 +33,10 @@ final class OnboardingGenderScreenViewController: UIViewController {
 
 // MARK: - OnboardingGenderScreenViewInput
 extension OnboardingGenderScreenViewController: OnboardingGenderScreenViewInput {
+    func setGender(_ gender: Gender) {
+        delegate?.childDidChooseGender(self, gender: gender)
+    }
+
     func collectionViewDidSelectCell(at indexPath: IndexPath) {
         delegate?.viewDidSelectOption()
     }
