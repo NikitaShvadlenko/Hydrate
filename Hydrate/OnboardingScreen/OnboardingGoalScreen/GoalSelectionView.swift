@@ -17,7 +17,7 @@ class GoalSelectionView: UIView {
     private lazy var textField: UITextField = {
         let view = UITextField()
         view.keyboardType = .decimalPad
-        view.placeholder = "3000"
+        view.placeholder = "Enter your goal"
         view.font = UIFont.systemFont(ofSize: 32)
         view.textAlignment = .center
         view.borderStyle = .none

@@ -40,28 +40,46 @@ public final class UserDataBuilder: UserDataBuilderProtocol {
     public private(set) var gender: Gender?
     public private(set) var theme: Theme?
 
-    public func setGoal(_ goal: Double, volumeUnit: VolumeMeasurementUnit) {
-        self.volumeMeasurementUnit = volumeUnit
+    public func setVolumeMeasurementUnit(_ volumeUnit: Dimension) {
 
         switch volumeUnit {
-        case .milliliters:
-            self.dailyGoal = goal
-        case .ounces:
-            let goalInOunces = Measurement(value: goal, unit: UnitVolume.fluidOunces)
-            let dailyGoal = goalInOunces.converted(to: .milliliters)
-            self.dailyGoal = dailyGoal.value
+        case UnitVolume.milliliters:
+            self.volumeMeasurementUnit = .milliliters
+        case UnitVolume.fluidOunces:
+            self.volumeMeasurementUnit = .ounces
+        default:
+            fatalError("Unknown dimension")
         }
     }
 
-    public func setWeight(_ weight: Double, weightUnit: WeightMeasurementUnit) {
-        self.weightMeasurementUnit = weightUnit
+    public func setGoal(_ goal: Double, volumeUnit: Dimension) {
+
+        switch volumeUnit {
+        case UnitVolume.milliliters:
+            self.volumeMeasurementUnit = .milliliters
+            self.dailyGoal = goal
+        case UnitVolume.fluidOunces:
+            self.volumeMeasurementUnit = .ounces
+            let goalInOunces = Measurement(value: goal, unit: UnitVolume.fluidOunces)
+            let dailyGoal = goalInOunces.converted(to: .milliliters)
+            self.dailyGoal = dailyGoal.value
+        default:
+            fatalError("Unknown dimension")
+        }
+    }
+
+    public func setWeight(_ weight: Double, weightUnit: Dimension) {
         switch weightUnit {
-        case .kilograms:
+        case UnitMass.kilograms:
+            self.weightMeasurementUnit = .kilograms
             self.weight = weight
-        case .pounds:
+        case UnitMass.pounds:
+            self.weightMeasurementUnit = .pounds
             let weightInPounds = Measurement(value: weight, unit: UnitMass.pounds)
             let weight = weightInPounds.converted(to: .kilograms).value
             self.weight = weight
+        default:
+            fatalError("Unknown dimension")
         }
     }
 
@@ -111,4 +129,9 @@ public final class UserDataBuilder: UserDataBuilderProtocol {
             theme: theme
         )
     }
+}
+
+// MARK: - Private functions
+extension UserDataBuilder {
+
 }

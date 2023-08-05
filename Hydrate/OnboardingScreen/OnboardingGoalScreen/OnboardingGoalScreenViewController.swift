@@ -15,8 +15,6 @@ final class OnboardingGoalScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad(self)
-        setOnboardingDelegate()
-        onboardingGoalScreenView.goalSelectionView.selectFirstSegmentedControlElement()
         registerDismissKeyboardWhenTouchOutside()
     }
 
@@ -32,11 +30,24 @@ final class OnboardingGoalScreenViewController: UIViewController {
 
 // MARK: - OnboardingGoalScreenViewInput
 extension OnboardingGoalScreenViewController: OnboardingGoalScreenViewInput {
+    func setGoal(goal: Double, dimension: Dimension) {
+        delegate?.childDidChooseGoal(self, goal: goal, preferredUnits: dimension)
+    }
+
+    func requestGoal(for dimension: Dimension) -> Double {
+        guard let goal = delegate?.childDidRequestGoal(self, for: dimension) else {
+            fatalError("Failed to get the goal")
+        }
+        return goal
+    }
+
     func updateGoal(goal: Double) {
         onboardingGoalScreenView.updateGoal(goal: goal)
     }
 
     func configureViews() {
+        setOnboardingDelegate()
+        onboardingGoalScreenView.goalSelectionView.selectFirstSegmentedControlElement()
     }
 }
 
@@ -47,7 +58,7 @@ extension OnboardingGoalScreenViewController: OnboardingChildController {
     }
 
     func viewDidPressNextButton() {
-        print("ViewPressedNextButton")
+        presenter?.viewDidPressNextButton(self)
     }
 }
 

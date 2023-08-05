@@ -33,6 +33,10 @@ final class OnboardingThemeScreenViewController: UIViewController {
 
 // MARK: - OnboardingThemeScreenViewInput
 extension OnboardingThemeScreenViewController: OnboardingThemeScreenViewInput {
+    func setTheme(_ theme: Theme) {
+        delegate?.childDidChooseTheme(self, theme: theme)
+    }
+
     func collectionViewDidSelectCell(at indexPath: IndexPath) {
         delegate?.viewDidSelectOption()
     }

@@ -15,7 +15,7 @@ extension OnboardingThemeScreenPresenter: OnboardingThemeScreenViewOutput {
         guard let theme = selectedTheme else {
             fatalError("Theme was not selected, but the button pressed")
         }
-        interactor?.saveTheme(theme)
+        view.setTheme(theme)
     }
 
     func viewDidLoad(_ view: OnboardingThemeScreenViewInput) {

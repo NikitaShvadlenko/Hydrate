@@ -5,30 +5,44 @@ final class OnboardingGoalScreenPresenter {
     weak var moduleOutput: OnboardingGoalScreenModuleOutput?
     var interactor: OnboardingGoalScreenInteractorInput?
     var router: OnboardingGoalScreenRouterInput?
+    var dimension: Dimension?
+    var goal: Double?
 }
 
 // MARK: - OnboardingGoalScreenViewOutput
 extension OnboardingGoalScreenPresenter: OnboardingGoalScreenViewOutput {
+    func viewDidPressNextButton(_ view: OnboardingGoalScreenViewInput) {
+        guard let goal = goal,
+            let dimension = dimension else {
+            fatalError("One of the values is nil")
+        }
+        view.setGoal(goal: goal, dimension: dimension)
+    }
+
     func viewDidSelectGoalDimension(_ view: OnboardingGoalScreenViewInput, _ dimension: Dimension) {
-        interactor?.saveDimension(dimension)
+        self.dimension = dimension
     }
 
     func viewDidInsertVolumeValue(_ view: OnboardingGoalScreenViewInput, value: Double) {
-        print("Saved \(value)")
+        self.goal = value
     }
 
     func viewDidLoad(_ view: OnboardingGoalScreenViewInput) {
-        interactor?.calculateGoal()
         view.configureViews()
+        guard let dimension = dimension else {
+            fatalError()
+        }
+        self.goal = view.requestGoal(for: dimension)
+        guard let goal = goal else {
+            fatalError("Goal was not provided")
+        }
+        view.updateGoal(goal: goal)
+
     }
 }
 
 // MARK: - OnboardingGoalScreenInteractorOutput
 extension OnboardingGoalScreenPresenter: OnboardingGoalScreenInteractorOutput {
-    func intercactorDidCalculateGoal(_ interactor: OnboardingGoalScreenInteractorInput, goal: Double) {
-        view?.updateGoal(goal: goal)
-    }
-
 }
 
 // MARK: - OnboardingGoalScreenRouterOutput

@@ -15,7 +15,7 @@ extension OnboardingActivityScreenPresenter: OnboardingActivityScreenViewOutput 
         guard let activity = selectedActivity else {
             fatalError("Activity was not selected, but the button pressed")
         }
-        interactor?.saveActivity(activity)
+        view.setActivityLevel(activityLevel: activity)
     }
 
     func viewDidLoad(_ view: OnboardingActivityScreenViewInput) {
@@ -25,9 +25,6 @@ extension OnboardingActivityScreenPresenter: OnboardingActivityScreenViewOutput 
 
 // MARK: - OnboardingActivityScreenInteractorOutput
 extension OnboardingActivityScreenPresenter: OnboardingActivityScreenInteractorOutput {
-    func interactor(_ interactor: OnboardingActivityScreenInteractorInput, didSaveActivity activity: ActivityLevel) {
-        print("Once next is pressed, need to open next screen")
-    }
 }
 
 // MARK: - OnboardingActivityScreenRouterOutput

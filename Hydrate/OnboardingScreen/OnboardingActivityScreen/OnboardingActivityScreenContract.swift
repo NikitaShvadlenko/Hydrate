@@ -3,6 +3,7 @@ import UIKit
 protocol OnboardingActivityScreenViewInput: AnyObject {
     func configureViews()
     func collectionViewDidSelectCell(at indexPath: IndexPath)
+    func setActivityLevel(activityLevel: ActivityLevel)
 }
 
 protocol OnboardingActivityScreenViewOutput {
@@ -12,12 +13,10 @@ protocol OnboardingActivityScreenViewOutput {
 
 // sourcery: AutoMockable
 protocol OnboardingActivityScreenInteractorInput {
-    func saveActivity(_ activity: ActivityLevel)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingActivityScreenInteractorOutput: AnyObject {
-    func interactor(_ interactor: OnboardingActivityScreenInteractorInput, didSaveActivity activity: ActivityLevel)
 }
 
 // sourcery: AutoMockable

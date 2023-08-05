@@ -33,6 +33,10 @@ final class OnboardingActivityScreenViewController: UIViewController {
 
 // MARK: - OnboardingActivityScreenViewInput
 extension OnboardingActivityScreenViewController: OnboardingActivityScreenViewInput {
+    func setActivityLevel(activityLevel: ActivityLevel) {
+        delegate?.childDidChooseActivityLevel(self, activityLevel: activityLevel)
+    }
+
     func collectionViewDidSelectCell(at indexPath: IndexPath) {
         delegate?.viewDidSelectOption()
     }

@@ -27,6 +27,10 @@ final class OnboardingWeightScreenViewController: UIViewController {
 
 // MARK: - OnboardingWeightScreenViewInput
 extension OnboardingWeightScreenViewController: OnboardingWeightScreenViewInput {
+    func setWeight(weight: Double, dimension: Dimension) {
+        delegate?.childDidChooseWeight(self, weight: weight, preferredUnits: dimension)
+    }
+
     func configureViews() {
     }
 }
@@ -38,7 +42,7 @@ extension OnboardingWeightScreenViewController: OnboardingChildController {
     }
 
     func viewDidPressNextButton() {
-        print("ViewPressedNextButton")
+        presenter?.viewDidPressNextButton(self)
     }
 }
 

@@ -6,10 +6,6 @@ final class OnboardingActivityScreenInteractor {
 
 // MARK: - OnboardingActivityScreenInteractorInput
 extension OnboardingActivityScreenInteractor: OnboardingActivityScreenInteractorInput {
-    func saveActivity(_ activity: ActivityLevel) {
-        print("saving", activity.rawValue)
-        presenter?.interactor(self, didSaveActivity: activity)
-    }
 }
 
 // MARK: - Private methods

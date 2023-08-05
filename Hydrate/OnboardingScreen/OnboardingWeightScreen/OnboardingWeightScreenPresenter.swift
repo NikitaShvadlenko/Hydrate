@@ -5,16 +5,27 @@ final class OnboardingWeightScreenPresenter {
     weak var moduleOutput: OnboardingWeightScreenModuleOutput?
     var interactor: OnboardingWeightScreenInteractorInput?
     var router: OnboardingWeightScreenRouterInput?
+    var dimension: Dimension?
+    var weight: Double?
 }
 
 // MARK: - OnboardingWeightScreenViewOutput
 extension OnboardingWeightScreenPresenter: OnboardingWeightScreenViewOutput {
+    func viewDidPressNextButton(_ view: OnboardingWeightScreenViewInput) {
+        guard
+            let weight = weight,
+            let dimension = dimension else {
+            fatalError("Either weight or dimension is nil")
+        }
+        view.setWeight(weight: weight, dimension: dimension)
+    }
+
     func viewDidSelectMassDimension(_ view: OnboardingWeightScreenViewInput, _ dimension: Dimension) {
-        interactor?.saveDimension(dimension)
+        self.dimension = dimension
     }
 
     func viewDidInsertWeightValue(_ view: OnboardingWeightScreenViewInput, value: Double) {
-        print("Saved \(value)")
+        self.weight = value
     }
 
     func viewDidLoad(_ view: OnboardingWeightScreenViewInput) {

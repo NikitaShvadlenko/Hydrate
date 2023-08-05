@@ -3,6 +3,7 @@ import UIKit
 protocol OnboardingThemeScreenViewInput: AnyObject {
     func configureViews()
     func collectionViewDidSelectCell(at indexPath: IndexPath)
+    func setTheme(_ theme: Theme)
 }
 
 protocol OnboardingThemeScreenViewOutput {
@@ -12,7 +13,6 @@ protocol OnboardingThemeScreenViewOutput {
 
 // sourcery: AutoMockable
 protocol OnboardingThemeScreenInteractorInput {
-    func saveTheme(_ theme: Theme)
 }
 
 // sourcery: AutoMockable

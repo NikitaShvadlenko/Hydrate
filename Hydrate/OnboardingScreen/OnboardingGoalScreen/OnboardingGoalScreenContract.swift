@@ -2,24 +2,24 @@ import Foundation
 // sourcery: AutoMockable
 protocol OnboardingGoalScreenViewInput: AnyObject {
     func configureViews()
+    func requestGoal(for dimension: Dimension) -> Double
     func updateGoal(goal: Double)
+    func setGoal(goal: Double, dimension: Dimension)
 }
 
 protocol OnboardingGoalScreenViewOutput {
     func viewDidLoad(_ view: OnboardingGoalScreenViewInput)
     func viewDidSelectGoalDimension(_ view: OnboardingGoalScreenViewInput, _ dimension: Dimension)
     func viewDidInsertVolumeValue(_ view: OnboardingGoalScreenViewInput, value: Double)
+    func viewDidPressNextButton(_ view: OnboardingGoalScreenViewInput)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingGoalScreenInteractorInput {
-    func saveDimension(_ dimension: Dimension)
-    func calculateGoal()
 }
 
 // sourcery: AutoMockable
 protocol OnboardingGoalScreenInteractorOutput: AnyObject {
-    func intercactorDidCalculateGoal(_ interactor: OnboardingGoalScreenInteractorInput, goal: Double)
 }
 
 // sourcery: AutoMockable

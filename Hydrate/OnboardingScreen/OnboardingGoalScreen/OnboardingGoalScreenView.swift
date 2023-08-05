@@ -19,7 +19,7 @@ final class OnboardingGoalScreenView: UIView {
 // MARK: - Public methods
 extension OnboardingGoalScreenView {
     public func updateGoal(goal: Double) {
-        goalSelectionView.updateTitle(title: String(goal))
+        goalSelectionView.updateTitle(title: String(format: "%.0f", goal))
     }
 }
 // MARK: - Private methods

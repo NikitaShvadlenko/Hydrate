@@ -10,8 +10,11 @@ final class OnboardingScreenPresenter {
 
 // MARK: - RegistrationScreenViewOutput
 extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
+    func viewDidChooseActivityLevel(_ view: OnboardingScreenViewInput, activityLevel: ActivityLevel) {
+        builder?.setActivityLevel(activityLevel)
+    }
+
     func viewDidChooseGender(_ view: OnboardingScreenViewInput, gender: Gender) {
-        print(gender)
         builder?.setGender(gender)
     }
 
@@ -19,20 +22,23 @@ extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
         builder?.setTheme(theme)
     }
 
-    func viewDidChooseGoal(_ view: OnboardingScreenViewInput, goal: Double, preferredUnits: VolumeMeasurementUnit) {
+    func viewDidChooseGoal(_ view: OnboardingScreenViewInput, goal: Double, preferredUnits: Dimension) {
         builder?.setGoal(goal, volumeUnit: preferredUnits)
     }
 
-    func viewDidChooseWeight(_ view: OnboardingScreenViewInput, weight: Double, preferredUnits: WeightMeasurementUnit) {
+    func viewDidChooseWeight(_ view: OnboardingScreenViewInput, weight: Double, preferredUnits: Dimension) {
         builder?.setWeight(weight, weightUnit: preferredUnits)
     }
 
-    func viewDidRequestGoal(_ view: OnboardingScreenViewInput, units: VolumeMeasurementUnit) -> Double {
+    func viewDidRequestGoal(_ view: OnboardingScreenViewInput, units: Dimension) -> Double {
         calculateGoal(unit: units)
     }
 
     func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput) {
-        // TODO: save user data to interactor
+        guard let userData = try? builder?.build() else { return }
+        print("Built the following:")
+        //swiftlint:disable line_length
+        print("Gender: \(userData.gender), goal: \(userData.dailyGoal), activity level: \(userData.activityLevel), weightMeasurement: \(userData.weightMeasurementUnit.rawValue), weight: \(userData.weight), volumeUnit: \(userData.volumeMeasurementUnit)")
         router?.routeToMainScreen()
     }
 
@@ -58,18 +64,21 @@ extension OnboardingScreenPresenter: OnboardingScreenModuleInput {
 
 // MARK: - Private methods
 extension OnboardingScreenPresenter {
-    private func calculateGoal(unit: VolumeMeasurementUnit) -> Double {
+    private func calculateGoal(unit: Dimension) -> Double {
         guard
             let weight = builder?.weight else {
             fatalError("Weight not set")
         }
-        switch unit {
+        builder?.setVolumeMeasurementUnit(unit)
+        switch builder?.volumeMeasurementUnit {
         case .milliliters:
             return weight * 40
         case .ounces:
             let weightInKgs = Measurement(value: weight, unit: UnitMass.kilograms)
             let weightInPounds = weightInKgs.converted(to: .pounds).value
             return weightInPounds * 0.67
+        case .none:
+            fatalError("Dimension was not set")
         }
     }
 }

@@ -153,6 +153,10 @@ extension OnboardingScreenViewController: NavigationNextButtonDelegate {
 
 // MARK: - OnboardingController
 extension OnboardingScreenViewController: OnboardingController {
+    func childDidChooseActivityLevel(_ child: OnboardingChildController, activityLevel: ActivityLevel) {
+        presenter?.viewDidChooseActivityLevel(self, activityLevel: activityLevel)
+    }
+
     func childDidChooseGender(_ child: OnboardingChildController, gender: Gender) {
         presenter?.viewDidChooseGender(self, gender: gender)
     }
@@ -161,21 +165,21 @@ extension OnboardingScreenViewController: OnboardingController {
         presenter?.viewDidChooseTheme(self, theme: theme)
     }
 
-    func childDidChooseGoal(_ child: OnboardingChildController, goal: Double, preferredUnits: VolumeMeasurementUnit) {
+    func childDidChooseGoal(_ child: OnboardingChildController, goal: Double, preferredUnits: Dimension) {
         presenter?.viewDidChooseGoal(self, goal: goal, preferredUnits: preferredUnits)
     }
 
     func childDidChooseWeight(
         _ child: OnboardingChildController,
         weight: Double,
-        preferredUnits: WeightMeasurementUnit
+        preferredUnits: Dimension
     ) {
         presenter?.viewDidChooseWeight(self, weight: weight, preferredUnits: preferredUnits)
     }
 
     func childDidRequestGoal(
         _ child: OnboardingChildController,
-        for unitsOfMeasurement: VolumeMeasurementUnit
+        for unitsOfMeasurement: Dimension
     ) -> Double {
         guard let goal = presenter?.viewDidRequestGoal(self, units: unitsOfMeasurement) else {
             fatalError("Presenter could not return goal")

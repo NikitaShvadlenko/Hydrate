@@ -10,8 +10,9 @@ public protocol UserDataBuilderProtocol {
     var gender: Gender? { get }
     var theme: Theme? { get }
 
-    func setGoal(_ goal: Double, volumeUnit: VolumeMeasurementUnit)
-    func setWeight(_ weight: Double, weightUnit: WeightMeasurementUnit)
+    func setVolumeMeasurementUnit(_ volumeUnit: Dimension)
+    func setGoal(_ goal: Double, volumeUnit: Dimension)
+    func setWeight(_ weight: Double, weightUnit: Dimension)
     func setActivityLevel(_ activityLevel: ActivityLevel)
     func setGender(_ gender: Gender)
     func setTheme(_ theme: Theme)
