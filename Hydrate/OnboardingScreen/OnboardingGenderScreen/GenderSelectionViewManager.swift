@@ -47,10 +47,10 @@ extension GenderSelectionViewManager: UICollectionViewDataSource {
             let cells = collectionView.visibleCells as? [GenderSelectionCell]
             cells?.forEach { cell in
                 if cell != selectedCell {
-                    cell.isCellSelected = false
+                    cell.isSelected = false
                 }
             }
-            selectedCell.isCellSelected = true
+            selectedCell.isSelected = true
         }
     }
 }

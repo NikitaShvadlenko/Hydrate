@@ -1,57 +1,19 @@
 import UIKit
 
-class GenderSelectionCell: UICollectionViewCell {
-
-    public var isCellSelected: Bool = false {
-        didSet {
-            if isCellSelected {
-                selectionBox.isSelected = true
-            } else {
-                prepareForReuse()
-            }
-        }
-    }
-
-    private var selectionBox = SelectionBox(width: 20)
+class GenderSelectionCell: SelectionCollectionViewCell {
 
     private lazy var genderImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .yellow
-        imageView.layer.cornerRadius = 10
+        imageView.backgroundColor = .red
         return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
+        setupCellView(mainContentView: genderImageView, cellStyle: .horizontal, cornerRadius: 10)
     }
+
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        selectionBox.isSelected = false
-    }
-}
-
-// MARK: - Private methods
-extension GenderSelectionCell {
-    private func setupView() {
-        layer.cornerRadius = 10
-        [
-            selectionBox,
-            genderImageView
-        ].forEach(addSubview(_:))
-
-        selectionBox.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-
-        genderImageView.snp.makeConstraints { make in
-            make.bottom.equalTo(selectionBox.snp.top).offset(-8)
-            make.leading.trailing.top.equalToSuperview()
-        }
     }
 }
