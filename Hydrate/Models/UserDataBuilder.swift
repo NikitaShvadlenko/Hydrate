@@ -1,6 +1,6 @@
 import Foundation
 
-public final class UserDataBuilder {
+public final class UserDataBuilder: UserDataBuilderProtocol {
     public enum Error: Swift.Error {
         case goalNotSet
         case weightNotSet
