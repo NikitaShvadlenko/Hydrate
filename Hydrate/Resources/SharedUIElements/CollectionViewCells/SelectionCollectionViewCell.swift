@@ -51,6 +51,7 @@ public class SelectionCollectionViewCell: UICollectionViewCell {
 extension SelectionCollectionViewCell {
     private func setupView() {
         layer.cornerRadius = cornerRadius
+        mainContentView.layer.cornerRadius = cornerRadius
         [
             selectionBox,
             mainContentView
