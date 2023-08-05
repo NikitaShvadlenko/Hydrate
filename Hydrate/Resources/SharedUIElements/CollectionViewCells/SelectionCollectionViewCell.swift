@@ -1,11 +1,16 @@
 import UIKit
 
-class SelectionCollectionViewCell: UICollectionViewCell {
+// swiftlint:disable line_length
+/**
+ Subclass this cell to create a custom selection cell.
 
+ Make sure to call `setupCellView(_:cellStyle:cornerRadius:)` method in your subclass's `init` method to configure the cell's appearance properly.
+ */
+public class SelectionCollectionViewCell: UICollectionViewCell {
     public var cornerRadius: CGFloat = 10
     public var style: Style = .horizontal
 
-    override var isSelected: Bool {
+    public override var isSelected: Bool {
         didSet {
             if isSelected {
                 selectionBox.isSelected = true
@@ -24,14 +29,13 @@ class SelectionCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
     }
 
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
     }
 
-    override func prepareForReuse() {
+    public override func prepareForReuse() {
         super.prepareForReuse()
         selectionBox.isSelected = false
     }
