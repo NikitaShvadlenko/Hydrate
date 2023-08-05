@@ -1,6 +1,6 @@
 import UIKit
 
-class GenderSelectionCell: SelectionCollectionViewCell {
+final class GenderSelectionCell: SelectionCollectionViewCell {
 
     private lazy var genderImageView: UIImageView = {
         let imageView = UIImageView()

@@ -47,10 +47,10 @@ extension ThemeSelectionViewManager: UICollectionViewDataSource {
             let cells = collectionView.visibleCells as? [ThemeSelectionCell]
             cells?.forEach { cell in
                 if cell != selectedCell {
-                    cell.isCellSelected = false
+                    cell.isSelected = false
                 }
             }
-            selectedCell.isCellSelected = true
+            selectedCell.isSelected = true
         }
     }
 }
