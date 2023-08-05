@@ -8,12 +8,12 @@ public protocol UserDataBuilderProtocol {
     var weight: Double? { get }
     var activityLevel: ActivityLevel? { get }
     var gender: Gender? { get }
+    var theme: Theme? { get }
 
-    func setGoal(_ goal: Double)
-    func setWeight(_ weight: Double)
+    func setGoal(_ goal: Double, volumeUnit: VolumeMeasurementUnit)
+    func setWeight(_ weight: Double, weightUnit: WeightMeasurementUnit)
     func setActivityLevel(_ activityLevel: ActivityLevel)
-    func setPreferredWeightUnit(_ weightUnit: WeightMeasurementUnit)
-    func setPreferredVolumeUnit(_ volumeUnit: VolumeMeasurementUnit)
     func setGender(_ gender: Gender)
+    func setTheme(_ theme: Theme)
     func build() throws -> UserDataForm
 }

@@ -8,6 +8,7 @@ public struct UserDataForm {
     var weightMeasurementUnit: WeightMeasurementUnit
     var volumeMeasurementUnit: VolumeMeasurementUnit
     var gender: Gender
+    var theme: Theme
 }
 
 public enum ActivityLevel: String, CaseIterable {
