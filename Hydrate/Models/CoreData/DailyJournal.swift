@@ -11,6 +11,15 @@ final class DailyJournal: NSManagedObject {
     @NSManaged
     fileprivate(set) var journalEntries: Set<JournalEntry>
 
+    @objc
+    var totalConsumed: Double {
+        journalEntries.reduce(0) { partialResult, entry in
+            var result = partialResult
+            result += entry.volumeConsumed
+            return result
+        }
+    }
+
     static func insert(
         into context: NSManagedObjectContext,
         dailyGoal: Double
