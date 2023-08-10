@@ -1,13 +1,12 @@
 import UIKit
 
 final class OnboardingScreenViewController: UIViewController {
-
+    var presenter: OnboardingScreenViewOutput?
     private let onboardingScreenView = OnboardingScreenView()
 
-    var presenter: OnboardingScreenViewOutput?
-    var onboardingViewControllers: [OnboardingChildController]?
-    var currentSelectedOnboardingViewController = -1
-    var currentlyDisplayedView: UIView?
+    private var onboardingViewControllers: [OnboardingChildController]?
+    private var selectedChildViewControllerIndex = -1
+    private var currentlyDisplayedView: UIView?
 
     override func loadView() {
         view = onboardingScreenView
@@ -17,7 +16,7 @@ final class OnboardingScreenViewController: UIViewController {
         super.viewDidLoad()
         setOnboardingViewControllers()
         guard let onboardingViewControllers = onboardingViewControllers else { return }
-        onboardingScreenView.pageView.setupNumberOfPages(onboardingViewControllers.count)
+        onboardingScreenView.setNumberOfPages(numberOfPages: onboardingViewControllers.count)
         navigationItem.largeTitleDisplayMode = .never
         navigationItem.hidesBackButton = true
         presenter?.viewDidLoad(self)
@@ -36,12 +35,12 @@ final class OnboardingScreenViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    func setBackButtonDelegate(_ backButtonDelegate: NavigationBackButtonDelegate) {
-        onboardingScreenView.navigationBackButton.delegate = backButtonDelegate
+    func setBackButtonDelegate(_ delegate: NavigationBackButtonDelegate) {
+        onboardingScreenView.setBackButtonDelegate(delegate)
     }
 
     func setNextButtonDelegate(delegate: NavigationNextButtonDelegate) {
-        onboardingScreenView.navigationNextButton.delegate = delegate
+        onboardingScreenView.setNextButtonDelegate(delegate)
     }
 }
 
@@ -54,16 +53,16 @@ extension OnboardingScreenViewController: OnboardingScreenViewInput {
 // MARK: - Private methods
 extension OnboardingScreenViewController {
     func navigateToNextOnboardingViewController(navigationDirection: NavigationDirection) {
-        currentSelectedOnboardingViewController += navigationDirection.rawValue
+        selectedChildViewControllerIndex += navigationDirection.rawValue
         removeChildrenViewControllers()
         currentlyDisplayedView?.removeFromSuperview()
         onboardingScreenView.disableNextButton()
         configureBackButton()
         guard let onboardingViewControllers = onboardingViewControllers else { return }
-        if currentSelectedOnboardingViewController < onboardingViewControllers.count {
-            let newOnboardingViewController = onboardingViewControllers[currentSelectedOnboardingViewController]
+        if selectedChildViewControllerIndex < onboardingViewControllers.count {
+            let newOnboardingViewController = onboardingViewControllers[selectedChildViewControllerIndex]
             setNavigationButtonTitle(newOnboardingViewController.navigationButtonTitle)
-            onboardingScreenView.pageView.pageSelected(pageIndex: currentSelectedOnboardingViewController)
+            onboardingScreenView.selectPage(selectedChildViewControllerIndex)
             addChild(newOnboardingViewController)
             currentlyDisplayedView = newOnboardingViewController.view
 
@@ -128,7 +127,7 @@ extension OnboardingScreenViewController {
     }
 
     func configureBackButton() {
-        if currentSelectedOnboardingViewController <= 0 {
+        if selectedChildViewControllerIndex <= 0 {
             onboardingScreenView.hideBackButton()
         } else {
             onboardingScreenView.displayBackButton()
@@ -146,7 +145,7 @@ extension OnboardingScreenViewController: NavigationBackButtonDelegate {
 // MARK: - NavigationNextButtonDelegate
 extension OnboardingScreenViewController: NavigationNextButtonDelegate {
     func buttonPressed() {
-        onboardingViewControllers?[currentSelectedOnboardingViewController].viewDidPressNextButton()
+        onboardingViewControllers?[selectedChildViewControllerIndex].viewDidPressNextButton()
         navigateToNextOnboardingViewController(navigationDirection: .forward)
     }
 }
@@ -188,7 +187,7 @@ extension OnboardingScreenViewController: OnboardingController {
     }
 
     func setNavigationButtonTitle(_ title: String) {
-        onboardingScreenView.navigationNextButton.title = title
+        onboardingScreenView.setNextButtonTitle(title)
     }
 
     func viewDidSelectOption() {

@@ -1,6 +1,6 @@
 import UIKit
 // TODO: refractor to use strategy pattern to create two types of ShortcutCells
-class AddShortcutCell: UICollectionViewCell {
+final class AddShortcutCell: UICollectionViewCell {
 
     private let symbolConfiguration = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
 

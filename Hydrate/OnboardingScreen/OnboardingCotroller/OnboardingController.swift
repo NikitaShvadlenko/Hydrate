@@ -3,7 +3,7 @@ import UIKit
 protocol OnboardingController: UIViewController {
     func viewDidSelectOption()
     func viewDidDeselectOption()
-    
+
     func childDidChooseActivityLevel(_ child: OnboardingChildController, activityLevel: ActivityLevel)
     func childDidChooseGender(_ child: OnboardingChildController, gender: Gender)
     func childDidChooseTheme(_ child: OnboardingChildController, theme: Theme)

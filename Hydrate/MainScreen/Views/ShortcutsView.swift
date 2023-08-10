@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ShortcutsView: UIView {
+final class ShortcutsView: UIView {
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)

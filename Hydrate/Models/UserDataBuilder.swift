@@ -1,8 +1,7 @@
 import Foundation
 
 public final class UserDataBuilder: UserDataBuilderProtocol {
-
-    private enum Error: Swift.Error, LocalizedError {
+    private enum Error: LocalizedError {
         case goalNotSet
         case weightNotSet
         case activityLevelNotSet

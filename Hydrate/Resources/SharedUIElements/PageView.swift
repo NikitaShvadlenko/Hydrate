@@ -31,7 +31,7 @@ class PageView: UIView {
 }
 
 extension PageView {
-    public func setupNumberOfPages(_ numberOfPages: Int) {
+    public func setNumberOfPages(_ numberOfPages: Int) {
         subviews.forEach { $0.removeFromSuperview() }
         addSubview(stackView)
         stackView.snp.makeConstraints { make in
@@ -50,10 +50,10 @@ extension PageView {
                 make.height.equalTo(elementWidth)
             }
         }
-        pageSelected(pageIndex: 0)
+        selectPage(pageIndex: 0)
     }
 
-    public func pageSelected(pageIndex: Int) {
+    public func selectPage(pageIndex: Int) {
         guard stackView.arrangedSubviews.count > pageIndex else {
             fatalError("Page number is higher")
         }

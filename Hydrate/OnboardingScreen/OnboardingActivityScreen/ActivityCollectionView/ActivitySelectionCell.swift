@@ -1,6 +1,6 @@
 import UIKit
 
-class ActivitySelectionCell: SelectionCollectionViewCell {
+final class ActivitySelectionCell: SelectionCollectionViewCell {
     private let titleView = TitleLabel()
     private let subtitleView = SubtitleLabel()
 

@@ -1,9 +1,9 @@
 import UIKit
 import SnapKit
 
-class OnboardingActivityScreenCollectionView: UIView {
+final class OnboardingActivityScreenCollectionView: UIView {
 
-    let containerView = BackgroundContainerView()
+    private let containerView = BackgroundContainerView()
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)

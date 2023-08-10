@@ -2,10 +2,10 @@ import UIKit
 
 final class OnboardingScreenView: UIView {
 
-    let pageViewContainer = UIView()
-    let pageView = PageView(elementWidth: 8, spacingBetweenElements: 12)
-    let navigationNextButton = NavigationNextButton()
-    let navigationBackButton = NavigationBackButton(width: 37.55)
+   private let pageViewContainer = UIView()
+   private let pageView = PageView(elementWidth: 8, spacingBetweenElements: 12)
+           let navigationNextButton = NavigationNextButton()
+   private let navigationBackButton = NavigationBackButton(width: 37.55)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +19,24 @@ final class OnboardingScreenView: UIView {
 }
 // MARK: Public Methods
 extension OnboardingScreenView {
-   public func hideBackButton() {
+
+    public func setNextButtonTitle(_ title: String) {
+        navigationNextButton.title = title
+    }
+
+    public func selectPage(_ pageIndex: Int) {
+        pageView.selectPage(pageIndex: pageIndex)
+    }
+
+    public func setNextButtonDelegate(_ delegate: NavigationNextButtonDelegate) {
+        navigationNextButton.delegate = delegate
+    }
+
+    public func setBackButtonDelegate(_ delegate: NavigationBackButtonDelegate) {
+        navigationBackButton.delegate = delegate
+    }
+
+    public func hideBackButton() {
         navigationBackButton.alpha = 0
     }
 
@@ -27,7 +44,7 @@ extension OnboardingScreenView {
         navigationBackButton.alpha = 1
     }
 
-    func enableNextButton() {
+   public func enableNextButton() {
         navigationNextButton.isActive = true
         if navigationNextButton.alpha != 1 {
             UIView.animate(withDuration: 0.2) {
@@ -36,7 +53,11 @@ extension OnboardingScreenView {
         }
     }
 
-    func disableNextButton() {
+    public func setNumberOfPages(numberOfPages: Int) {
+        pageView.setNumberOfPages(numberOfPages)
+    }
+
+    public func disableNextButton() {
         navigationNextButton.isActive = false
         navigationNextButton.alpha = 0.5
     }

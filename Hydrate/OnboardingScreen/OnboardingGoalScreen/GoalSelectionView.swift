@@ -4,7 +4,7 @@ protocol GoalSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension)
 }
 
-class GoalSelectionView: UIView {
+final class GoalSelectionView: UIView {
 
     weak var delegate: GoalSelectionViewDelegate? {
         didSet {
@@ -12,7 +12,7 @@ class GoalSelectionView: UIView {
         }
     }
 
-    let backgroundContainerView = BackgroundContainerView()
+    private let backgroundContainerView = BackgroundContainerView()
 
     private lazy var textField: UITextField = {
         let view = UITextField()

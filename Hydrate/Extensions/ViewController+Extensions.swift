@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIViewController {
-    func registerDismissKeyboardWhenTouchOutside() {
+   public func registerDismissKeyboardWhenTouchOutside() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(UIViewController.dismissKeyboard)

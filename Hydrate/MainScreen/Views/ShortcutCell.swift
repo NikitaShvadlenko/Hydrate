@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class ShortcutCell: UICollectionViewCell {
+final class ShortcutCell: UICollectionViewCell {
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()

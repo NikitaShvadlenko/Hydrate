@@ -1,6 +1,6 @@
 import UIKit
 
-class CircleProgressView: UIView {
+final class CircleProgressView: UIView {
     private var radius: CGFloat { (bounds.width - lineWidth) / 2 }
     private let baseLayer = CAShapeLayer()
     private let progressLayer = CAShapeLayer()

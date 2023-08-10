@@ -4,7 +4,7 @@ protocol WeightSelectionViewDelegate: UITextFieldDelegate {
     func segmentedControlDidSelectDimension(_ segmentedControl: UISegmentedControl, dimension: Dimension)
 }
 
-class WeightSelectionView: UIView {
+final class WeightSelectionView: UIView {
 
     weak var delegate: WeightSelectionViewDelegate? {
         didSet {

@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingThemeScreenCollectionView: UIView {
+final class OnboardingThemeScreenCollectionView: UIView {
 
     let containerView = BackgroundContainerView()
 

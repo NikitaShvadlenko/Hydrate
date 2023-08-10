@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class OnboardingGenderScreenCollectionView: UIView {
+final class OnboardingGenderScreenCollectionView: UIView {
 
     let containerView = BackgroundContainerView()
 
