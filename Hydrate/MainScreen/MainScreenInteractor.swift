@@ -9,25 +9,30 @@ final class MainScreenInteractor {
 // MARK: - MainScreenInteractorInput
 extension MainScreenInteractor: MainScreenInteractorInput {
     func retrieveUserData() {
-        let userData = fetchUserData()
-        presenter?.interactor(self, didRetrieveUserData: userData)
+        let fetchRequest = UserData.sortedFetchRequest
+        do {
+            let userData = try context?.fetch(fetchRequest)
+            guard let userData = userData?.first else {
+                presenter?.interactorFailedToRetrieveUserData(self)
+                return
+            }
+            presenter?.interactor(self, didRetrieveUserData: userData)
+        } catch {
+            fatalError("Failed to perform fetch request")
+        }
     }
 
-    func insertJournalEntry(beverageName: String, volumeConsumed: Double) {
-        guard let dailyJournal = fetchDailyJournal(for: Date()) else {
-            fatalError("Failed to find daily journal ")
+    func insertJournalEntry(beverage: Beverage, volumeConsumed: Int) {
+        guard let context = context else {
+            fatalError("Context")
         }
 
-        guard let journalEntry = dataService?.insertJournalEntry(
-            beverageName: beverageName,
-            volumeConsumed: volumeConsumed
-        ) else {
-            fatalError("Failed to create journal entry")
-        }
-
-        dataService?.addJournalEntry(to: dailyJournal, journalEntry: journalEntry)
+        let dailyJournal = DailyJournal.currentDaysJournal(context: context)
+        JournalEntry.insert(into: context, in: dailyJournal, beverage: beverage, consumed: volumeConsumed)
+        // TODO: check if there is a reason for moving to main here
+        // Why is there beverage name?
         DispatchQueue.main.async {
-            self.presenter?.interactor(self, didInsertJournalEntry: beverageName)
+            self.presenter?.interactor(self, didInsertJournalEntry: beverage.name)
         }
     }
 
@@ -37,9 +42,13 @@ extension MainScreenInteractor: MainScreenInteractorInput {
     }
 
     func retrieveHydrationData() {
-        if let dailyJournal = fetchDailyJournal(for: Date()) {
+        guard let context = context else {
+            fatalError("Context not set")
+        }
+        let dailyJournal = DailyJournal.currentDaysJournal(context: context)
+        updateDailyGoalIfNeeded(for: dailyJournal)
             let journalEntries = dailyJournal.journalEntries
-            var volumeConsumed = 0.0
+            var volumeConsumed = 0
             journalEntries.forEach { entry in
                 volumeConsumed = entry.volumeConsumed + volumeConsumed
             }
@@ -48,63 +57,32 @@ extension MainScreenInteractor: MainScreenInteractorInput {
                 self,
                 didRetrieveHydration: dailyData
             )
-        } else {
-            createDailyJournal(goal: 2500)
-            let dailyData =  ConsumptionModel(totalConsumed: 0, dailyGoal: 2500)
-            presenter?.interactor(self, didRetrieveHydration: dailyData)
-        }
     }
 }
 
 // MARK: - Private methods
 extension MainScreenInteractor {
      private func fetchAllShortcuts() -> [Shortcut] {
-        guard let shortcutService = shortcutService else {
-            fatalError("No data storage is set")
+        guard let context = context else {
+            fatalError("No context")
         }
+         let fetchRequest = Shortcut.sortedFetchRequest
         do {
-           let items = try shortcutService.retrieveAllShortcuts()
+            let items = try context.fetch(fetchRequest)
             return items
         } catch {
             fatalError("\(error)")
         }
     }
 
-    func fetchDailyJournal(for date: Date) -> DailyJournal? {
-        guard let dataService = dataService else {
-            fatalError("No data serice")
-        }
-
-        let calendar = Calendar.current
-        let startOfDay = calendar.startOfDay(for: date)
-        guard
-            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
-            fatalError("Failed to add a day to startOfDay")
-        }
-        let predicate = NSPredicate(format: "date >= %@ && date < %@", startOfDay as NSDate, endOfDay as NSDate)
-
-        do {
-            let dailyJournal = try dataService.fetchAllDailyJournals(datePredicate: predicate)
-            return dailyJournal.first
-        } catch {
-            return nil
-        }
-    }
-
-    func createDailyJournal(goal: Double) {
-        dataService?.createDailyJournalEntry(with: goal)
-    }
-
-    func fetchUserData() -> UserData? {
-        guard let dataService = dataService else {
-            fatalError("No data service is set")
-        }
-        do {
-            let userData = try dataService.retrieveUserData()
-            return userData
-        } catch {
-            print(error)
-            return nil
+    private func updateDailyGoalIfNeeded(for journal: DailyJournal) {
+        if journal.dailyGoal == 0 {
+            guard let context = context else {
+                fatalError("No context")
+            }
+            context.performChanges {
+                journal.dailyGoal = UserData.goal(context: context)
+            }
         }
     }
 }

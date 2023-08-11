@@ -16,8 +16,8 @@ protocol MainScreenInteractorInput {
     func retrieveHydrationData()
     func retriveShortcuts()
     func insertJournalEntry(
-        beverageName: String,
-        volumeConsumed: Double
+        beverage: Beverage,
+        volumeConsumed: Int
     )
     func retrieveUserData()
 }
@@ -28,6 +28,7 @@ protocol MainScreenInteractorOutput: AnyObject {
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut])
     func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String)
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData?)
+    func interactorFailedToRetrieveUserData(_ interactor: MainScreenInteractorInput)
 }
 
 // sourcery: AutoMockable

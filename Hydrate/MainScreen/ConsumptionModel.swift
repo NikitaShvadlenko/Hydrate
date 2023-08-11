@@ -1,6 +1,6 @@
 import Foundation
 
 struct ConsumptionModel {
-    let totalConsumed: Double
-    let dailyGoal: Double
+    let totalConsumed: Int
+    let dailyGoal: Int
 }
