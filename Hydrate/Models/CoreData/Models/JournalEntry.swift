@@ -7,10 +7,13 @@ final class JournalEntry: NSManagedObject {
     fileprivate(set) var date: Date
 
     @NSManaged
-    fileprivate(set) var beverage: String
+    fileprivate(set) var beverage: Beverage
 
     @NSManaged
-    fileprivate(set) var volumeConsumed: Double
+    fileprivate(set) var dailyJournal: DailyJournal
+
+    @NSManaged
+    fileprivate(set) var volumeConsumed: Int
 
     static func insert(
         into context: NSManagedObjectContext,
@@ -18,7 +21,7 @@ final class JournalEntry: NSManagedObject {
         volumeConsumed: Double
     ) -> JournalEntry {
         let hydationJournal: JournalEntry = context.insertObject()
-        hydationJournal.beverage = beverage
+        //hydationJournal.beverage = beverage
         hydationJournal.volumeConsumed = volumeConsumed
         hydationJournal.date = Date()
         return hydationJournal

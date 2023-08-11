@@ -10,10 +10,10 @@ final class Shortcut: NSManagedObject {
     fileprivate(set) var imageName: String
 
     @NSManaged
-    fileprivate(set) var beverageName: String
+    fileprivate(set) var beverage: Beverage
 
     @NSManaged
-    fileprivate(set) var volumeConsumed: Double
+    fileprivate(set) var volumeConsumed: Int
 
     @NSManaged
     fileprivate(set) var date: Date
@@ -29,7 +29,7 @@ final class Shortcut: NSManagedObject {
         shortcut.colorName = colorName
         shortcut.imageName = imageName
         shortcut.volumeConsumed = volumeConsumed
-        shortcut.beverageName = beverageName
+      //  shortcut.beverageName = beverageName
         shortcut.date = Date()
         return shortcut
     }

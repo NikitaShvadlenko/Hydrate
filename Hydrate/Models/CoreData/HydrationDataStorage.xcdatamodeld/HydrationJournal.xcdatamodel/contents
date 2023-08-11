@@ -1,29 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Beverage" representedClassName="Beverage" syncable="YES">
+        <attribute name="associatedColor" optional="YES" attributeType="Transformable"/>
+        <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Transformable"/>
+        <attribute name="name" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="ratio" optional="YES" attributeType="Double" minValueString="0" maxValueString="1" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="journalEntries" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="JournalEntry" inverseName="beverage" inverseEntity="JournalEntry"/>
+    </entity>
     <entity name="DailyJournal" representedClassName=".DailyJournal" syncable="YES">
         <attribute name="dailyGoal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="totalConsumed" transient="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalConsumed" transient="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="journalEntries" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="JournalEntry" inverseName="dailyJournal" inverseEntity="JournalEntry"/>
     </entity>
     <entity name="JournalEntry" representedClassName=".JournalEntry" syncable="YES">
-        <attribute name="beverage" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="volumeConsumed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="volumeConsumed" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="beverage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beverage" inverseName="journalEntries" inverseEntity="Beverage"/>
         <relationship name="dailyJournal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DailyJournal" inverseName="journalEntries" inverseEntity="DailyJournal"/>
     </entity>
     <entity name="Shortcut" representedClassName=".Shortcut" syncable="YES">
-        <attribute name="beverageName" optional="YES" attributeType="String"/>
         <attribute name="colorName" optional="YES" attributeType="String"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
-        <attribute name="volumeConsumed" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="volumeConsumed" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="beverage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beverage"/>
     </entity>
     <entity name="UserData" representedClassName=".UserData" syncable="YES">
         <attribute name="activityLevelRawValue" optional="YES" attributeType="String"/>
-        <attribute name="dailyGoal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dailyGoal" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="volumeMeasurementUnitRawValue" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weightMeasurementUnitRawValue" optional="YES" attributeType="String"/>

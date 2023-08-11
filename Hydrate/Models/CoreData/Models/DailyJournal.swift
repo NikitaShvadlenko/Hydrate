@@ -6,13 +6,13 @@ final class DailyJournal: NSManagedObject {
     fileprivate(set) var date: Date
 
     @NSManaged
-    fileprivate(set) var dailyGoal: Double
+    fileprivate(set) var dailyGoal: Int
 
     @NSManaged
     fileprivate(set) var journalEntries: Set<JournalEntry>
 
     @objc
-    var totalConsumed: Double {
+    var totalConsumed: Int {
         journalEntries.reduce(0) { partialResult, entry in
             var result = partialResult
             result += entry.volumeConsumed
@@ -25,7 +25,7 @@ final class DailyJournal: NSManagedObject {
         dailyGoal: Double
     ) -> DailyJournal {
         let dailyJournal: DailyJournal = context.insertObject()
-        dailyJournal.dailyGoal = dailyGoal
+      //  dailyJournal.dailyGoal = dailyGoal
         dailyJournal.date = Date()
         return dailyJournal
     }
@@ -37,7 +37,7 @@ final class DailyJournal: NSManagedObject {
         dailyGoal: Double
     ) {
         guard let updateObject = context.object(with: object.objectID) as? Self else { return }
-        updateObject.dailyGoal = dailyGoal
+        // updateObject.dailyGoal = dailyGoal
         updateObject.journalEntries = journalEntries
     }
 }

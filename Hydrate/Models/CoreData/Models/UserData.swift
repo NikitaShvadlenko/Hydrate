@@ -6,7 +6,7 @@ final class UserData: NSManagedObject {
     fileprivate(set) var date: Date
 
     @NSManaged
-    fileprivate(set) var dailyGoal: Double
+    fileprivate(set) var dailyGoal: Int
 
     @NSManaged
     fileprivate(set) var weight: Double
