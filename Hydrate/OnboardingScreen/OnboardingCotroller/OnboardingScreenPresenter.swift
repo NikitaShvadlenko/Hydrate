@@ -36,19 +36,20 @@ extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
 
     func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput) {
         guard let userData = try? builder?.build() else { return }
-        print("Built the following:")
-        //swiftlint:disable line_length
-        print("Gender: \(userData.gender), goal: \(userData.dailyGoal), activity level: \(userData.activityLevel), weightMeasurement: \(userData.weightMeasurementUnit.rawValue), weight: \(userData.weight), volumeUnit: \(userData.volumeMeasurementUnit)")
-        router?.routeToMainScreen()
+        interactor?.saveUser(with: userData)
     }
 
     func viewDidLoad(_ view: OnboardingScreenViewInput) {
         view.configureViews()
+        router?.routeToMainScreen()
     }
 }
 
 // MARK: - RegistrationScreenInteractorOutput
 extension OnboardingScreenPresenter: OnboardingScreenInteractorOutput {
+    func interactorDidSaveUserData(_ intercator: OnboardingScreenInteractorInput) {
+
+    }
 }
 
 // MARK: - RegistrationScreenRouterOutput
@@ -64,6 +65,7 @@ extension OnboardingScreenPresenter: OnboardingScreenModuleInput {
 
 // MARK: - Private methods
 extension OnboardingScreenPresenter {
+    // TODO: Use real formula for goal calculation
     private func calculateGoal(unit: Dimension) -> Double {
         guard
             let weight = builder?.weight else {
