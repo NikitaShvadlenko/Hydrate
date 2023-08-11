@@ -43,8 +43,8 @@ extension MainScreenViewController: MainScreenViewInput {
         let hydrationModel =
         HydrationProgressModel(
             goal: Measurement(
-                value: model.dailyGoal, unit: .milliliters),
-            amount: Measurement(value: model.totalConsumed, unit: .milliliters)
+                value: Double(model.dailyGoal), unit: .milliliters),
+            amount: Measurement(value: Double(model.totalConsumed), unit: .milliliters)
         )
 
 // TODO: Create ViewModel

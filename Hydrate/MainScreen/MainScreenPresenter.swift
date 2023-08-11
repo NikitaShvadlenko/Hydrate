@@ -21,10 +21,20 @@ extension MainScreenPresenter: MainScreenViewOutput {
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
-    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData?) {
-        if userData == nil {
-            router?.routeToRegistrationScreen()
-        }
+    func interactorFailedToRetrieveUserData(_ interactor: MainScreenInteractorInput) {
+        router?.routeToRegistrationScreen()
+    }
+
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData) {
+        print("retrieved the following:")
+        print("""
+                Gender: \(userData.gender),
+                goal: \(userData.dailyGoal),
+                activity level: \(userData.activityLevel),
+                weightMeasurement: \(userData.weightMeasurementUnit.rawValue),
+                weight: \(userData.weight),
+                volumeUnit: \(userData.volumeMeasurementUnit)
+              """)
     }
 
     func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String) {
@@ -74,8 +84,8 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
         if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
             let shortcutItem = shortcuts[indexPath.item]
             interactor?.insertJournalEntry(
-                beverageName: shortcutItem.beverage.name,
-                volumeConsumed: Double(shortcutItem.volumeConsumed)
+                beverage: shortcutItem.beverage,
+                volumeConsumed: shortcutItem.volumeConsumed
             )
         } else {
             print("Asking vc to pop a screen with addShortcut")

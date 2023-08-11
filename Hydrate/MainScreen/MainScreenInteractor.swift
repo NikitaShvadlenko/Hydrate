@@ -47,26 +47,26 @@ extension MainScreenInteractor: MainScreenInteractorInput {
         }
         let dailyJournal = DailyJournal.currentDaysJournal(context: context)
         updateDailyGoalIfNeeded(for: dailyJournal)
-            let journalEntries = dailyJournal.journalEntries
-            var volumeConsumed = 0
-            journalEntries.forEach { entry in
-                volumeConsumed = entry.volumeConsumed + volumeConsumed
-            }
-            let dailyData =  ConsumptionModel(totalConsumed: volumeConsumed, dailyGoal: dailyJournal.dailyGoal)
-            presenter?.interactor(
-                self,
-                didRetrieveHydration: dailyData
-            )
+        let journalEntries = dailyJournal.journalEntries
+        var volumeConsumed = 0
+        journalEntries.forEach { entry in
+            volumeConsumed = entry.volumeConsumed + volumeConsumed
+        }
+        let dailyData =  ConsumptionModel(totalConsumed: volumeConsumed, dailyGoal: dailyJournal.dailyGoal)
+        presenter?.interactor(
+            self,
+            didRetrieveHydration: dailyData
+        )
     }
 }
 
 // MARK: - Private methods
 extension MainScreenInteractor {
-     private func fetchAllShortcuts() -> [Shortcut] {
+    private func fetchAllShortcuts() -> [Shortcut] {
         guard let context = context else {
             fatalError("No context")
         }
-         let fetchRequest = Shortcut.sortedFetchRequest
+        let fetchRequest = Shortcut.sortedFetchRequest
         do {
             let items = try context.fetch(fetchRequest)
             return items
@@ -81,7 +81,8 @@ extension MainScreenInteractor {
                 fatalError("No context")
             }
             context.performChanges {
-                journal.dailyGoal = UserData.goal(context: context)
+                let goal = UserData.goal(context: context)
+                DailyJournal.updateTodaysGoal(context: context, goal: goal)
             }
         }
     }
