@@ -17,14 +17,16 @@ public final class JournalEntry: NSManagedObject {
 
     static func insert(
         into context: NSManagedObjectContext,
-        beverage: String,
-        volumeConsumed: Double
-    ) -> JournalEntry {
-        let hydationJournal: JournalEntry = context.insertObject()
-        //hydationJournal.beverage = beverage
-       // hydationJournal.volumeConsumed = volumeConsumed
-        hydationJournal.date = Date()
-        return hydationJournal
+        in journal: DailyJournal,
+        beverage: Beverage,
+        consumed volume: Int
+    ) {
+        context.performChanges {
+            let journalEntry: JournalEntry = context.insertObject()
+            journalEntry.dailyJournal = journal
+            journalEntry.beverage = beverage
+            journalEntry.volumeConsumed = volume
+        }
     }
 }
 
