@@ -13,16 +13,18 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
-        interactor?.retrieveUserData()
-        interactor?.retrieveHydrationData()
-        interactor?.retriveShortcuts()
+  //      interactor?.retrieveUserData()
+        print("asasd")
+        router?.routeToOnboardingScreen()
+//        interactor?.retrieveHydrationData()
+//        interactor?.retriveShortcuts()
     }
 }
 
 // MARK: - MainScreenInteractorOutput
 extension MainScreenPresenter: MainScreenInteractorOutput {
     func interactorFailedToRetrieveUserData(_ interactor: MainScreenInteractorInput) {
-        router?.routeToRegistrationScreen()
+        router?.routeToOnboardingScreen()
     }
 
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData) {

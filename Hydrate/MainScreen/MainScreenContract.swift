@@ -33,7 +33,7 @@ protocol MainScreenInteractorOutput: AnyObject {
 
 // sourcery: AutoMockable
 protocol MainScreenRouterInput {
-    func routeToRegistrationScreen()
+    func routeToOnboardingScreen()
 }
 
 protocol MainScreenRouterOutput: AnyObject {

@@ -9,9 +9,6 @@ enum MainScreenAssembly {
         let router = MainScreenRouter()
         let coreDataService = CoreDataService.shared
 
-        let dataService = coreDataService
-        let shortcutsService = coreDataService
-
         let shortcutsViewManager = ShortcutsViewManager()
 
         shortcutsViewManager.delegate = presenter
