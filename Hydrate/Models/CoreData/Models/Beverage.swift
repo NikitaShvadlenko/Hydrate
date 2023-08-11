@@ -1,5 +1,6 @@
 import CoreData
-import UIKit
+import UIKit.UIImage
+import UIKit.UIColor
 
 final class Beverage: NSManagedObject {
 
@@ -23,6 +24,9 @@ final class Beverage: NSManagedObject {
 
     @NSManaged
     fileprivate(set) var journalEntries: Set<JournalEntry>
+
+    @NSManaged
+    fileprivate(set) var shortcuts: Set<Shortcut>
 
 //    static func insert(
 //        into context: NSManagedObjectContext,

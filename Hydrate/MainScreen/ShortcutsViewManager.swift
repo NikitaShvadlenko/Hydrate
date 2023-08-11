@@ -64,7 +64,7 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
 
             let shortcut = shortcuts[indexPath.item]
             cell.configureCell(
-                name: shortcut.beverageName,
+                name: shortcut.beverage.name,
                 volume: "\(shortcut.volumeConsumed)",
                 image: UIImage(named: shortcut.imageName) ?? UIImage(),
                 color: UIColor(named: shortcut.colorName) ?? .systemRed

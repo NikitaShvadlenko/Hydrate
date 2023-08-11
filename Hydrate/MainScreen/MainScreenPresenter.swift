@@ -74,8 +74,8 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
         if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
             let shortcutItem = shortcuts[indexPath.item]
             interactor?.insertJournalEntry(
-                beverageName: shortcutItem.beverageName,
-                volumeConsumed: shortcutItem.volumeConsumed
+                beverageName: shortcutItem.beverage.name,
+                volumeConsumed: Double(shortcutItem.volumeConsumed)
             )
         } else {
             print("Asking vc to pop a screen with addShortcut")

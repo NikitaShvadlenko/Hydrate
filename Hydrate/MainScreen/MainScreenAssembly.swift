@@ -26,8 +26,7 @@ enum MainScreenAssembly {
         presenter.shortcutsManager = shortcutsViewManager
 
         interactor.presenter = presenter
-        interactor.dataService = dataService
-        interactor.shortcutService = shortcutsService
+        interactor.context = coreDataService.context
 
         router.viewController = viewController
         router.presenter = presenter

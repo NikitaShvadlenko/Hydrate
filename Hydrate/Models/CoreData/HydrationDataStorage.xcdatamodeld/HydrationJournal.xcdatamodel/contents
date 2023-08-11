@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Beverage" representedClassName="Beverage" syncable="YES">
-        <attribute name="associatedColor" optional="YES" attributeType="Transformable"/>
+        <attribute name="associatedColor" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="."/>
         <attribute name="dateAdded" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="image" optional="YES" attributeType="Transformable"/>
+        <attribute name="image" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromDataTransformer" customClassName="."/>
         <attribute name="name" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="ratio" optional="YES" attributeType="Double" minValueString="0" maxValueString="1" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="journalEntries" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="JournalEntry" inverseName="beverage" inverseEntity="JournalEntry"/>
+        <relationship name="shortcuts" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Shortcut" inverseName="beverage" inverseEntity="Shortcut"/>
     </entity>
     <entity name="DailyJournal" representedClassName=".DailyJournal" syncable="YES">
         <attribute name="dailyGoal" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
@@ -26,7 +27,7 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="imageName" optional="YES" attributeType="String"/>
         <attribute name="volumeConsumed" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="beverage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beverage"/>
+        <relationship name="beverage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Beverage" inverseName="shortcuts" inverseEntity="Beverage"/>
     </entity>
     <entity name="UserData" representedClassName=".UserData" syncable="YES">
         <attribute name="activityLevelRawValue" optional="YES" attributeType="String"/>
