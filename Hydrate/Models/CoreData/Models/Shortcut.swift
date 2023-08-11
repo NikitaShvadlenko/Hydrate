@@ -22,16 +22,17 @@ final class Shortcut: NSManagedObject {
         into context: NSManagedObjectContext,
         colorName: String,
         imageName: String,
-        beverageName: String,
-        volumeConsumed: Double
-    ) -> Shortcut {
-        let shortcut: Shortcut = context.insertObject()
-        shortcut.colorName = colorName
-        shortcut.imageName = imageName
-        shortcut.volumeConsumed = volumeConsumed
-      //  shortcut.beverageName = beverageName
-        shortcut.date = Date()
-        return shortcut
+        beverage: Beverage,
+        volumeConsumed: Int
+    ) {
+        context.performChanges {
+            let shortcut: Shortcut = context.insertObject()
+            shortcut.colorName = colorName
+            shortcut.imageName = imageName
+            shortcut.volumeConsumed = volumeConsumed
+            shortcut.beverage = beverage
+            shortcut.date = Date()
+        }
     }
 }
 

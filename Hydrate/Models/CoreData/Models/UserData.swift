@@ -26,16 +26,17 @@ final class UserData: NSManagedObject {
     static func insert(
         into context: NSManagedObjectContext,
         form: UserDataForm
-    ) -> UserData {
-        let userData: UserData = context.insertObject()
-       // userData.dailyGoal = form.dailyGoal
-        userData.weight = form.weight
-        userData.genderRawValue = form.gender.rawValue
-        userData.activityLevelRawValue = form.activityLevel.rawValue
-        userData.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
-        userData.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
-        userData.date = Date()
-        return userData
+    ) {
+        context.performChanges {
+            let userData: UserData = context.insertObject()
+            userData.dailyGoal = form.dailyGoal
+            userData.weight = form.weight
+            userData.genderRawValue = form.gender.rawValue
+            userData.activityLevelRawValue = form.activityLevel.rawValue
+            userData.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
+            userData.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
+            userData.date = Date()
+        }
     }
 
     static func updateUserData(

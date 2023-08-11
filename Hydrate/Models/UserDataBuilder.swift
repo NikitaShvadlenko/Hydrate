@@ -119,7 +119,7 @@ public final class UserDataBuilder: UserDataBuilderProtocol {
 
         return UserDataForm(
             date: date,
-            dailyGoal: dailyGoal,
+            dailyGoal: Int(dailyGoal),
             weight: weight,
             activityLevel: activityLevel,
             weightMeasurementUnit: weightMeasurementUnit,

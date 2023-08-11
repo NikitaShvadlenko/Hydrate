@@ -2,7 +2,7 @@ import Foundation
 
 public struct UserDataForm {
     var date: Date
-    var dailyGoal: Double
+    var dailyGoal: Int
     var weight: Double
     var activityLevel: ActivityLevel
     var weightMeasurementUnit: WeightMeasurementUnit
