@@ -43,13 +43,6 @@ public final class DailyJournal: NSManagedObject {
             fatalError("Failed to execute fetch request: \(error)")
         }
     }
-
-    public static func insertJournalEntry(context: NSManagedObjectContext, journalEntry: JournalEntry) {
-        let currentDailyJournal = currentDaysJournal(context: context)
-        context.performChanges {
-            currentDailyJournal.journalEntries.insert(journalEntry)
-        }
-    }
 }
 
 extension DailyJournal: Managed {
