@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-final class JournalEntry: NSManagedObject {
+public final class JournalEntry: NSManagedObject {
 
     @NSManaged
     fileprivate(set) var date: Date
@@ -22,7 +22,7 @@ final class JournalEntry: NSManagedObject {
     ) -> JournalEntry {
         let hydationJournal: JournalEntry = context.insertObject()
         //hydationJournal.beverage = beverage
-        hydationJournal.volumeConsumed = volumeConsumed
+       // hydationJournal.volumeConsumed = volumeConsumed
         hydationJournal.date = Date()
         return hydationJournal
     }

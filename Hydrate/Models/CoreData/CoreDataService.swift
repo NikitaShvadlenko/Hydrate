@@ -16,10 +16,6 @@ protocol DataServiceProtocol {
         volumeConsumed: Double
     )
 
-    func createDailyJournalEntry(
-        with dailyGoal: Double
-    )
-
     func fetchAllDailyJournals(datePredicate: NSPredicate) throws -> [DailyJournal]
 
     func addJournalEntry(
@@ -113,16 +109,6 @@ extension CoreDataService {
 
 // MARK: Daily Journal
 extension CoreDataService {
-    public func createDailyJournalEntry(
-        with dailyGoal: Double
-    ) {
-        context.performChanges {
-            _ = DailyJournal.insert(
-                into: self.context,
-                dailyGoal: dailyGoal
-            )
-        }
-    }
 
     public func fetchAllDailyJournals(datePredicate: NSPredicate) throws -> [DailyJournal] {
         let request = DailyJournal.sortedFetchRequest

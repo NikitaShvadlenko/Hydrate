@@ -1,18 +1,19 @@
 import CoreData
 
-final class DailyJournal: NSManagedObject {
+public final class DailyJournal: NSManagedObject {
 
     @NSManaged
-    fileprivate(set) var date: Date
+    public fileprivate(set) var date: Date
+
+    // Can not have daily goal as optional. The default value is 0. 
+    @NSManaged
+    public fileprivate(set) var dailyGoal: Int
 
     @NSManaged
-    fileprivate(set) var dailyGoal: Int
-
-    @NSManaged
-    fileprivate(set) var journalEntries: Set<JournalEntry>
+    public fileprivate(set) var journalEntries: Set<JournalEntry>
 
     @objc
-    var totalConsumed: Int {
+    public var totalConsumed: Int {
         journalEntries.reduce(0) { partialResult, entry in
             var result = partialResult
             result += entry.volumeConsumed
@@ -20,7 +21,13 @@ final class DailyJournal: NSManagedObject {
         }
     }
 
-    static func currentDaysJournal(context: NSManagedObjectContext) -> DailyJournal {
+    public static func updateTodaysGoal(context: NSManagedObjectContext, goal: Int) {
+        context.performChanges {
+            currentDaysJournal(context: context).dailyGoal = goal
+        }
+    }
+
+    public static func currentDaysJournal(context: NSManagedObjectContext) -> DailyJournal {
         let fetchRequest = sortedFetchRequest
         do {
             let journalEntries = try context.fetch(fetchRequest)
@@ -37,39 +44,29 @@ final class DailyJournal: NSManagedObject {
         }
     }
 
-    private static func createNewJournal(context: NSManagedObjectContext) -> DailyJournal {
-        let dailyJournal: DailyJournal = context.insertObject()
-        dailyJournal.dailyGoal = 3000
-        dailyJournal.date = Date()
-        _ = context.saveOrRollback()
-        return dailyJournal
+    public static func insertJournalEntry(context: NSManagedObjectContext, journalEntry: JournalEntry) {
+        let currentDailyJournal = currentDaysJournal(context: context)
+        context.performChanges {
+            currentDailyJournal.journalEntries.insert(journalEntry)
+        }
     }
-
-//    static func insert(
-//        into context: NSManagedObjectContext,
-//        dailyGoal: Int
-//    ) -> DailyJournal {
-//        context.performC
-//        let dailyJournal: DailyJournal = context.insertObject()
-//        dailyJournal.dailyGoal = dailyGoal
-//        dailyJournal.date = Date()
-//        return dailyJournal
-//    }
-
-//    static func updateDailyJournal(
-//        object: DailyJournal,
-//        into context: NSManagedObjectContext,
-//        journalEntries: Set<JournalEntry>,
-//        dailyGoal: Int
-//    ) {
-//        guard let updateObject = context.object(with: object.objectID) as? Self else { return }
-//        updateObject.dailyGoal = dailyGoal
-//        updateObject.journalEntries = journalEntries
-//    }
 }
 
 extension DailyJournal: Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] {
         return [NSSortDescriptor(key: #keyPath(date), ascending: false)]
+    }
+}
+
+// MARK: - Private Methods
+extension DailyJournal {
+    // Note - the new journal is created with a goal default value 0
+    // (already set in HydrationDataStorage.xcdatamodeld as a default value)
+    private static func createNewJournal(context: NSManagedObjectContext) -> DailyJournal {
+        let dailyJournal: DailyJournal = context.insertObject()
+        dailyJournal.date = Date()
+        dailyJournal.dailyGoal = 0
+        _ = context.saveOrRollback()
+        return dailyJournal
     }
 }

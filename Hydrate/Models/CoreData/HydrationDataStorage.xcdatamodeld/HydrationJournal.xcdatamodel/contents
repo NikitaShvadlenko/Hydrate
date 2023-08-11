@@ -10,8 +10,8 @@
         <relationship name="journalEntries" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="JournalEntry" inverseName="beverage" inverseEntity="JournalEntry"/>
     </entity>
     <entity name="DailyJournal" representedClassName=".DailyJournal" syncable="YES">
-        <attribute name="dailyGoal" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dailyGoal" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="totalConsumed" transient="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="journalEntries" optional="YES" toMany="YES" deletionRule="Deny" destinationEntity="JournalEntry" inverseName="dailyJournal" inverseEntity="JournalEntry"/>
     </entity>
