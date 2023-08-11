@@ -1,10 +1,10 @@
 import CoreData
 
-class CoreDataService {
-    var context: NSManagedObjectContext
-    var container: NSPersistentContainer
+public final class CoreDataService {
+    public var context: NSManagedObjectContext
+    public var container: NSPersistentContainer
 
-    static let shared = CoreDataService()
+    public static let shared = CoreDataService()
 
     private init() {
         self.container = NSPersistentContainer(name: Constants.hydrationJournalContainerName.rawValue)
@@ -16,7 +16,7 @@ class CoreDataService {
         self.context = container.viewContext
     }
 
-    enum Constants: String {
+    private enum Constants: String {
         case hydrationJournalContainerName = "HydrationDataStorage"
     }
 
