@@ -13,11 +13,7 @@ final class MainScreenPresenter {
 extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
         view.configureViews()
-  //      interactor?.retrieveUserData()
-        print("asasd")
-        router?.routeToOnboardingScreen()
-//        interactor?.retrieveHydrationData()
-//        interactor?.retriveShortcuts()
+        interactor?.retrieveUserData()
     }
 }
 
@@ -37,6 +33,8 @@ extension MainScreenPresenter: MainScreenInteractorOutput {
                 weight: \(userData.weight),
                 volumeUnit: \(userData.volumeMeasurementUnit)
               """)
+        interactor.retrieveHydrationData()
+        interactor.retriveShortcuts()
     }
 
     func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String) {

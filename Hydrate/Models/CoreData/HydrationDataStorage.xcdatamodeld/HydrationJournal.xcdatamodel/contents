@@ -33,6 +33,7 @@
         <attribute name="activityLevelRawValue" optional="YES" attributeType="String"/>
         <attribute name="dailyGoal" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="genderRawValue" optional="YES" attributeType="String"/>
         <attribute name="volumeMeasurementUnitRawValue" optional="YES" attributeType="String"/>
         <attribute name="weight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="weightMeasurementUnitRawValue" optional="YES" attributeType="String"/>

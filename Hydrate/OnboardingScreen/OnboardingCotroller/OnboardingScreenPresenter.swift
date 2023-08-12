@@ -36,7 +36,8 @@ extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
 
     func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput) {
         guard let userData = try? builder?.build() else { return }
-        interactor?.saveUser(with: userData)
+           interactor?.saveUser(with: userData)
+           router?.routeToMainScreen()
     }
 
     func viewDidLoad(_ view: OnboardingScreenViewInput) {

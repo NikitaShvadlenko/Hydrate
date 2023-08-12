@@ -31,7 +31,7 @@ final class UserData: NSManagedObject {
             let userData: UserData = context.insertObject()
             userData.dailyGoal = form.dailyGoal
             userData.weight = form.weight
-            userData.genderRawValue = form.gender.rawValue
+            userData.gender = form.gender
             userData.activityLevelRawValue = form.activityLevel.rawValue
             userData.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
             userData.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
@@ -39,18 +39,18 @@ final class UserData: NSManagedObject {
         }
     }
 
-    static func updateUserData(
-        object: UserData,
-        into context: NSManagedObjectContext,
-        form: UserDataForm
-    ) {
-        guard let updateObject = context.object(with: object.objectID) as? Self else { return }
-        // updateObject.dailyGoal = form.dailyGoal
-        updateObject.weight = form.weight
-        updateObject.activityLevelRawValue = form.activityLevel.rawValue
-        updateObject.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
-        updateObject.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
-    }
+//    static func updateUserData(
+//        object: UserData,
+//        into context: NSManagedObjectContext,
+//        form: UserDataForm
+//    ) {
+//        guard let updateObject = context.object(with: object.objectID) as? Self else { return }
+//        updateObject.dailyGoal = form.dailyGoal
+//        updateObject.weight = form.weight
+//        updateObject.activityLevelRawValue = form.activityLevel.rawValue
+//        updateObject.weightMeasurementUnitRawValue = form.weightMeasurementUnit.rawValue
+//        updateObject.volumeMeasurementUnitRawValue = form.volumeMeasurementUnit.rawValue
+//    }
 
     public static func goal(context: NSManagedObjectContext) -> Int {
         let fetchRequest = UserData.sortedFetchRequest
