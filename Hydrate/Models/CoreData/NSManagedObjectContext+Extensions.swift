@@ -25,7 +25,7 @@ extension NSManagedObjectContext {
     }
 
     public func performChanges(block: @escaping() -> Void) {
-        perform {
+        performAndWait {
             block()
             _ = self.saveOrRollback()
         }
