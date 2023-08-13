@@ -29,11 +29,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
 
         let dailyJournal = DailyJournal.currentDaysJournal(context: context)
         JournalEntry.insert(into: context, in: dailyJournal, beverage: beverage, consumed: volumeConsumed)
-        // TODO: check if there is a reason for moving to main here
-        // Why is there beverage name?
-        DispatchQueue.main.async {
             self.presenter?.interactor(self, didInsertJournalEntry: beverage.name)
-        }
     }
 
     func retriveShortcuts() {
