@@ -31,3 +31,14 @@
 "OnboardingScreen.calculatedGoal" = "We calculated your ideal intake goal, you can change it by tapping on the number";
 "OnboardingScreen.setGoal" = "Set goal";
 "OnboardingScreen.setTheme" = "Set theme";
+
+"Settings.Section.yourInfo" = "Your info";
+"Settings.Section.drinks" = "Drinks";
+"Settings.Section.AboutApp" = "About app";
+"Settings.Cell.personalInformation" = "Personal information";
+"Settings.Cell.changeGoal" = "Change goal";
+"Settings.Cell.theme" = "Theme";
+"Settings.Cell.yourDrinks" = "Your drinks";
+"Settings.Cell.customDrinks" = "Custom drinks";
+"Settings.Cell.abooutApp" = "About app";
+"Settings.Cell.connections" = "Connections";
