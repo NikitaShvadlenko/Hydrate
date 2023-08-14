@@ -1,6 +1,4 @@
 import CoreData
-import UIKit.UIImage
-import UIKit.UIColor
 
 final class Beverage: NSManagedObject {
 
@@ -8,10 +6,7 @@ final class Beverage: NSManagedObject {
     fileprivate(set) var dateAdded: Date
 
     @NSManaged
-    fileprivate(set) var associatedColor: UIColor?
-
-    @NSManaged
-    fileprivate(set) var image: UIImage?
+    fileprivate(set) var associatedColor: String?
 
     @NSManaged
     fileprivate(set) var name: String
@@ -27,6 +22,9 @@ final class Beverage: NSManagedObject {
 
     @NSManaged
     fileprivate(set) var shortcuts: Set<Shortcut>
+
+    @NSManaged
+    fileprivate(set) var beverageIconRawValue: String
 
 //    static func insert(
 //        into context: NSManagedObjectContext,
@@ -46,3 +44,18 @@ extension Beverage: Managed {
         return [NSSortDescriptor(key: #keyPath(dateAdded), ascending: false)]
     }
 }
+
+extension Beverage {
+    var beverageIcon: BeverageIcon {
+        get {
+            guard let activityLevel = BeverageIcon(rawValue: beverageIconRawValue) else {
+                fatalError("Failed to convert")
+            }
+            return activityLevel
+        }
+        set {
+            beverageIconRawValue = newValue.rawValue
+        }
+    }
+}
+
