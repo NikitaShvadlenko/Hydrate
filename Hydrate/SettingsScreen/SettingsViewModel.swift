@@ -14,18 +14,6 @@ enum SectionType {
     case aboutApp
 }
 
-enum CellType {
-    case personalInformation
-    case changeGoal
-    case theme
-    case connections
-
-    case yourDrinks
-    case customDrinks
-
-    case aboutApp
-}
-
 struct CellViewModel {
     let cellType: CellType
     let title: String
