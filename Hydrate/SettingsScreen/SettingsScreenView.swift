@@ -2,9 +2,8 @@ import UIKit
 import SnapKit
 
 final class SettingsScreenView: UIView {
-
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView()
+    public lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
         return collectionView
     }()
 
@@ -28,9 +27,4 @@ extension SettingsScreenView {
             make.edges.equalToSuperview()
         }
     }
-}
-
-// MARK: - Public methods
-extension SettingsScreenView {
-
 }

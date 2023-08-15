@@ -5,6 +5,7 @@ protocol SettingsCollectionViewManagerProtocol {
     func createLayout() -> UICollectionViewLayout
     var dataSource: UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel> { get }
     func setCollectionView(_ collectionView: UICollectionView)
+    func configureSnapshot()
 }
 
 final class SettingsCollectionViewManager: NSObject {
@@ -59,16 +60,8 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
                 item: identifier
             )
         }
-
     }
 
-    func setSettingsViewModel(with viewModel: SettingsViewModel) {
-        self.settingsViewModel = viewModel
-    }
-}
-
-// MARK: - Private methods
-extension SettingsCollectionViewManager {
     func configureSnapshot() {
         guard let sections = settingsViewModel?.sections else {
             return
@@ -79,5 +72,9 @@ extension SettingsCollectionViewManager {
             snapshot.appendItems($0.cells)
         }
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+
+    func setSettingsViewModel(with viewModel: SettingsViewModel) {
+        self.settingsViewModel = viewModel
     }
 }

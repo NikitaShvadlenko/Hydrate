@@ -18,6 +18,12 @@ final class SettingsScreenViewController: UIViewController {
 
 // MARK: - SettingsScreenViewInput
 extension SettingsScreenViewController: SettingsScreenViewInput {
+    func configureSettingsCollectionViewManager(_ manager: SettingsCollectionViewManagerProtocol) {
+        manager.setCollectionView(settingsScreenView.collectionView)
+        settingsScreenView.collectionView.dataSource = manager.dataSource
+        settingsScreenView.collectionView.collectionViewLayout = manager.createLayout()
+    }
+
     func configureViews() {
     }
 }

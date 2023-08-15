@@ -9,7 +9,7 @@ enum SettingsScreenAssembly {
         let collectionViewManager = SettingsCollectionViewManager()
 
         viewController.presenter = presenter
-
+        viewController.configureSettingsCollectionViewManager(collectionViewManager)
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router

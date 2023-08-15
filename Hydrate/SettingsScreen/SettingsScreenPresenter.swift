@@ -13,7 +13,11 @@ extension SettingsScreenPresenter: SettingsScreenViewOutput {
     func viewDidLoad(_ view: SettingsScreenViewInput) {
         view.configureViews()
         let viewModel = generateViewModel()
-        collectionViewManager?.setSettingsViewModel(with: viewModel)
+        guard let collectionViewManager = collectionViewManager else {
+            return
+        }
+        collectionViewManager.setSettingsViewModel(with: viewModel)
+        collectionViewManager.configureSnapshot()
     }
 }
 
