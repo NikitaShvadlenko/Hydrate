@@ -10,7 +10,27 @@ protocol SettingsCollectionViewManagerProtocol {
 
 final class SettingsCollectionViewManager: NSObject {
     var settingsViewModel: SettingsViewModel?
-   weak var collecitonView: UICollectionView?
+    weak var collecitonView: UICollectionView?
+    lazy var dataSource: UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel> = {
+        guard let collectionView = self.collecitonView else {
+            fatalError("CollectionView was not set")
+        }
+
+        let cellRegistration = UICollectionView
+            .CellRegistration<NavigationListCell, CellViewModel> { (cell, _, item) in
+                cell.configure(title: item.title, onTapAction: item.action)
+            }
+
+        return UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: CellViewModel) -> UICollectionViewCell? in
+
+            return collectionView.dequeueConfiguredReusableCell(
+                using: cellRegistration,
+                for: indexPath,
+                item: identifier
+            )
+        }
+    }()
 }
 
 extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
@@ -36,30 +56,6 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
 
     func setCollectionView(_ collectionView: UICollectionView) {
         self.collecitonView = collectionView
-    }
-
-    var dataSource: UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel> {
-        // TODO: register multiple cell types when availible
-        guard let collecitonView = self.collecitonView else {
-            fatalError("CollectionView was not set")
-        }
-
-        let cellRegistration = UICollectionView
-            .CellRegistration<NavigationListCell, CellViewModel> { (cell, _, item) in
-                cell.configure(title: item.title, onTapAction: item.action)
-        }
-
-        return UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel>(collectionView: collecitonView) {
-            // swiftlint:disable closure_parameter_position
-            // swiftlint:disable line_length
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: CellViewModel) -> UICollectionViewCell? in
-
-            return collectionView.dequeueConfiguredReusableCell(
-                using: cellRegistration,
-                for: indexPath,
-                item: identifier
-            )
-        }
     }
 
     func configureSnapshot() {
