@@ -3,7 +3,13 @@ import UIKit
 // TODO: when new cell types are used (switch cell, value cell...), make one protocol
 final public class NavigationListCell: UICollectionViewCell {
 
-    private let label = SubtitleLabel()
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.textColor = Asset.primaryTextColor.color
+        label.font = UIFont.systemFont(ofSize: 16)
+        return label
+    }()
+
     private var onTapAction: (() -> Void)?
 
     private lazy var separatorView: UIView = {

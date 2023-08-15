@@ -1,8 +1,13 @@
 import UIKit
 import SnapKit
 
-class SettingsHeaderView: UICollectionReusableView {
-    private let label = TitleLabel()
+final class SettingsHeaderView: UICollectionReusableView {
+    private lazy var label: UILabel = {
+        let label = UILabel()
+        label.textColor = Asset.primaryTextColor.color
+        label.font = UIFont.systemFont(ofSize: 14)
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
