@@ -16,6 +16,15 @@ extension MainScreenRouter: MainScreenRouterInput {
                 animated: true
             )
     }
+
+    func routeToSettingsScreen() {
+        let settingsViewController = SettingsScreenAssembly.assemble().viewController
+        viewController?
+            .navigationController?
+            .pushViewController(
+                settingsViewController, animated: true
+            )
+    }
 }
 
 // MARK: - Private methods
