@@ -1,5 +1,6 @@
 import UIKit
 
+// TODO: when new cell types are used (switch cell, value cell...), make one protocol
 final public class NavigationListCell: UICollectionViewCell {
 
     private let label = SubtitleLabel()
@@ -17,7 +18,7 @@ final public class NavigationListCell: UICollectionViewCell {
 
 // MARK: - Public Methods
 extension NavigationListCell {
-    public func configureCell(title: String, onTapAction: @escaping () -> Void) {
+    public func configure(title: String, onTapAction: @escaping () -> Void) {
         self.label.text = title
         self.onTapAction = onTapAction
     }

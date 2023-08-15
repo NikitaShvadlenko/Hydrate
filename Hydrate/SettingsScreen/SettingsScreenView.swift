@@ -3,7 +3,10 @@ import SnapKit
 
 final class SettingsScreenView: UIView {
 
-    let collectionView = UICollectionView()
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView()
+        return collectionView
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,7 +22,8 @@ final class SettingsScreenView: UIView {
 // MARK: - Private methods
 extension SettingsScreenView {
     private func configureViews() {
-        backgroundColor = .white
+        backgroundColor = .red
+        addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }

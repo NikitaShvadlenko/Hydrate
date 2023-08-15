@@ -5,12 +5,15 @@ final class SettingsScreenPresenter {
     weak var moduleOutput: SettingsScreenModuleOutput?
     var interactor: SettingsScreenInteractorInput?
     var router: SettingsScreenRouterInput?
+    var collectionViewManager: SettingsCollectionViewManagerProtocol?
 }
 
 // MARK: - SettingsScreenViewOutput
 extension SettingsScreenPresenter: SettingsScreenViewOutput {
     func viewDidLoad(_ view: SettingsScreenViewInput) {
         view.configureViews()
+        let viewModel = generateViewModel()
+        collectionViewManager?.setSettingsViewModel(with: viewModel)
     }
 }
 
@@ -32,8 +35,8 @@ extension SettingsScreenPresenter: SettingsScreenModuleInput {
 // MARK: - Private methods
 extension SettingsScreenPresenter {
     // swiftlint:disable function_body_length
-    func generateViewModel() {
-        let settingsViewModel = SettingsViewModel(
+    func generateViewModel() -> SettingsViewModel {
+        return SettingsViewModel(
             sections: [
                 SectionViewModel(
                     sectionType: .yourInfo,
