@@ -1,4 +1,4 @@
- enum CellType {
+enum CellType {
     case personalInformation
     case changeGoal
     case theme
