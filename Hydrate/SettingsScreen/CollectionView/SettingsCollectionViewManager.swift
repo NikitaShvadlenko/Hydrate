@@ -21,15 +21,31 @@ final class SettingsCollectionViewManager: NSObject {
                 cell.configure(title: item.title, onTapAction: item.action)
             }
 
-        return UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: CellViewModel) -> UICollectionViewCell? in
+        let headerRegistration = UICollectionView.SupplementaryRegistration
+        // swiftlint:disable line_length
+        <SettingsHeaderView>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] (supplementaryView, _, indexPath) in
+            supplementaryView.configureView(
+                title: self?.settingsViewModel?
+                    .sections[indexPath.section]
+                    .sectionTitle ?? ""
+            )
+        }
 
+        let dataSource = UICollectionViewDiffableDataSource<SectionViewModel, CellViewModel>(collectionView: collectionView) {
+            // swiftlint:disable closure_parameter_position
+            // swiftlint:disable line_length
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: CellViewModel) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
                 for: indexPath,
                 item: identifier
             )
         }
+        dataSource.supplementaryViewProvider = { (view, kind, index) in
+            return collectionView.dequeueConfiguredReusableSupplementary(
+                using: headerRegistration, for: index)
+        }
+        return dataSource
     }()
 }
 
@@ -47,10 +63,31 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
+        group.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 16,
+            bottom: 0,
+            trailing: 16
+        )
+
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 5
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.interGroupSpacing = 0
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 8,
+            leading: 10,
+            bottom: 18,
+            trailing: 10
+        )
+
+        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                      heightDimension: .estimated(44))
+
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerFooterSize,
+            elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
         let layout = UICollectionViewCompositionalLayout(section: section)
+
         return layout
     }
 
@@ -65,7 +102,7 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel, CellViewModel>()
         snapshot.appendSections(sections)
         sections.forEach {
-            snapshot.appendItems($0.cells)
+            snapshot.appendItems($0.cells, toSection: $0)
         }
         dataSource.apply(snapshot, animatingDifferences: false)
     }
