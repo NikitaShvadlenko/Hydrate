@@ -7,9 +7,9 @@ protocol SettingsCollectionViewManagerProtocol {
     func setCollectionView(_ collectionView: UICollectionView)
 }
 
-class SettingsCollectionViewManager: NSObject {
+final class SettingsCollectionViewManager: NSObject {
     var settingsViewModel: SettingsViewModel?
-    var collecitonView: UICollectionView?
+   weak var collecitonView: UICollectionView?
 }
 
 extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
