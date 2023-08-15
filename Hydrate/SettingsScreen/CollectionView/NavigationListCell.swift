@@ -51,8 +51,8 @@ extension NavigationListCell {
         }
 
         label.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(12.5)
-            make.leading.equalToSuperview().inset(16)
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview()
             make.centerY.equalToSuperview()
         }
 

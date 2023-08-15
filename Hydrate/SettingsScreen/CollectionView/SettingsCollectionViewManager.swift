@@ -55,7 +55,14 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
             widthDimension: .fractionalWidth(1.0),
             heightDimension: .fractionalHeight(1.0)
         )
+
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 16,
+            bottom: 0,
+            trailing: 16
+        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
@@ -63,33 +70,38 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
         )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
-        group.contentInsets = NSDirectionalEdgeInsets(
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 0
+        section.contentInsets = NSDirectionalEdgeInsets(
+            top: 8,
+            leading: 16,
+            bottom: 18,
+            trailing: 16
+        )
+
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44)
+        )
+
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: UICollectionView.elementKindSectionHeader,
+            alignment: .top
+        )
+        sectionHeader.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
             leading: 16,
             bottom: 0,
             trailing: 16
         )
 
-        let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = 0
-        section.contentInsets = NSDirectionalEdgeInsets(
-            top: 8,
-            leading: 10,
-            bottom: 18,
-            trailing: 10
-        )
-
-        let headerFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                      heightDimension: .estimated(44))
-
-        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
-            layoutSize: headerFooterSize,
-            elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         section.boundarySupplementaryItems = [sectionHeader]
         let layout = UICollectionViewCompositionalLayout(section: section)
 
         return layout
     }
+
 
     func setCollectionView(_ collectionView: UICollectionView) {
         self.collecitonView = collectionView
