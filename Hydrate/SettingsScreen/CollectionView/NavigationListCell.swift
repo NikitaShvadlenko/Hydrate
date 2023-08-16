@@ -14,7 +14,7 @@ final public class NavigationListCell: UICollectionViewCell {
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .black.withAlphaComponent(0.5)
         return view
     }()
 
@@ -30,9 +30,21 @@ final public class NavigationListCell: UICollectionViewCell {
 
 // MARK: - Public Methods
 extension NavigationListCell {
-    public func configure(title: String, onTapAction: @escaping () -> Void) {
+    public func configure(
+        title: String,
+        onTapAction: @escaping () -> Void,
+        isFirst: Bool,
+        isLast: Bool
+    ) {
         self.label.text = title
         self.onTapAction = onTapAction
+        if isFirst && isLast {
+            contentView.roundCorners(using: [.allCorners], cornerRadii: CGSize(width: 10, height: 10))
+        } else if isFirst {
+            contentView.roundCorners(using: [.topLeft, .topRight], cornerRadii: CGSize(width: 10, height: 10))
+        } else if isLast {
+            contentView.roundCorners(using: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: 10, height: 10))
+        }
     }
 
     public func cellTapped(_ cell: NavigationListCell) {
@@ -44,7 +56,7 @@ extension NavigationListCell {
 // MARK: - Private methods
 extension NavigationListCell {
     private func setupView() {
-        contentView.backgroundColor = Asset.backgroundColor.color
+        contentView.backgroundColor = Asset.backgroundContainerColor.color
         contentView.addSubview(label)
         contentView.addSubview(separatorView)
         label.textAlignment = .left
@@ -52,13 +64,13 @@ extension NavigationListCell {
         separatorView.snp.makeConstraints { make in
             make.width.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.equalTo(0.5)
             make.leading.trailing.equalToSuperview()
         }
 
         label.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
         }
 

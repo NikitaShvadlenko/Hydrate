@@ -12,6 +12,8 @@ final class SettingsScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.hidesBackButton = true
+        navigationItem.largeTitleDisplayMode = .never
         presenter?.viewDidLoad(self)
     }
 }

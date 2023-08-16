@@ -31,7 +31,7 @@ extension SettingsHeaderView {
         addSubview(label)
         label.textAlignment = .left
         label.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(16)
             make.top.bottom.equalToSuperview()
         }
     }

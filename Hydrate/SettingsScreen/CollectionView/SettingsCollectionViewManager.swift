@@ -17,8 +17,17 @@ final class SettingsCollectionViewManager: NSObject {
         }
 
         let cellRegistration = UICollectionView
-            .CellRegistration<NavigationListCell, CellViewModel> { (cell, _, item) in
-                cell.configure(title: item.title, onTapAction: item.action)
+            .CellRegistration<NavigationListCell, CellViewModel> { [weak self] (cell, indexPath, item) in
+                var isFirst = false
+                var isLast = false
+                if indexPath.row == 0 {
+                    isFirst = true
+                }
+
+                if self?.settingsViewModel?.sections[indexPath.section].cells.last == item {
+                    isLast = true
+                }
+                cell.configure(title: item.title, onTapAction: item.action, isFirst: isFirst, isLast: isLast)
             }
 
         let headerRegistration = UICollectionView.SupplementaryRegistration
@@ -101,7 +110,6 @@ extension SettingsCollectionViewManager: SettingsCollectionViewManagerProtocol {
 
         return layout
     }
-
 
     func setCollectionView(_ collectionView: UICollectionView) {
         self.collecitonView = collectionView
