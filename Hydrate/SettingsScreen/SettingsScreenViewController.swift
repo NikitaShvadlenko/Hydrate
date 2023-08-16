@@ -15,15 +15,15 @@ final class SettingsScreenViewController: UIViewController {
         navigationItem.hidesBackButton = true
         navigationItem.largeTitleDisplayMode = .never
         presenter?.viewDidLoad(self)
+        refreshTableView()
     }
 }
 
 // MARK: - SettingsScreenViewInput
 extension SettingsScreenViewController: SettingsScreenViewInput {
-    func configureSettingsCollectionViewManager(_ manager: SettingsCollectionViewManagerProtocol) {
-        manager.setCollectionView(settingsScreenView.collectionView)
-        settingsScreenView.collectionView.dataSource = manager.dataSource
-        settingsScreenView.collectionView.collectionViewLayout = manager.createLayout()
+    func setTableViewManager(_ manager: SettingsTableViewManagerProtocol) {
+        settingsScreenView.tableView.dataSource = manager
+        settingsScreenView.tableView.delegate = manager
     }
 
     func configureViews() {
@@ -32,4 +32,7 @@ extension SettingsScreenViewController: SettingsScreenViewInput {
 
 // MARK: - Private methods
 extension SettingsScreenViewController {
+    func refreshTableView() {
+        settingsScreenView.tableView.reloadData()
+    }
 }

@@ -6,14 +6,14 @@ enum SettingsScreenAssembly {
         let presenter = SettingsScreenPresenter()
         let interactor = SettingsScreenInteractor()
         let router = SettingsScreenRouter()
-        let collectionViewManager = SettingsCollectionViewManager()
+        let tableViewManager = SettingsTableViewViewManager()
 
         viewController.presenter = presenter
-        viewController.configureSettingsCollectionViewManager(collectionViewManager)
+        viewController.setTableViewManager(tableViewManager)
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
-        presenter.collectionViewManager = collectionViewManager
+        presenter.collectionViewManager = tableViewManager
 
         interactor.presenter = presenter
 

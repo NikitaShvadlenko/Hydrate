@@ -1,7 +1,7 @@
 // sourcery: AutoMockable
 protocol SettingsScreenViewInput: AnyObject {
     func configureViews()
-    func configureSettingsCollectionViewManager(_ manager: SettingsCollectionViewManagerProtocol)
+    func setTableViewManager(_ manager: SettingsTableViewManagerProtocol)
 }
 
 protocol SettingsScreenViewOutput {

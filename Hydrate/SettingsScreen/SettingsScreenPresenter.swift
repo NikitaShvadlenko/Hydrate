@@ -5,7 +5,7 @@ final class SettingsScreenPresenter {
     weak var moduleOutput: SettingsScreenModuleOutput?
     var interactor: SettingsScreenInteractorInput?
     var router: SettingsScreenRouterInput?
-    var collectionViewManager: SettingsCollectionViewManagerProtocol?
+    var collectionViewManager: SettingsTableViewManagerProtocol?
 }
 
 // MARK: - SettingsScreenViewOutput
@@ -17,7 +17,6 @@ extension SettingsScreenPresenter: SettingsScreenViewOutput {
             return
         }
         collectionViewManager.setSettingsViewModel(with: viewModel)
-        collectionViewManager.configureSnapshot()
     }
 }
 

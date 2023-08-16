@@ -2,9 +2,13 @@ import UIKit
 import SnapKit
 
 final class SettingsScreenView: UIView {
-    public lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
-        return collectionView
+    public lazy var tableView: UITableView = {
+        let tableVeiw = UITableView(frame: .zero, style: .insetGrouped)
+        tableVeiw.separatorStyle = .singleLine
+        tableVeiw.backgroundColor = .systemBackground
+        tableVeiw.rowHeight = 44
+        tableVeiw.register(NavigationListCell.self, forCellReuseIdentifier: "\(NavigationListCell.self)")
+        return tableVeiw
     }()
 
     override init(frame: CGRect) {
@@ -22,8 +26,8 @@ final class SettingsScreenView: UIView {
 extension SettingsScreenView {
     private func configureViews() {
         backgroundColor = .red
-        addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
+        addSubview(tableView)
+        tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
     }
