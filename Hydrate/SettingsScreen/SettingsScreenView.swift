@@ -25,7 +25,6 @@ final class SettingsScreenView: UIView {
 // MARK: - Private methods
 extension SettingsScreenView {
     private func configureViews() {
-        backgroundColor = .red
         addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
