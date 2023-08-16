@@ -9,6 +9,15 @@ final public class NavigationListCell: UITableViewCell {
         return label
     }()
 
+    private lazy var accessoryImageView: UIImageView = {
+        let imageView = UIImageView()
+        let image = UIImage(sfSymbol: SFSymbol.forwardSymbol)
+        imageView.image = image
+        imageView.tintColor = Asset.primaryTextColor.color
+        imageView.contentMode = .center
+        return imageView
+    }()
+
     private var onTapAction: (() -> Void)?
 
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -23,7 +32,7 @@ final public class NavigationListCell: UITableViewCell {
     override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         var color = contentView.backgroundColor
-        color = selected ? Asset.greenShortcutColor.color : Asset.backgroundColor.color
+        color = selected ? UIColor.lightGray : Asset.backgroundColor.color
         UIView.animate(withDuration: 0.5) { [weak self] in
             self?.contentView.backgroundColor = color
         }
@@ -51,13 +60,19 @@ extension NavigationListCell {
     private func setupView() {
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(label)
+        contentView.addSubview(accessoryImageView)
         label.textAlignment = .left
 
         label.snp.makeConstraints { make in
-            make.top.trailing.equalToSuperview()
+            make.top.equalToSuperview()
             make.leading.equalToSuperview().inset(16)
             make.centerY.equalToSuperview()
+            make.trailing.equalTo(accessoryImageView.snp.leading)
         }
 
+        accessoryImageView.snp.makeConstraints { make in
+            make.top.trailing.bottom.equalToSuperview()
+            make.width.equalTo(accessoryImageView.snp.height)
+        }
     }
 }

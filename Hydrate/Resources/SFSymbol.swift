@@ -7,4 +7,5 @@ public enum SFSymbol: String, SFSymbolRepresentable {
     case water = "drop.fill"
     case achievements = "flag.2.crossed.circle"
     case backSymbol = "chevron.backward"
+    case forwardSymbol = "chevron.forward"
 }
