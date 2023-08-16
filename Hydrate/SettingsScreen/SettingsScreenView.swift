@@ -5,7 +5,7 @@ final class SettingsScreenView: UIView {
     public lazy var tableView: UITableView = {
         let tableVeiw = UITableView(frame: .zero, style: .insetGrouped)
         tableVeiw.separatorStyle = .singleLine
-        tableVeiw.backgroundColor = .systemBackground
+        tableVeiw.backgroundColor = .systemGroupedBackground
         tableVeiw.rowHeight = 44
         tableVeiw.register(NavigationListCell.self, forCellReuseIdentifier: "\(NavigationListCell.self)")
         return tableVeiw

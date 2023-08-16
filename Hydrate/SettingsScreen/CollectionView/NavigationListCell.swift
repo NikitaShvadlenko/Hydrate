@@ -2,7 +2,6 @@ import UIKit
 
 // TODO: when new cell types are used (switch cell, value cell...), make one protocol
 final public class NavigationListCell: UITableViewCell {
-
     private lazy var label: UILabel = {
         let label = UILabel()
         label.textColor = Asset.primaryTextColor.color
@@ -20,6 +19,15 @@ final public class NavigationListCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    override public func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        var color = contentView.backgroundColor
+        color = selected ? Asset.greenShortcutColor.color : Asset.backgroundColor.color
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.contentView.backgroundColor = color
+        }
+    }
 }
 
 // MARK: - Public Methods
@@ -32,7 +40,7 @@ extension NavigationListCell {
         self.onTapAction = onTapAction
     }
 
-    public func cellTapped(_ cell: NavigationListCell) {
+    public func cellTapped() {
         guard let onTapAction = onTapAction else { return }
         onTapAction()
     }
@@ -41,7 +49,7 @@ extension NavigationListCell {
 // MARK: - Private methods
 extension NavigationListCell {
     private func setupView() {
-        contentView.backgroundColor = Asset.backgroundContainerColor.color
+        contentView.backgroundColor = .systemBackground
         contentView.addSubview(label)
         label.textAlignment = .left
 
