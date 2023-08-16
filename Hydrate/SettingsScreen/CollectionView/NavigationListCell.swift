@@ -45,6 +45,9 @@ extension NavigationListCell {
         } else if isLast {
             contentView.roundCorners(using: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: 10, height: 10))
         }
+        if isLast {
+            separatorView.removeFromSuperview()
+        }
     }
 
     public func cellTapped(_ cell: NavigationListCell) {
