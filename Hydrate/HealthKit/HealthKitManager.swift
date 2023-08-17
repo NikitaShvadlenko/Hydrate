@@ -2,13 +2,6 @@ import HealthKit
 
 final class HealthKitManager: ManagesAppleHealth {
 
-    enum HealthKitManagerError: Error {
-        case noItemsToRequestPermissionToWrite
-        case sharingDenied
-        case undeterminedAuthorizationStatus
-        case failedToSaveSample
-    }
-
     private let store: HKHealthStore
     private let hkTypesToWrite: Set<HKSampleType> = [
         HKQuantityType(.dietaryWater),
@@ -39,29 +32,11 @@ extension HealthKitManager {
     }
 
     func requestAuthorizationIfNeeded(completion: @escaping CompletionHandler) {
-        guard let authorizationType = hkTypesToWrite.first else {
-            completion(false, HealthKitManagerError.noItemsToRequestPermissionToWrite)
-            return
-        }
-
-        let authorizationStatus = store.authorizationStatus(for: authorizationType)
-
-        switch authorizationStatus {
-        case .sharingAuthorized:
-                completion(true, nil)
-
-        case .sharingDenied:
-            completion(false, HealthKitManagerError.sharingDenied)
-
-        case .notDetermined:
-            store.requestAuthorization(toShare: hkTypesToWrite, read: nil) { result, error in
-                DispatchQueue.main.async {
-                    completion(result, error)
-                }
+        store.requestAuthorization(toShare: hkTypesToWrite, read: nil) { success, error in
+            if let error = error {
+                print(error)
             }
-
-        default:
-            completion(false, HealthKitManagerError.undeterminedAuthorizationStatus)
+            completion(success, HealthKitManagerError.failedToRequestAuthorization)
         }
     }
 }

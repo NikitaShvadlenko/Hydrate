@@ -5,3 +5,8 @@ protocol ManagesAppleHealth {
     func recordWaterIntake(_ milliliters: Int, completion: @escaping CompletionHandler)
     func recordCaffeineIntake(_ milligrams: Int, completion: @escaping CompletionHandler)
 }
+
+enum HealthKitManagerError: Error {
+    case failedToRequestAuthorization
+    case failedToSaveSample
+    }
