@@ -31,5 +31,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This is a sample message that needs to be localised</string>
 </dict>
 </plist>
