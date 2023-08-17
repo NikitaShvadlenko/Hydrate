@@ -17,12 +17,14 @@ protocol OnboardingScreenViewOutput {
 
 // sourcery: AutoMockable
 protocol OnboardingScreenInteractorInput {
+    func requestHealthKitAuthorization()
     func saveUser(with userData: UserDataForm)
 }
 
 // sourcery: AutoMockable
 protocol OnboardingScreenInteractorOutput: AnyObject {
     func interactorDidSaveUserData(_ intercator: OnboardingScreenInteractorInput)
+    func interactorDidRequestAuthorisation(_ intercator: OnboardingScreenInteractorInput)
 }
 
 // sourcery: AutoMockable

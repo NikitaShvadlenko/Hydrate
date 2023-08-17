@@ -37,11 +37,8 @@ extension HealthKitManager {
         let unit = HKUnit.literUnit(with: .milli)
         createAndSaveSample(type: waterType, unit: unit, quantityValue: Double(milliliters), completion: completion)
     }
-}
 
-// MARK: - Private Methods
-extension HealthKitManager {
-    private func requestAuthorizationIfNeeded(completion: @escaping CompletionHandler) {
+    func requestAuthorizationIfNeeded(completion: @escaping CompletionHandler) {
         guard let authorizationType = hkTypesToWrite.first else {
             completion(false, HealthKitManagerError.noItemsToRequestPermissionToWrite)
             return
@@ -51,21 +48,26 @@ extension HealthKitManager {
 
         switch authorizationStatus {
         case .sharingAuthorized:
-            completion(true, nil)
+                completion(true, nil)
 
         case .sharingDenied:
             completion(false, HealthKitManagerError.sharingDenied)
 
         case .notDetermined:
             store.requestAuthorization(toShare: hkTypesToWrite, read: nil) { result, error in
-                completion(result, error)
+                DispatchQueue.main.async {
+                    completion(result, error)
+                }
             }
 
         default:
             completion(false, HealthKitManagerError.undeterminedAuthorizationStatus)
         }
     }
+}
 
+// MARK: - Private Methods
+extension HealthKitManager {
     private func createAndSaveSample(
         type: HKQuantityType,
         unit: HKUnit,

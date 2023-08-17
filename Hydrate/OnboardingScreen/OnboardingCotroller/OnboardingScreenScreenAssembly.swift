@@ -8,6 +8,7 @@ enum OnboardingScreenAssembly {
         let router = OnboardingScreenRouter()
         let builder = UserDataBuilder()
         let context = CoreDataService.shared.context
+        let healthKitManager = HealthKitManager()
 
         viewController.presenter = presenter
         viewController.setBackButtonDelegate(viewController)
@@ -20,6 +21,7 @@ enum OnboardingScreenAssembly {
 
         interactor.context = context
         interactor.presenter = presenter
+        interactor.healthKitManager = healthKitManager
 
         router.viewController = viewController
         router.presenter = presenter

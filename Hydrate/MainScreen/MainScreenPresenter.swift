@@ -12,7 +12,8 @@ final class MainScreenPresenter {
 // MARK: - MainScreenViewOutput
 extension MainScreenPresenter: MainScreenViewOutput {
     func viewDidLoad(_ view: MainScreenViewInput) {
-        router?.routeToSettingsScreen()
+        router?.routeToOnboardingScreen()
+   //     router?.routeToSettingsScreen()
 //        view.configureViews()
 //        interactor?.retrieveUserData()
     }

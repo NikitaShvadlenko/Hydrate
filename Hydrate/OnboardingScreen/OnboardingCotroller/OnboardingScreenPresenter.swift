@@ -37,7 +37,7 @@ extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
     func viewDidCompleteOnboarding(_ view: OnboardingScreenViewInput) {
         guard let userData = try? builder?.build() else { return }
            interactor?.saveUser(with: userData)
-           router?.routeToMainScreen()
+        interactor?.requestHealthKitAuthorization()
     }
 
     func viewDidLoad(_ view: OnboardingScreenViewInput) {
@@ -47,8 +47,12 @@ extension OnboardingScreenPresenter: OnboardingScreenViewOutput {
 
 // MARK: - RegistrationScreenInteractorOutput
 extension OnboardingScreenPresenter: OnboardingScreenInteractorOutput {
-    func interactorDidSaveUserData(_ intercator: OnboardingScreenInteractorInput) {
+    func interactorDidRequestAuthorisation(_ intercator: OnboardingScreenInteractorInput) {
+        router?.routeToMainScreen()
+    }
 
+    func interactorDidSaveUserData(_ intercator: OnboardingScreenInteractorInput) {
+        intercator.requestHealthKitAuthorization()
     }
 }
 
