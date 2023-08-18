@@ -33,10 +33,13 @@ extension HealthKitManager {
 
     func requestAuthorizationIfNeeded(completion: @escaping CompletionHandler) {
         store.requestAuthorization(toShare: hkTypesToWrite, read: nil) { success, error in
-            if let error = error {
+            if var error = error {
                 print(error)
+                error = HealthKitManagerError.failedToRequestAuthorization
             }
-            completion(success, HealthKitManagerError.failedToRequestAuthorization)
+            DispatchQueue.main.async {
+                completion(success, error)
+            }
         }
     }
 }
@@ -62,10 +65,11 @@ extension HealthKitManager {
                 end: Date()
             )
             self?.store.save(sample) { success, error in
-                if let error = error {
+                if var error = error {
                     print("Failed to save sample \(error)")
+                    error = HealthKitManagerError.failedToSaveSample
                 }
-                completion(success, HealthKitManagerError.failedToSaveSample)
+                completion(success, error)
             }
         }
     }
