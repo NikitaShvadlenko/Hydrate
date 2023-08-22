@@ -28,9 +28,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainScreenViewController = MainScreenAssembly.assemble(
             managedObjectContext: container.viewContext
         ).viewController
-        viewControllers = [mainScreenViewController, settingsViewController]
+        let mainScreenNavigationController = UINavigationController(rootViewController: mainScreenViewController)
+        viewControllers = [mainScreenNavigationController, settingsViewController]
         tabBarController.setViewControllers(viewControllers, animated: false)
-        tabBarController.selectedViewController = mainScreenViewController
+        tabBarController.selectedViewController = mainScreenNavigationController
 
         settingsViewController.tabBarItem = UITabBarItem(
             title: L10n.TabBar.settings,

@@ -8,7 +8,7 @@ final class MainScreenViewController: UIViewController {
 
     override func loadView() {
         view = mainScreenView
-        navigationItem.hidesBackButton = true
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {
