@@ -70,10 +70,10 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
         _ shortcutsViewManager: ShortcutsViewManagerProtocol,
         didCalculateNumberOfPages numberOfPages: Int
     ) {
-        view?.setNumberOfShortcutPages(numberOfPages)
+       // view?.setNumberOfShortcutPages(numberOfPages)
     }
     func shortcutsViewManager(_ shortcutsViewManager: ShortcutsViewManagerProtocol, didMoveToPageNumber: Int) {
-        view?.selectShortcutPage(didMoveToPageNumber)
+       // view?.selectShortcutPage(didMoveToPageNumber)
     }
 
     func shortcutsViewManager(

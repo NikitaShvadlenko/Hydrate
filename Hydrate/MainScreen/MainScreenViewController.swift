@@ -27,14 +27,6 @@ final class MainScreenViewController: UIViewController {
 
 // MARK: - MainScreenViewInput
 extension MainScreenViewController: MainScreenViewInput {
-    func setNumberOfShortcutPages(_ numberOfPages: Int) {
-        mainScreenView.pageView.setNumberOfPages(numberOfPages)
-    }
-
-    func selectShortcutPage(_ page: Int) {
-        mainScreenView.pageView.selectPage(pageIndex: page)
-    }
-
     func configureViews() {
     }
 
@@ -57,7 +49,7 @@ extension MainScreenViewController: MainScreenViewInput {
     }
 
     func reloadShortcutsCollection() {
-        mainScreenView.shortcutsView.reloadCollection()
+    //    mainScreenView.shortcutsView.reloadCollection()
     }
 }
 

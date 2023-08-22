@@ -3,8 +3,6 @@ protocol MainScreenViewInput: AnyObject {
     func configureViews()
     func setHydration(model: ConsumptionModel)
     func reloadShortcutsCollection()
-    func setNumberOfShortcutPages(_ numberOfPages: Int)
-    func selectShortcutPage(_ page: Int)
 }
 
 protocol MainScreenViewOutput {
