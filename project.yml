@@ -31,11 +31,12 @@ targets:
     settings:
       base:
         TARGETED_DEVICE_FAMILY: 1
+        CODE_SIGN_ENTITLEMENTS: Hydrate/Hydrate.entitlements
         DISPLAY_NAME: "Hydrate"
         INFOPLIST_FILE: "Hydrate/Info.plist"
-        DEVELOPMENT_TEAM: SGM5527A99
-        PRODUCT_BUNDLE_IDENTIFIER: com.nikitaShvad.xylophone
-        CODE_SIGN_STYLE: Manual
+        DEVELOPMENT_TEAM: Nikita Shvadlenko
+        PRODUCT_BUNDLE_IDENTIFIER: com.nikitaShvad.hydrate
+        CODE_SIGN_STYLE: Automatic
       configs:
         Debug:
           CODE_SIGN_IDENTITY: "Apple Development"
