@@ -21,11 +21,11 @@ extension MainScreenView {
     private func configureViews() {
         backgroundColor = Asset.backgroundColor.color
         addSubview(progressView)
-
         progressView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(12)
-            make.top.equalTo(safeAreaLayoutGuide).offset(12)
+            make.top.equalToSuperview()
+            make.width.equalToSuperview().inset(20)
             make.height.equalTo(progressView.snp.width)
+            make.centerX.equalToSuperview()
         }
     }
 }
