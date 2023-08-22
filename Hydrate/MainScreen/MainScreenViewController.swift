@@ -9,8 +9,6 @@ final class MainScreenViewController: UIViewController {
     override func loadView() {
         view = mainScreenView
         navigationItem.hidesBackButton = true
-        navigationController?.navigationBar.prefersLargeTitles = true
-        title = L10n.currentHydration
     }
 
     override func viewDidLoad() {
