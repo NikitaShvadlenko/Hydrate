@@ -42,3 +42,6 @@
 "Settings.Cell.customDrinks" = "Custom drinks";
 "Settings.Cell.abooutApp" = "About app";
 "Settings.Cell.connections" = "Connections";
+
+"TabBar.settings" = "Settings";
+"TabBar.main" = "Hydration";
