@@ -27,7 +27,7 @@ extension ShortcutsViewManager: ShortcutsViewManagerProtocol {
 
 extension ShortcutsViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shortcuts.count + 1
+        5
     }
 
     func collectionView(

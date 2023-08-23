@@ -10,10 +10,34 @@ final class MainScreenView: UIView {
     let shortcutsView = ShortcutsView()
     weak var delegate: MainScreenViewDelegate?
 
-    private lazy var undisegnedView: UIView = {
+    private lazy var undesignedView: UIView = {
         let view = UIView()
         view.backgroundColor = .purple
         return view
+    }()
+
+    private lazy var testView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .green
+        return view
+    }()
+
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.addSubview(scrollViewContentView)
+        return scrollView
+    }()
+
+    private lazy var scrollViewContentView: UIView = {
+        let contentView = UIView()
+        [
+            undesignedView,
+            progressView,
+            cancelLastButton,
+            shortcutsView,
+            testView
+        ].forEach(contentView.addSubview(_:))
+        return contentView
     }()
 
     private lazy var cancelLastButton: UIButton = {
@@ -39,21 +63,37 @@ final class MainScreenView: UIView {
 extension MainScreenView {
     private func configureViews() {
         backgroundColor = Asset.backgroundColor.color
-        addSubview(progressView)
-        addSubview(undisegnedView)
-        addSubview(cancelLastButton)
+        addSubview(scrollView)
 
-        undisegnedView.snp.makeConstraints { make in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(24)
+        undesignedView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(24)
             make.height.equalTo(54)
             make.leading.trailing.equalToSuperview().inset(24)
         }
 
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(safeAreaLayoutGuide)
+        }
+
+        scrollViewContentView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
+            make.height.equalToSuperview().priority(1)
+            make.bottom.lessThanOrEqualToSuperview()
+        }
+
         progressView.snp.makeConstraints { make in
-            make.top.equalTo(undisegnedView.snp.bottom).offset(66)
+            make.top.equalTo(undesignedView.snp.bottom).offset(60)
             make.width.equalTo(250)
             make.height.equalTo(progressView.snp.width)
             make.centerX.equalToSuperview()
+        }
+
+        testView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalTo(900)
+            make.top.equalTo(cancelLastButton.snp.bottom).offset(40)
+            make.bottom.equalToSuperview()
         }
 
         cancelLastButton.snp.makeConstraints { make in
