@@ -45,3 +45,4 @@
 
 "TabBar.settings" = "Settings";
 "TabBar.main" = "Hydration";
+"MainScreen.cancelButtonTitle" = "Cancel last item";
