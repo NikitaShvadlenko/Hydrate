@@ -16,7 +16,7 @@ final class MainScreenView: UIView {
         return view
     }()
 
-    private lazy var testView: UIView = {
+    private lazy var calendarView: UIView = {
         let view = UIView()
         view.backgroundColor = .green
         return view
@@ -35,7 +35,7 @@ final class MainScreenView: UIView {
             progressView,
             cancelLastButton,
             shortcutsView,
-            testView
+            calendarView
         ].forEach(contentView.addSubview(_:))
         return contentView
     }()
@@ -89,11 +89,11 @@ extension MainScreenView {
             make.centerX.equalToSuperview()
         }
 
-        testView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
-            make.height.equalTo(900)
-            make.top.equalTo(cancelLastButton.snp.bottom).offset(40)
+        calendarView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview()
+            make.height.equalTo(900)
+            
         }
 
         cancelLastButton.snp.makeConstraints { make in

@@ -49,7 +49,7 @@ extension MainScreenViewController: MainScreenViewInput {
     }
 
     func reloadShortcutsCollection() {
-    //    mainScreenView.shortcutsView.reloadCollection()
+      mainScreenView.shortcutsView.reloadCollection()
     }
 }
 
