@@ -9,28 +9,12 @@ protocol ShortcutsViewManagerDelegate: AnyObject {
         _ shortcutsViewManager: ShortcutsViewManagerProtocol,
         didSelectItemAt indexPath: IndexPath
     )
-
-    func shortcutsViewManager(
-        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
-        didCalculateNumberOfPages numberOfPages: Int
-    )
-
-    func shortcutsViewManager(
-        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
-        didMoveToPageNumber: Int
-    )
 }
 
 class ShortcutsViewManager: NSObject {
     var shortcuts: [Shortcut] = [] {
         didSet {
-            let totalNumberOfCells = shortcuts.count + 1
-            let itemsPerPage = Int(Constants.numberOfRows + Constants.numberOfColumns)
-            let numberOfPages =
-            totalNumberOfCells % itemsPerPage == 0 ?
-            totalNumberOfCells/itemsPerPage : totalNumberOfCells/itemsPerPage + 1
-
-            delegate?.shortcutsViewManager(self, didCalculateNumberOfPages: numberOfPages)
+            let totalNumberOfCells = shortcuts.count
         }
     }
 
@@ -43,32 +27,28 @@ extension ShortcutsViewManager: ShortcutsViewManagerProtocol {
 
 extension ShortcutsViewManager: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if !shortcuts.isEmpty {
-            return shortcuts.count + 1
-        } else {
-            return 1
-        }
+        return shortcuts.count + 1
     }
 
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "\(ShortcutCell.self)",
-                for: indexPath
-            ) as? ShortcutCell else {
-                fatalError("failed to deqeue cell")
-            }
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "\(ShortcutCell.self)",
+            for: indexPath
+        ) as? ShortcutCell else {
+            fatalError("failed to deqeue cell")
+        }
 
-            let shortcut = shortcuts[indexPath.item]
-            cell.configureCell(
-                name: shortcut.beverage.name,
-                volume: "\(shortcut.volumeConsumed)",
-                image: UIImage(named: shortcut.imageName) ?? UIImage(),
-                color: UIColor(named: shortcut.colorName) ?? .systemRed
-            )
-            return cell
+        let shortcut = shortcuts[indexPath.item]
+        cell.configureCell(
+            name: shortcut.beverage.name,
+            volume: "\(shortcut.volumeConsumed)",
+            image: UIImage(named: shortcut.imageName) ?? UIImage(),
+            color: UIColor(named: shortcut.colorName) ?? .systemRed
+        )
+        return cell
     }
 }
 
@@ -96,13 +76,6 @@ extension ShortcutsViewManager: UICollectionViewDelegateFlowLayout {
         let height = availableHeight / Constants.numberOfRows
 
         return CGSize(width: width, height: height)
-    }
-
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let width = scrollView.bounds.width - Constants.horizontalCardInsets * 2
-        let offset = scrollView.contentOffset.x
-        let pageNumber = Int((width/2 + offset) / width)
-        delegate?.shortcutsViewManager(self, didMoveToPageNumber: pageNumber)
     }
 
     private enum Constants {
