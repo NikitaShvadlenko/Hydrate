@@ -9,7 +9,6 @@ final class ShortcutsView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
-        collectionView.register(AddShortcutCell.self, forCellWithReuseIdentifier: "\(AddShortcutCell.self)")
         return collectionView
     }()
 

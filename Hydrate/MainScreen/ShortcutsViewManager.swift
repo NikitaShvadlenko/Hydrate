@@ -54,7 +54,6 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
             guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "\(ShortcutCell.self)",
                 for: indexPath
@@ -70,15 +69,6 @@ extension ShortcutsViewManager: UICollectionViewDataSource {
                 color: UIColor(named: shortcut.colorName) ?? .systemRed
             )
             return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: "\(AddShortcutCell.self)",
-                for: indexPath
-            ) as? AddShortcutCell else {
-                fatalError("failed to deqeue cell")
-            }
-            return cell
-        }
     }
 }
 
