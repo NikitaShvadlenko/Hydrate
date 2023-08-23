@@ -47,7 +47,7 @@ final class HydrationProgressView: UIView {
         circleView.center = amountLabel.center
         circleView.snp.makeConstraints { make in
             make.centerY.equalTo(amountLabel.snp.centerY)
-            make.edges.equalToSuperview().inset(20)
+            make.edges.equalToSuperview()
         }
     }
 }
