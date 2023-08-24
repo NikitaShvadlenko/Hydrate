@@ -14,7 +14,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = createTabBarController()
         setTabBarAppearence(tabBarController: tabBarController)
         window.rootViewController = tabBarController
-        // TODO: Customize tab bar
 
         self.window = window
         window.makeKeyAndVisible()

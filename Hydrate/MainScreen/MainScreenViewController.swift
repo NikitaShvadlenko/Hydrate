@@ -23,6 +23,13 @@ final class MainScreenViewController: UIViewController {
     func setShortcutsDelegate(_ delegate: UICollectionViewDelegate) {
  //       mainScreenView.shortcutsView.delegate = delegate
     }
+
+    func setMainScreenManager(_ manager: ManagesMainScreen) {
+        manager.setCollectionView(mainScreenView.collectionView)
+        mainScreenView.collectionView.dataSource = manager.dataSource
+        mainScreenView.collectionView.collectionViewLayout = manager.generateLayout()
+        manager.configureSnapshot()
+    }
 }
 
 // MARK: - MainScreenViewInput

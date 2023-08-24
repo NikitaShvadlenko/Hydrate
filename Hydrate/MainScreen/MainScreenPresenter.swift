@@ -7,6 +7,7 @@ final class MainScreenPresenter {
     var interactor: MainScreenInteractorInput?
     var router: MainScreenRouterInput?
     var shortcutsManager: ShortcutsViewManagerProtocol?
+    var mainScreenManager: ManagesMainScreen?
 }
 
 // MARK: - MainScreenViewOutput
@@ -91,6 +92,11 @@ extension MainScreenPresenter: ShortcutsViewManagerDelegate {
             print("Asking vc to pop a screen with addShortcut")
         }
     }
+}
+
+// MARK: - MainScreenManagerDelegate
+extension MainScreenPresenter: MainScreenManagerDelegate {
+
 }
 
 // MARK: - Private methods
