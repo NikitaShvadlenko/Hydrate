@@ -17,11 +17,11 @@ final class MainScreenViewController: UIViewController {
     }
 
     func setShortcutsDataSource(_ dataSource: UICollectionViewDataSource) {
-        mainScreenView.shortcutsView.dataSource = dataSource
+//        mainScreenView.shortcutsView.dataSource = dataSource
     }
 
     func setShortcutsDelegate(_ delegate: UICollectionViewDelegate) {
-        mainScreenView.shortcutsView.delegate = delegate
+ //       mainScreenView.shortcutsView.delegate = delegate
     }
 }
 
@@ -41,15 +41,15 @@ extension MainScreenViewController: MainScreenViewInput {
 // TODO: Create ViewModel
         let progress = hydrationModel.amount.value / hydrationModel.goal.value
         let variance = hydrationModel.amount.value - hydrationModel.goal.value
-            mainScreenView.progressView.configureView(
-            progress: progress,
-            amount: hydrationModel.amount,
-            variance: Measurement(value: variance, unit: hydrationModel.amount.unit)
-        )
+     //       mainScreenView.progressView.configureView(
+//            progress: progress,
+//            amount: hydrationModel.amount,
+//            variance: Measurement(value: variance, unit: hydrationModel.amount.unit)
+//        )
     }
 
     func reloadShortcutsCollection() {
-      mainScreenView.shortcutsView.reloadCollection()
+     // mainScreenView.shortcutsView.reloadCollection()
     }
 }
 
