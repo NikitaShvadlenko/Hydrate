@@ -8,9 +8,16 @@
 
 import UIKit
 
-struct HydrationViewModel: Hashable {
-    let id = UUID()
-    let amount = 1500
+struct MainScreenViewModel: Hashable {
+    let identificator = UUID()
+    let hydrationViewModel: HydrationViewModel
+    let shortcuts: ShortcutViewModel
+    static func == (lhs: MainScreenViewModel, rhs: MainScreenViewModel) -> Bool {
+        lhs.identificator == rhs.identificator
+    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identificator)
+    }
 }
 
 enum CollectionViewSection: CaseIterable {
@@ -19,7 +26,7 @@ enum CollectionViewSection: CaseIterable {
 }
 
 protocol ManagesMainScreen {
-    var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, HydrationViewModel> { get }
+    var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, MainScreenViewModel> { get }
     func setCollectionView(_ collectionView: UICollectionView)
     func generateLayout() -> UICollectionViewLayout
     func configureSnapshot()
@@ -30,28 +37,28 @@ protocol MainScreenManagerDelegate: AnyObject {
 }
 
 final class MainScreenManager: NSObject {
-    var hydrationViewModel = [HydrationViewModel(), HydrationViewModel()]
+    var hydrationViewModel: [MainScreenViewModel]?
     weak var delegate: MainScreenManagerDelegate?
     weak var collectionView: UICollectionView?
-    lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, HydrationViewModel> = {
+    lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, MainScreenViewModel> = {
         guard let collectionView = self.collectionView else {
             fatalError("CollectionView was not set")
         }
         let cellRegistration = UICollectionView
-            .CellRegistration<MainScreenInfoCell, HydrationViewModel> { (cell, indexPath, _) in
+            .CellRegistration<MainScreenInfoCell, MainScreenViewModel> { (cell, indexPath, _) in
                 let section = CollectionViewSection.allCases[indexPath.section]
                 switch section {
                 case .statusView:
-                    cell.configure(.blue)
+                    cell.configure(.white)
                 case .calendar:
                     cell.configure(.red)
                 }
             }
 
-        return UICollectionViewDiffableDataSource<CollectionViewSection, HydrationViewModel>(
+        return UICollectionViewDiffableDataSource<CollectionViewSection, MainScreenViewModel>(
             collectionView: collectionView
             // swiftlint:disable line_length
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: HydrationViewModel) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: MainScreenViewModel) -> UICollectionViewCell? in
 
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
@@ -76,7 +83,8 @@ extension MainScreenManager: ManagesMainScreen {
     }
 
     func configureSnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<CollectionViewSection, HydrationViewModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<CollectionViewSection, MainScreenViewModel>()
+        guard let hydrationViewModel else { return }
         snapshot.appendSections(CollectionViewSection.allCases)
 
         snapshot.appendItems([hydrationViewModel[0]], toSection: .statusView)

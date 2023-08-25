@@ -48,7 +48,7 @@ extension MainScreenInteractor: MainScreenInteractorInput {
         journalEntries.forEach { entry in
             volumeConsumed = entry.volumeConsumed + volumeConsumed
         }
-        let dailyData =  ConsumptionModel(totalConsumed: volumeConsumed, dailyGoal: dailyJournal.dailyGoal)
+        let dailyData =  HydrationViewModel(totalConsumed: volumeConsumed, dailyGoal: dailyJournal.dailyGoal)
         presenter?.interactor(
             self,
             didRetrieveHydration: dailyData

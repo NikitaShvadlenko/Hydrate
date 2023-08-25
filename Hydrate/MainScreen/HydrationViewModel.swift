@@ -1,6 +1,6 @@
 import Foundation
 
-struct ConsumptionModel {
+struct HydrationViewModel {
     let totalConsumed: Int
     let dailyGoal: Int
 }

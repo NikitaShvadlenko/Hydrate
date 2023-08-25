@@ -1,7 +1,7 @@
 // sourcery: AutoMockable
 protocol MainScreenViewInput: AnyObject {
     func configureViews()
-    func setHydration(model: ConsumptionModel)
+    func setHydration(model: HydrationViewModel)
     func reloadShortcutsCollection()
 }
 
@@ -22,7 +22,7 @@ protocol MainScreenInteractorInput {
 
 // sourcery: AutoMockable
 protocol MainScreenInteractorOutput: AnyObject {
-    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: ConsumptionModel)
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration hydration: HydrationViewModel)
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut])
     func interactor(_ interactor: MainScreenInteractorInput, didInsertJournalEntry itemName: String)
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveUserData userData: UserData)

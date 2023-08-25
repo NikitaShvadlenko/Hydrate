@@ -31,6 +31,8 @@ final class MainScreenInfoCell: UICollectionViewCell {
 
 // MARK: - Public Methods
 extension MainScreenInfoCell {
+
+    // configure with viewModel
     public func configure(_ color: UIColor) {
         contentView.backgroundColor = color
     }

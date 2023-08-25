@@ -37,7 +37,7 @@ extension MainScreenViewController: MainScreenViewInput {
     func configureViews() {
     }
 
-    func setHydration(model: ConsumptionModel) {
+    func setHydration(model: HydrationViewModel) {
         let hydrationModel =
         HydrationProgressModel(
             goal: Measurement(

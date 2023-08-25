@@ -48,7 +48,7 @@ extension MainScreenPresenter: MainScreenInteractorOutput {
         view?.reloadShortcutsCollection()
     }
 
-    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: ConsumptionModel) {
+    func interactor(_ interactor: MainScreenInteractorInput, didRetrieveHydration: HydrationViewModel) {
         view?.setHydration(model: didRetrieveHydration)
     }
 }
