@@ -61,6 +61,7 @@ final class MainScreenManager: NSObject {
             case .shortcuts:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ShortcutCell.self)", for: indexPath) as? ShortcutCell
                 else { fatalError("Could not dequeue cell") }
+                cell.configureCell(name: "Water", volume: "250 ml", color: .cyan)
                 return cell
             case .calendar:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CalendarCell.self)", for: indexPath) as? CalendarCell

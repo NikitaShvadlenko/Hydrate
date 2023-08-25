@@ -3,6 +3,18 @@ import SnapKit
 
 final class ShortcutCell: UICollectionViewCell {
 
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.addSubview(stackView)
+        return view
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [nameLabel, volumeLabel])
+        stackView.axis = .vertical
+        return stackView
+    }()
+
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
@@ -15,14 +27,8 @@ final class ShortcutCell: UICollectionViewCell {
     private lazy var volumeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
-    }()
-
-    private lazy var beverageIcon: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        return imageView
     }()
 
     override init(frame: CGRect) {
@@ -39,58 +45,39 @@ extension ShortcutCell {
     public func configureCell(
         name: String,
         volume: String,
-        image: UIImage,
         color: UIColor
     ) {
-        contentView.layer.borderColor = color.cgColor
-        contentView.backgroundColor = color.withAlphaComponent(ShortcutCellConstants.backgroundAlpha)
+        containerView.backgroundColor = color
+        contentView.layer.borderColor = color.cgColor.copy(alpha: ShortcutCellConstants.borderAlpha)
         nameLabel.text = name
         volumeLabel.text = volume
-        volumeLabel.textColor = color
-        beverageIcon.image = image
-        beverageIcon.tintColor = color
     }
 }
 
 // MARK: Private methods
 extension ShortcutCell {
     private func setupView() {
-        [
-            nameLabel,
-            volumeLabel,
-            beverageIcon
-        ].forEach(addSubview(_:))
-
         contentView.layer.cornerRadius = ShortcutCellConstants.cornerRadius
         contentView.layer.borderWidth = ShortcutCellConstants.borderWidth
-
-        nameLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(5)
-            make.leading.equalToSuperview().inset(12)
-            make.bottom.equalTo(volumeLabel.snp.top)
-            make.height.equalTo(30)
+        contentView.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(ShortcutCellConstants.borderWidth)
         }
 
-        volumeLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(12)
-            make.top.equalTo(nameLabel.snp.bottom)
-            make.bottom.equalToSuperview().inset(12)
+        stackView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(29)
         }
 
-        beverageIcon.snp.makeConstraints { make in
-            make.trailing.top.equalToSuperview().inset(12)
-            make.width.equalTo(30)
-            make.height.equalTo(30)
-        }
     }
 }
 
 // MARK: - Constants
 extension ShortcutCell {
     enum ShortcutCellConstants {
-        static let borderWidth: CGFloat = 1
-        static let cornerRadius: CGFloat = 14
-        static let backgroundAlpha = 0.1
+        static let borderWidth: CGFloat = 3
+        static let cornerRadius: CGFloat = 10
+        static let borderAlpha = 0.5
     }
 
 }
