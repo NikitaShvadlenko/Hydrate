@@ -21,6 +21,7 @@ final class MainScreenInfoCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupView()
     }
 
     required init(coder: NSCoder) {
@@ -37,6 +38,31 @@ extension MainScreenInfoCell {
 
 // MARK: - Private Methods
 extension MainScreenInfoCell {
+
+    private func setupView() {
+        [
+            toolbar,
+            hydrationView,
+            cancelLastButton
+        ].forEach(contentView.addSubview(_:))
+
+        toolbar.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview().inset(24)
+            make.height.equalTo(54)
+        }
+
+        hydrationView.snp.makeConstraints { make in
+            make.top.equalTo(toolbar.snp.bottom).offset(60)
+            make.centerX.equalToSuperview()
+            make.height.width.equalTo(250)
+        }
+
+        cancelLastButton.snp.makeConstraints { make in
+            make.top.equalTo(hydrationView.snp.bottom).offset(66)
+            make.centerX.equalToSuperview()
+        }
+    }
+
     @objc
     func viewDidPressCancelLast() {
 

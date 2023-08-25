@@ -37,7 +37,6 @@ final class MainScreenManager: NSObject {
         guard let collectionView = self.collectionView else {
             fatalError("CollectionView was not set")
         }
-
         let cellRegistration = UICollectionView
             .CellRegistration<MainScreenInfoCell, HydrationViewModel> { (cell, indexPath, _) in
                 let section = CollectionViewSection.allCases[indexPath.section]
