@@ -12,9 +12,11 @@ struct MainScreenViewModel: Hashable {
     let identificator = UUID()
     let hydrationViewModel: HydrationViewModel
     let shortcuts: ShortcutViewModel
+
     static func == (lhs: MainScreenViewModel, rhs: MainScreenViewModel) -> Bool {
         lhs.identificator == rhs.identificator
     }
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(identificator)
     }
@@ -22,6 +24,7 @@ struct MainScreenViewModel: Hashable {
 
 enum CollectionViewSection: CaseIterable {
     case statusView
+    case shortcuts
     case calendar
 }
 
@@ -52,6 +55,8 @@ final class MainScreenManager: NSObject {
                     cell.configure(.white)
                 case .calendar:
                     cell.configure(.red)
+                case .shortcuts:
+                    cell.configure(.green)
                 }
             }
 
@@ -99,9 +104,11 @@ extension MainScreenManager {
     private func generateLayoutForSectionKind(_ sectionKind: CollectionViewSection) -> NSCollectionLayoutSection {
         switch sectionKind {
         case .statusView:
-          return  hydrationSection()
+            return  hydrationSection()
         case .calendar:
             return calendarSection()
+        case .shortcuts:
+            return shortcutsSection()
         }
     }
 
@@ -146,6 +153,33 @@ extension MainScreenManager {
 
         let section = NSCollectionLayoutSection(group: group)
 
+        return section
+    }
+
+    private func shortcutsSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .estimated(100),
+            heightDimension: .estimated(100))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 0,
+            leading: 4,
+            bottom: 0,
+            trailing: 4
+        )
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(100)
+        )
+
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize, subitems: [item]
+        )
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
         return section
     }
 }
