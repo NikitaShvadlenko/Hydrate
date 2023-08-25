@@ -9,11 +9,13 @@
 import UIKit
 
 struct HydrationViewModel: Hashable {
+    let id = UUID()
     let amount = 1500
 }
 
 enum CollectionViewSection: CaseIterable {
-    case topBar
+    case statusView
+    case calendar
 }
 
 protocol ManagesMainScreen {
@@ -28,7 +30,7 @@ protocol MainScreenManagerDelegate: AnyObject {
 }
 
 final class MainScreenManager: NSObject {
-    var hydrationViewModel = HydrationViewModel()
+    var hydrationViewModel = [HydrationViewModel(), HydrationViewModel()]
     weak var delegate: MainScreenManagerDelegate?
     weak var collectionView: UICollectionView?
     lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, HydrationViewModel> = {
@@ -37,24 +39,25 @@ final class MainScreenManager: NSObject {
         }
 
         let cellRegistration = UICollectionView
-            .CellRegistration<MainScreenCell, HydrationViewModel> { (cell, indexPath, item) in
+            .CellRegistration<MainScreenInfoCell, HydrationViewModel> { (cell, indexPath, _) in
                 let section = CollectionViewSection.allCases[indexPath.section]
-                print(section)
                 switch section {
-                case .topBar:
-                    cell.configure(UIView())
+                case .statusView:
+                    cell.configure(.blue)
+                case .calendar:
+                    cell.configure(.red)
                 }
             }
 
         return UICollectionViewDiffableDataSource<CollectionViewSection, HydrationViewModel>(
             collectionView: collectionView
             // swiftlint:disable line_length
-        ) { (collectionView: UICollectionView, indexPath: IndexPath, identifier: HydrationViewModel) -> UICollectionViewCell? in
+        ) { (collectionView: UICollectionView, indexPath: IndexPath, item: HydrationViewModel) -> UICollectionViewCell? in
 
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration,
                 for: indexPath,
-                item: identifier
+                item: item
             )
         }
     }()
@@ -66,41 +69,76 @@ extension MainScreenManager: ManagesMainScreen {
     }
 
     func generateLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int, _) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout {[weak self] (sectionIndex: Int, _) -> NSCollectionLayoutSection? in
             let sectionLayoutKind = CollectionViewSection.allCases[sectionIndex]
-            switch sectionLayoutKind {
-            case .topBar:
-                return self.generateTopBarLayout()
-            }
+            return self?.generateLayoutForSectionKind(sectionLayoutKind)
         }
         return layout
     }
 
-     func configureSnapshot() {
-        let section = CollectionViewSection.topBar
+    func configureSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<CollectionViewSection, HydrationViewModel>()
-        snapshot.appendSections([section])
-         snapshot.appendItems([hydrationViewModel])
+        snapshot.appendSections(CollectionViewSection.allCases)
+
+        snapshot.appendItems([hydrationViewModel[0]], toSection: .statusView)
+        snapshot.appendItems([hydrationViewModel[1]], toSection: .calendar)
+
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
 
 // MARK: - Private Methods
 extension MainScreenManager {
-    func generateTopBarLayout() -> NSCollectionLayoutSection {
+    private func generateLayoutForSectionKind(_ sectionKind: CollectionViewSection) -> NSCollectionLayoutSection {
+        switch sectionKind {
+        case .statusView:
+          return  hydrationSection()
+        case .calendar:
+            return calendarSection()
+        }
+    }
+
+    private func hydrationSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(1)
-        )
+            heightDimension: .fractionalHeight(1))
+
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .absolute(54)
+            heightDimension: .fractionalHeight(0.78)
         )
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize, subitems: [item]
+        )
+        // content insets
 
         let section = NSCollectionLayoutSection(group: group)
+
+        return section
+    }
+
+    private func calendarSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1))
+
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(400)
+        )
+
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: groupSize, subitems: [item]
+        )
+        // content insets
+
+        let section = NSCollectionLayoutSection(group: group)
+
         return section
     }
 }
