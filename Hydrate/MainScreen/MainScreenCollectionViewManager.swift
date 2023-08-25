@@ -157,13 +157,13 @@ extension MainScreenManager {
     private func shortcutsSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .absolute(100),
-            heightDimension: .absolute(100))
+            heightDimension: .fractionalHeight(1))
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(0.2)
+            heightDimension: .absolute(100)
         )
 
         let group = NSCollectionLayoutGroup.horizontal(
