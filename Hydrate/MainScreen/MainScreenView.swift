@@ -9,6 +9,9 @@ final class MainScreenView: UIView {
             collectionViewLayout: UICollectionViewFlowLayout()
         )
         collectionView.backgroundColor = .red
+        collectionView.register(MainScreenInfoCell.self, forCellWithReuseIdentifier: "\(MainScreenInfoCell.self)")
+        collectionView.register(ShortcutCell.self, forCellWithReuseIdentifier: "\(ShortcutCell.self)")
+        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: "\(CalendarCell.self)")
         return collectionView
     }()
 

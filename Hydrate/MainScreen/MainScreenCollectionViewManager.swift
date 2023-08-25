@@ -10,8 +10,8 @@ import UIKit
 
 struct MainScreenViewModel: Hashable {
     let identificator = UUID()
-    let hydrationViewModel: HydrationViewModel
-    let shortcuts: ShortcutViewModel
+//    let hydrationViewModel: HydrationViewModel
+//    let shortcuts: ShortcutViewModel
 
     static func == (lhs: MainScreenViewModel, rhs: MainScreenViewModel) -> Bool {
         lhs.identificator == rhs.identificator
@@ -40,36 +40,33 @@ protocol MainScreenManagerDelegate: AnyObject {
 }
 
 final class MainScreenManager: NSObject {
-    var hydrationViewModel: [MainScreenViewModel]?
+    var hydrationViewModel: [MainScreenViewModel] = [MainScreenViewModel(), MainScreenViewModel(), MainScreenViewModel()]
     weak var delegate: MainScreenManagerDelegate?
     weak var collectionView: UICollectionView?
     lazy var dataSource: UICollectionViewDiffableDataSource<CollectionViewSection, MainScreenViewModel> = {
         guard let collectionView = self.collectionView else {
             fatalError("CollectionView was not set")
         }
-        let cellRegistration = UICollectionView
-            .CellRegistration<MainScreenInfoCell, MainScreenViewModel> { (cell, indexPath, _) in
-                let section = CollectionViewSection.allCases[indexPath.section]
-                switch section {
-                case .statusView:
-                    cell.configure(.white)
-                case .calendar:
-                    cell.configure(.red)
-                case .shortcuts:
-                    cell.configure(.green)
-                }
-            }
-
         return UICollectionViewDiffableDataSource<CollectionViewSection, MainScreenViewModel>(
             collectionView: collectionView
             // swiftlint:disable line_length
         ) { (collectionView: UICollectionView, indexPath: IndexPath, item: MainScreenViewModel) -> UICollectionViewCell? in
 
-            return collectionView.dequeueConfiguredReusableCell(
-                using: cellRegistration,
-                for: indexPath,
-                item: item
-            )
+            let section = CollectionViewSection.allCases[indexPath.section]
+            switch section {
+            case .statusView:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(MainScreenInfoCell.self)", for: indexPath) as? MainScreenInfoCell
+                else { fatalError("Could not dequeue cell") }
+                return cell
+            case .shortcuts:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(ShortcutCell.self)", for: indexPath) as? ShortcutCell
+                else { fatalError("Could not dequeue cell") }
+                return cell
+            case .calendar:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "\(CalendarCell.self)", for: indexPath) as? CalendarCell
+                else { fatalError("Could not dequeue cell") }
+                return cell
+            }
         }
     }()
 }
@@ -89,11 +86,12 @@ extension MainScreenManager: ManagesMainScreen {
 
     func configureSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<CollectionViewSection, MainScreenViewModel>()
-        guard let hydrationViewModel else { return }
+     //   guard let hydrationViewModel else { return }
         snapshot.appendSections(CollectionViewSection.allCases)
 
         snapshot.appendItems([hydrationViewModel[0]], toSection: .statusView)
         snapshot.appendItems([hydrationViewModel[1]], toSection: .calendar)
+        snapshot.appendItems([hydrationViewModel[2]], toSection: .shortcuts)
 
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -121,7 +119,7 @@ extension MainScreenManager {
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .fractionalHeight(0.78)
+            heightDimension: .fractionalHeight(0.58)
         )
 
         let group = NSCollectionLayoutGroup.vertical(
@@ -158,23 +156,17 @@ extension MainScreenManager {
 
     private func shortcutsSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(
-            widthDimension: .estimated(100),
-            heightDimension: .estimated(100))
+            widthDimension: .absolute(100),
+            heightDimension: .absolute(100))
 
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(
-            top: 0,
-            leading: 4,
-            bottom: 0,
-            trailing: 4
-        )
 
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
-            heightDimension: .estimated(100)
+            heightDimension: .fractionalHeight(0.2)
         )
 
-        let group = NSCollectionLayoutGroup.vertical(
+        let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize, subitems: [item]
         )
 
