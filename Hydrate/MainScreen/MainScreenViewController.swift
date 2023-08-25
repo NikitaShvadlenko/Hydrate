@@ -16,14 +16,6 @@ final class MainScreenViewController: UIViewController {
         presenter?.viewDidLoad(self)
     }
 
-    func setShortcutsDataSource(_ dataSource: UICollectionViewDataSource) {
-//        mainScreenView.shortcutsView.dataSource = dataSource
-    }
-
-    func setShortcutsDelegate(_ delegate: UICollectionViewDelegate) {
- //       mainScreenView.shortcutsView.delegate = delegate
-    }
-
     func setMainScreenManager(_ manager: ManagesMainScreen) {
         manager.setCollectionView(mainScreenView.collectionView)
         mainScreenView.collectionView.dataSource = manager.dataSource

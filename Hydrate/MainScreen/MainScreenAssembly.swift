@@ -9,22 +9,16 @@ enum MainScreenAssembly {
         let router = MainScreenRouter()
         let coreDataService = CoreDataService.shared
 
-        let shortcutsViewManager = ShortcutsViewManager()
         let mainScreenManager = MainScreenManager()
 
         presenter.mainScreenManager = mainScreenManager
 
-        shortcutsViewManager.delegate = presenter
-
         viewController.presenter = presenter
-        viewController.setShortcutsDataSource(shortcutsViewManager)
-        viewController.setShortcutsDelegate(shortcutsViewManager)
         viewController.setMainScreenManager(mainScreenManager)
 
         presenter.view = viewController
         presenter.interactor = interactor
         presenter.router = router
-        presenter.shortcutsManager = shortcutsViewManager
 
         interactor.presenter = presenter
         interactor.context = coreDataService.context

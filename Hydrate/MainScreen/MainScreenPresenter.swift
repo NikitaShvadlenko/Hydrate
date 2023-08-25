@@ -6,7 +6,6 @@ final class MainScreenPresenter {
     weak var moduleOutput: MainScreenModuleOutput?
     var interactor: MainScreenInteractorInput?
     var router: MainScreenRouterInput?
-    var shortcutsManager: ShortcutsViewManagerProtocol?
     var mainScreenManager: ManagesMainScreen?
 }
 
@@ -44,7 +43,7 @@ extension MainScreenPresenter: MainScreenInteractorOutput {
     }
 
     func interactor(_ interactor: MainScreenInteractorInput, didRetrieveShortcuts shortcuts: [Shortcut]) {
-        shortcutsManager?.shortcuts = shortcuts
+        // TODO: shortcuts
         view?.reloadShortcutsCollection()
     }
 
@@ -61,36 +60,6 @@ extension MainScreenPresenter: MainScreenRouterOutput {
 extension MainScreenPresenter: MainScreenModuleInput {
     func configureModule(output: MainScreenModuleOutput?) {
         self.moduleOutput = output
-    }
-}
-
-// MARK: - ShortcutsViewManagerProtocol
-extension MainScreenPresenter: ShortcutsViewManagerDelegate {
-
-    func shortcutsViewManager(
-        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
-        didCalculateNumberOfPages numberOfPages: Int
-    ) {
-       // view?.setNumberOfShortcutPages(numberOfPages)
-    }
-    func shortcutsViewManager(_ shortcutsViewManager: ShortcutsViewManagerProtocol, didMoveToPageNumber: Int) {
-       // view?.selectShortcutPage(didMoveToPageNumber)
-    }
-
-    func shortcutsViewManager(
-        _ shortcutsViewManager: ShortcutsViewManagerProtocol,
-        didSelectItemAt indexPath: IndexPath
-    ) {
-        let shortcuts = shortcutsViewManager.shortcuts
-        if !shortcuts.isEmpty && indexPath.item != shortcuts.count {
-            let shortcutItem = shortcuts[indexPath.item]
-            interactor?.insertJournalEntry(
-                beverage: shortcutItem.beverage,
-                volumeConsumed: shortcutItem.volumeConsumed
-            )
-        } else {
-            print("Asking vc to pop a screen with addShortcut")
-        }
     }
 }
 
